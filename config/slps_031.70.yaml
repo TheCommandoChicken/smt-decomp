@@ -1,0 +1,64 @@
+name: Shin Megami Tensei (Japan)
+sha1: 6f47610e33692a5c0f37695c855d79a1b7af7fe7
+options:
+  basename: SLPS_031
+  target_path: SLPS_031.70
+  elf_path: build/smt1.elf
+  base_path: .
+  platform: psx
+  compiler: PSYQ
+
+  # asm_path: asm
+  # src_path: src
+  # build_path: build
+  # create_asm_dependencies: True
+
+  ld_script_path: slps_031.70.ld
+  ld_dependencies: True
+
+  find_file_boundaries: True
+  gp_value: 0x800B6C5C
+
+  o_as_suffix: True
+  use_legacy_include_asm: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+
+  symbol_addrs_path:
+    - symbol_addrs.txt
+  reloc_addrs_path:
+    - reloc_addrs.txt
+
+  # undefined_funcs_auto_path: undefined_funcs_auto.txt
+  # undefined_syms_auto_path: undefined_syms_auto.txt
+
+  extensions_path: tools/splat_ext
+
+  asset_path: assets
+  src_path: src
+  asm_path: asm
+
+  subalign: 4
+
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: main
+    type: code
+    start: 0x800
+    vram: 0x80010000
+    subalign: 4
+    subsegments:
+      - [0x800, rodata]
+      - [0x47d0, c, main]
+      - [0x5e518, c, lib]
+  
+  - [0xa8000]
