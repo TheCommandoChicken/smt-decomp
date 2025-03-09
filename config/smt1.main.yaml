@@ -1,0 +1,97 @@
+name: Shin Megami Tensei (Japan)
+sha1: 6f47610e33692a5c0f37695c855d79a1b7af7fe7
+options:
+  basename: smt1_main
+  target_path: game/smt1/SLPS_031.70
+  elf_path: build/smt1.elf
+  base_path: ../
+  platform: psx
+  compiler: PSYQ
+
+  asm_path: asm/smt1/main
+  src_path: src/smt1/main
+  build_path: build
+  # create_asm_dependencies: True
+
+  ld_script_path: config/smt1.main.ld
+  ld_dependencies: True
+
+  find_file_boundaries: True
+  gp_value: 0x800B6C5C
+
+  o_as_suffix: True
+  use_legacy_include_asm: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+
+  section_order: [".rodata", ".text", ".data", ".bss"]
+
+  symbol_addrs_path:
+    - config/symbols.smt1.main.txt
+  reloc_addrs_path:
+    - config/reloc_addrs.smt1.main.txt
+
+  undefined_funcs_auto_path: config/undefined_funcs_auto.smt1.main.txt
+  undefined_syms_auto_path: config/undefined_syms_auto.smt1.main.txt
+
+  extensions_path: tools/splat_ext
+
+  subalign: 4
+
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - name: header
+    type: header
+    start: 0x0
+
+  - name: main
+    type: code
+    start: 0x800
+    vram: 0x80010000
+    subalign: 4
+    subsegments:
+      - [0x800, rodata, main]
+      - [0x80C, rodata, field]
+      - [0xB04, rodata, object]
+      - [0xB68, rodata, pad]
+      - [0xB88, rodata, dat]
+      - [0xBBC, rodata, graph]
+      - [0xBF4, rodata]
+      - [0xFF0, rodata]
+      - [0x1074, rodata]
+      - [0x1170, rodata]
+      - [0x12B4, rodata]
+      - [0x1544, rodata, sound]
+      - [0x1788, rodata]
+      - [0x19D4, rodata]
+      - [0x1C68, rodata]
+      - [0x1DF4, rodata]
+      - [0x1E10, rodata]
+      - [0x1E24, rodata]
+      - [0x1EB8, rodata]
+      - [0x2124, rodata]
+      - [0x3448, rodata]
+      - [0x34AC, rodata]
+      - [0x3578, rodata, lib]
+      - [0x47d0, asm, main]
+      - [0x59dc, asm, field]
+      - [0x87f0, asm, object]
+      - [0x9430, asm, pad]
+      - [0x97f0, asm, dat]
+      - [0xac50, asm, graph]
+      - [0xf7a0, asm, unk]
+      - [0x18e40, asm, dungeon]
+      - [0x2fab0, asm, sound]
+      - [0x31480, asm, unk3]
+      - [0x5e518, asm, lib/libcd]
+      - [0x60d2c, asm, lib/libds]
+      - [0x64dec, asm, lib/libspu]
+      - [0x6597c, asm, lib/libsnd]
+      - [0x8f000, data]
+      
+  - [0xa8000]

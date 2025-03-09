@@ -32,3 +32,14 @@
 *.app
 /.vs
 /.vscode
+/__pycache__
+/asm/smt1
+/assets/smt1
+build/SLPS_031.70
+build/slps_031.elf
+/game/smt1
+/game/smt2
+/game/smtif
+/tools/m2c-master
+/tools/maspsx
+/tools/psyq

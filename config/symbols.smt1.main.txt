@@ -2,6 +2,8 @@
 // function labels
 
 __main = 0x80013FD4; // type:func size:8
+main = 0x80014098; // type:func size:56
+init = 0x800140d0; // type:func
 SsGetMute = 0x80016AF0; // type:func size:32
 StSetRing = 0x8006DE1C; // type:func size:44
 StClearRing = 0x8006DE4C; // type:func size:96
@@ -712,13 +714,13 @@ CURR_MAIN_VOL_L = 0x1F801DB8; // size:2
 CURR_MAIN_VOL_R = 0x1F801DBA; // size:2
 SPU_UNKN_1DBC = 0x1F801DBC; // size:4
 NewMoonText = 0x8001045C; // size:4
-1_8MoonText = 0x80010460; // size:4
-2_8MoonText = 0x80010464; // size:4
-3_8MoonText = 0x80010468; // size:4
+D1_8MoonText = 0x80010460; // size:4
+D2_8MoonText = 0x80010464; // size:4
+D3_8MoonText = 0x80010468; // size:4
 HalfMoonText = 0x8001046C; // size:4
-5_8MoonText = 0x80010470; // size:4
-6_8MoonText = 0x80010474; // size:4
-7_8MoonText = 0x80010478; // size:4
+D5_8MoonText = 0x80010470; // size:4
+D6_8MoonText = 0x80010474; // size:4
+D7_8MoonText = 0x80010478; // size:4
 FullMoonText = 0x8001047C; // size:4
 EndOfMoonText = 0x8001049C; // size:4
 FieldLocationNamePtrArray = 0x8001065C; // size:236

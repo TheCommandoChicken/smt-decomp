@@ -1,0 +1,263 @@
+name: Shin Megami Tensei (Japan)
+sha1: 81c5e7ee5f5a4e0ff3747c1d1f16c4a9478819ec
+options:
+  basename: smt1_data
+  target_path: game/smt1/DATA.BIN
+  elf_path: build/smt1_data.elf
+  base_path: ../
+  platform: psx
+  compiler: PSYQ
+
+  asm_path: asm/smt1/data
+  src_path: src/smt1/data
+  build_path: build
+  asset_path: assets/smt1/data
+  # create_asm_dependencies: True
+
+  ld_script_path: config/smt1.data.ld
+  ld_dependencies: True
+
+  find_file_boundaries: True
+  gp_value: 0x800B6C5C
+
+  o_as_suffix: True
+  use_legacy_include_asm: False
+
+  asm_function_macro: glabel
+  asm_jtbl_label_macro: jlabel
+  asm_data_macro: dlabel
+
+  symbol_addrs_path:
+    - config/symbols.smt1.data.txt
+  reloc_addrs_path:
+    - config/reloc_addrs.smt1.data.txt
+
+  undefined_funcs_auto_path: config/undefined_funcs_auto.smt1.data.txt
+  undefined_syms_auto_path: config/undefined_syms_auto.smt1.data.txt
+
+  extensions_path: tools/splat_ext
+
+  subalign: 0x800
+
+  string_encoding: ASCII
+  data_string_encoding: ASCII
+  rodata_string_guesser_level: 2
+  data_string_guesser_level: 2
+segments:
+  - [0x0, bin]
+  - [0xe000, bin]
+  - [0x18000, bin]
+  - [0x20800, bin]
+  - [0x22000, bin]
+  - [0x2f800, bin]
+  - [0x33800, bin]
+  - name: intro
+    type: code
+    start: 0x36000
+    vram: 0x80180000
+    subalign: 4
+    subsegments:
+      - [0x36000, data]
+      - [0x366e0, asm]
+      - [0x3b2a0, rodata]
+      - [0x3b404, pad]
+
+  - [0x3b800, bin, tex/map]
+  - [0x3d000, bin]
+  - [0x43000, bin]
+  - [0x58000, bin]
+  - [0x5a000, bin]
+  - [0x5e000, bin]
+  - [0x5e800, bin]
+  - [0x63000, bin]
+  - [0x67000, bin]
+  - [0x68800, bin]
+  - [0x6a000, bin]
+  - [0x6b800, bin]
+  - [0x6d000, bin]
+  - [0x6e800, bin]
+  - [0x70000, bin]
+  - [0x71800, bin]
+  - [0x73000, bin]
+  - [0x73800, bin]
+  - [0x74800, bin]
+  - [0x79800, bin]
+  - [0x7b800, bin]
+  - [0x7d000, bin]
+  - [0x7d800, bin]
+  - [0x7e000, bin]
+  - [0x7e800, bin]
+  - [0x80000, bin]
+  - [0x80800, bin, tex/rnd1]
+  - [0x85800, bin, tex/titlel]
+  - [0x8a800, bin, tex/titler]
+  - [0x8f800, bin, tex/logo]
+  - [0x94000, bin]
+  - [0x96000, bin]
+  - [0x97800, bin]
+  - [0x99000, bin]
+  - [0x99800, bin]
+  - [0x9a000, bin]
+  - [0x9a800, bin, tex/fusecaps]
+  - [0xa3800, bin, tex/fusebubl]
+  - [0xad000, bin, tex/flash]
+  - [0xb6800, bin, tex/countdwn]
+  - [0xb7800, bin]
+  - [0xb8000, bin]
+  - [0xba800, bin]
+  - [0xbc000, bin]
+  - [0xbd800, bin]
+  - [0xbe800, bin]
+  - [0xbf000, bin]
+  - [0xbf800, bin]
+  - [0xc0800, bin]
+  - [0xc2800, bin]
+  - [0xc8800, bin]
+  - [0xc9800, bin]
+  - [0xcc000, bin]
+  - [0xcc800, bin]
+  - [0xcd800, bin]
+  - [0xce800, bin]
+  - [0xcf800, bin]
+  - [0xd3000, bin]
+  - [0xd3800, bin]
+  - [0xd6800, bin]
+  - [0xd8000, bin]
+  - [0xdc800, bin]
+  - [0xde800, bin]
+  - [0xe1000, bin]
+  - [0xe2800, bin]
+  - [0xe3800, bin]
+  - [0xe4000, bin]
+  - [0xe5800, bin]
+  - [0xe7800, bin]
+  - [0xe8000, bin]
+  - [0xe9800, bin]
+  - [0xea800, bin]
+  - [0xeb000, bin]
+  - [0xec000, bin]
+  - [0xec800, bin]
+  - [0xed800, bin]
+  - [0xee800, bin]
+  - [0xef800, bin]
+  - [0xf0800, bin]
+  - [0xf1800, bin]
+  - [0xf2800, bin]
+  - [0xf3800, bin, tex/bg/jakyol]
+  - [0xff800, bin, tex/bg/jakyor]
+  - [0x10b800, bin, tex/bg/mesial]
+  - [0x117800, bin, tex/bg/mesiar]
+  - [0x123800, bin, tex/bg/gaial]
+  - [0x12f800, bin, tex/bg/gaiar]
+  - [0x13b800, bin, tex/bg/kaifukul]
+  - [0x147800, bin, tex/bg/kaifukur]
+  - [0x153800, bin, tex/bg/terml]
+  - [0x15f800, bin, tex/bg/termr]
+  - [0x16b800, bin, tex/bg/rooml]
+  - [0x177800, bin, tex/bg/roomr]
+  - [0x183800, bin, tex/bg/hospl]
+  - [0x18f800, bin, tex/bg/hospr]
+  - [0x19b800, bin, tex/bg/brooml]
+  - [0x1a7800, bin, tex/bg/broomr]
+  - [0x1b3800, bin, tex/bg/homel]
+  - [0x1bf800, bin, tex/bg/homer]
+  - [0x1cb800, bin, tex/bg/gbrooml]
+  - [0x1d7800, bin, tex/bg/gbroomr]
+  - [0x1e3800, bin, tex/bg/oprooml]
+  - [0x1ef800, bin, tex/bg/oproomr]
+  - [0x1fb800, bin, tex/bg/shuttrl]
+  - [0x207800, bin, tex/bg/shuttrr]
+  - [0x213800, bin, tex/bg/doorl]
+  - [0x21f800, bin, tex/bg/doorr]
+  - [0x22b800, bin, tex/bg/ddoorl]
+  - [0x237800, bin, tex/bg/ddoorr]
+  - [0x243800, bin, tex/bg/dshuttrl]
+  - [0x24f800, bin, tex/bg/dshuttrr]
+  - [0x25b800, bin, tex/bg/grooml]
+  - [0x269000, bin, tex/bg/groomr]
+  - [0x275000, bin, tex/bg/embassyl]
+  - [0x288800, bin, tex/bg/embassyr]
+  - [0x294800, bin, tex/bg/st0l]
+  - [0x2a0800, bin, tex/bg/st0r]
+  - [0x2b4000, bin, tex/bg/lakel]
+  - [0x2c0000, bin, tex/bg/laker]
+  - [0x2cc000, bin, tex/bg/cereml]
+  - [0x2d8000, bin, tex/bg/ceremr]
+  - [0x2e4000, bin, tex/bg/shrinel]
+  - [0x2f0000, bin, tex/bg/shriner]
+  - [0x2fc000, bin, tex/bg/endl]
+  - [0x308000, bin, tex/bg/endr]
+  - [0x314000, bin, tex/bg/chikyul]
+  - [0x320000, bin, tex/bg/chikyur]
+  - [0x330000, bin, tex/bg/galaxyl]
+  - [0x340000, bin, tex/bg/galaxyr]
+  - [0x34c000, bin, tex/bg/bar1l]
+  - [0x358000, bin, tex/bg/bar1r]
+  - [0x364000, bin, tex/bg/bar2l]
+  - [0x370000, bin, tex/bg/bar2r]
+  - [0x37d800, bin, tex/bg/antiquel]
+  - [0x389800, bin, tex/bg/antiquer]
+  - [0x395800, bin, tex/bg/drugl]
+  - [0x3a1800, bin, tex/bg/drugr]
+  - [0x3ad800, bin, tex/bg/knivel]
+  - [0x3b9800, bin, tex/bg/kniver]
+  - [0x3c5800, bin, tex/bg/surviv1l]
+  - [0x3d5800, bin, tex/bg/surviv1r]
+  - [0x3e5800, bin, tex/bg/nendl]
+  - [0x3f9000, bin, tex/bg/nendr]
+  - [0x40c800, bin, tex/bg/wasitul]
+  - [0x418800, bin, tex/bg/wasitur]
+  - [0x424800, bin, tex/bg/sibuya1l]
+  - [0x430800, bin, tex/bg/sibuya1r]
+  - [0x43c800, bin, tex/bg/exect1l]
+  - [0x448800, bin, tex/bg/exect1r]
+  - [0x454800, bin, tex/bg/exect2l]
+  - [0x460800, bin, tex/bg/exect2r]
+  - [0x46c800, bin, tex/bg/sibuya2l]
+  - [0x478800, bin, tex/bg/sibuya2r]
+  - [0x484800, bin, tex/bg/tkrooml]
+  - [0x490800, bin, tex/bg/tkroomr]
+  - [0x49c800, bin, tex/bg/junkl]
+  - [0x4a8800, bin, tex/bg/junkr]
+  - [0x4b4800, bin, tex/bg/gunl]
+  - [0x4c0800, bin, tex/bg/gunr]
+  - [0x4cc800, bin, tex/bg/surviv2l]
+  - [0x4d8800, bin, tex/bg/surviv2r]
+  - [0x4e4800, bin, tex/bg/shopl]
+  - [0x4f0800, bin, tex/bg/shopr]
+  - [0x4fc800, bin, tex/bg/palacel]
+  - [0x508800, bin, tex/bg/palacer]
+  - [0x514800, bin, tex/bg/prisonl]
+  - [0x520800, bin, tex/bg/prisonr]
+  - [0x52c800, bin, tex/bg/constrl]
+  - [0x538800, bin, tex/bg/constrr]
+  - [0x544800, bin, tex/bg/thronel]
+  - [0x550800, bin, tex/bg/throner]
+  - [0x137b000, bin, seq/effect]
+  - [0x13bd800, bin, seq/mus/open]
+  - [0x13ce800, bin, seq/mus/title]
+  - [0x13df000, bin, seq/mus/dream]
+  - [0x13f5800, bin, seq/mus/home]
+  - [0x1411000, bin, seq/mus/kichijoj]
+  - [0x142b000, bin, seq/mus/arcade]
+  - [0x1438800, bin, seq/mus/neutral]
+  - [0x1450800, bin, seq/mus/embassy]
+  - [0x145b000, bin, seq/mus/shop]
+  - [0x146b800, bin, seq/mus/terminal]
+  - [0x1477000, bin, seq/mus/palace]
+  - [0x147f000, bin, seq/mus/battle]
+  - [0x14a0000, bin, seq/mus/law]
+  - [0x14ba000, bin, seq/mus/ginza]
+  - [0x14d5800, bin, seq/mus/jakyo]
+  - [0x14f1000, bin, seq/mus/shibuya]
+  - [0x14fc800, bin, seq/mus/boss]
+  - [0x1517800, bin, seq/mus/gover]
+  - [0x1521000, bin, seq/mus/ruins]
+  - [0x152c800, bin, seq/mus/chaos]
+  - [0x1539800, bin, seq/mus/cathedrl]
+  - [0x1550000, bin, seq/mus/end]
+  - [0x155b000, bin, seq/mus/credits]
+  - [0x157a800, bin, seq/mus/pascal]
+  - [0x158b800, bin, seq/mus/majin]
+      
+  - [0x1fa0000]

@@ -1,0 +1,7 @@
+Rename each of your games like:
+smt1.cue
+smt1.bin
+smt2.cue
+smt2.bin
+smtif.cue
+smtif.bin
