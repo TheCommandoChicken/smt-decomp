@@ -2,8 +2,30 @@
 // function labels
 
 __main = 0x80013FD4; // type:func size:8
+start = 0x80013fdc; // type:func
+weirdDat0 = 0x80014088; // type:u16
 main = 0x80014098; // type:func size:56
-init = 0x800140d0; // type:func
+Init = 0x800140d0; // type:func
+MainLoop = 0x800141b4; // type:func
+Empty = 0x80014214; // type:func
+SysInit = 0x8001421c; // type:func
+VSyncCallbackFunc = 0x8001426c; // type:func
+DrawSyncCallbackFunc = 0x8001429c; // type:func
+Random = 0x800142a4; // type:func
+GameInit = 0x800142c4; // type:func
+GameManagerProc = 0x800143DC; // type:func
+GameDataInit = 0x80014538; // type:func
+ClearUnknownStruct = 0x8001497c; // type:func
+FieldMapProc = 0x80015714; // type:func
+FieldMapKill = 0x80015824; // type:func
+FieldMapClose1 = 0x800158ec; // type:func
+FieldMapSleepEvent = 0x800159bc; // type:func
+FieldMapSleep = 0x80015b94; // type:func
+UpdateField = 0x80015bfc; // type:func
+FieldMovement = 0x80016204; // type:func
+ExecuteFieldMovement = 0x80016618; // type:func
+AddFieldOverlays = 0x80016f9c; // type:func
+EncounterBarProc = 0x8001708c; // type:func
 SsGetMute = 0x80016AF0; // type:func size:32
 StSetRing = 0x8006DE1C; // type:func size:44
 StClearRing = 0x8006DE4C; // type:func size:96

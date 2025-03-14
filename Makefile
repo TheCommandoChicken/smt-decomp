@@ -29,6 +29,7 @@ SMTIF_ASSETS_DIR := $(ASSETS_DIR)/$(SMTIF_DIR)
 SMT1_S_FILES := $(foreach dir, $(SMT1_ASM_DIRS), $(wildcard $(dir)/*.s))
 
 OBJECT_FILES := $(patsubst asm/%.s, build/asm/%.o, $(shell find asm -name "*.s"))
+SOURCE_FILES := $(patsubst asm/%.s, src/%.c, $(shell find src -name "*.s"))
 
 MAKE := make
 PYTHON := python3
@@ -40,9 +41,11 @@ CROSS := mipsel-linux-gnu-
 LD := $(CROSS)ld
 AS := $(CROSS)as
 MASPSX := $(TOOLS_DIR)/maspsx/maspsx.py
+M2C := $(TOOLS_DIR)/m2c/m2c.py
 
 AS_FLAGS += -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G0
 LD_FLAGS := -nostdlib --no-check-sections --noinhibit-exec
+M2C_FLAGS := 
 
 PSX_RIP := $(TOOLS_DIR)/psximager/psxrip.exe
 
@@ -78,3 +81,9 @@ $(OBJECT_FILES): build/asm/%.o: asm/%.s
 build:
 	$(LD) $(LD_FLAGS) -o build/slps_031.elf -T $(CONFIG_DIR)/smt1.main.ld -T $(CONFIG_DIR)/undefined_funcs_auto.smt1.main.txt -T $(CONFIG_DIR)/undefined_syms_auto.smt1.main.txt
 	@objcopy -I elf32-big -O binary build/slps_031.elf build/SLPS_031.70
+
+decompile: $(SOURCE_FILES)
+
+$(SOURCE_FILES): src/%.c: asm/%.s
+	@mkdir -p $(dir $@)
+	@$(PYTHON) $(M2C) $(M2C_FLAGS) $< -o $@

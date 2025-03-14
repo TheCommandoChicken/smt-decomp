@@ -1,4 +1,3 @@
-func_80014214 = 0x80014214;
 func_800213A0 = 0x800213A0;
 func_8007CA5C = 0x8007CA5C;
 func_8007D0AC = 0x8007D0AC;
@@ -81,6 +80,7 @@ func_8009C9BC = 0x8009C9BC;
 strncat = 0x8009C9FC;
 strncmp = 0x8009CA7C;
 sprintf = 0x8009D4FC;
+InitHeap = 0x8009DE5C;
 DeliverEvent = 0x8009DEAC;
 StartRCnt = 0x8009E0F0;
 func_801177D4 = 0x801177D4;

@@ -44,6 +44,8 @@ options:
   data_string_encoding: ASCII
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
+
+  migrate_rodata_to_functions: True
 segments:
   - name: header
     type: header
