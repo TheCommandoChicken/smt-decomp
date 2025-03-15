@@ -22,7 +22,7 @@ SECTIONS
     {
         FILL(0x00000000);
         main_RODATA_START = .;
-        build/asm/smt1/main/data/main.rodata.o(.rodata);
+        build/src/smt1/main/main.o(.rodata);
         build/asm/smt1/main/data/field.rodata.o(.rodata);
         build/asm/smt1/main/data/object.rodata.o(.rodata);
         build/asm/smt1/main/data/pad.rodata.o(.rodata);
@@ -56,7 +56,7 @@ SECTIONS
         main_RODATA_END = .;
         main_RODATA_SIZE = ABSOLUTE(main_RODATA_END - main_RODATA_START);
         main_TEXT_START = .;
-        build/asm/smt1/main/main.o(.text);
+        build/src/smt1/main/main.o(.text);
         build/asm/smt1/main/field.o(.text);
         build/asm/smt1/main/object.o(.text);
         build/asm/smt1/main/pad.o(.text);
@@ -74,7 +74,7 @@ SECTIONS
         main_TEXT_END = .;
         main_TEXT_SIZE = ABSOLUTE(main_TEXT_END - main_TEXT_START);
         main_DATA_START = .;
-        build/asm/smt1/main/main.o(.data);
+        build/src/smt1/main/main.o(.data);
         build/asm/smt1/main/field.o(.data);
         build/asm/smt1/main/object.o(.data);
         build/asm/smt1/main/pad.o(.data);
@@ -109,7 +109,7 @@ SECTIONS
         main_DATA_END = .;
         main_DATA_SIZE = ABSOLUTE(main_DATA_END - main_DATA_START);
         main_BSS_START = .;
-        build/asm/smt1/main/main.o(.bss);
+        build/src/smt1/main/main.o(.bss);
         build/asm/smt1/main/field.o(.bss);
         build/asm/smt1/main/object.o(.bss);
         build/asm/smt1/main/pad.o(.bss);
