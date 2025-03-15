@@ -32,22 +32,35 @@ OBJECT_FILES := $(patsubst asm/%.s, build/asm/%.o, $(shell find asm -name "*.s")
 SOURCE_FILES := $(patsubst asm/%.s, src/%.c, $(shell find src -name "*.s"))
 
 MAKE := make
-PYTHON := python3
 WINE := wine
-SPLAT := splat
+
+VENV_DIR       	?= .venv
+
+ifneq ($(wildcard $(VENV_DIR)),)
+PYTHON_BIN		:= $(realpath $(VENV_DIR))/bin/
+endif
+PYTHON          := $(PYTHON_BIN)python3
+BLACK			:= $(PYTHON_BIN)black
+PIP			 	:= $(realpath .)/$(VENV_DIR)/bin/pip3
+SPLAT := $(PYTHON_BIN)splat
 SPLIT := $(SPLAT) split
 
 CROSS := mipsel-linux-gnu-
 LD := $(CROSS)ld
 AS := $(CROSS)as
-MASPSX := $(TOOLS_DIR)/maspsx/maspsx.py
-M2C := $(TOOLS_DIR)/m2c/m2c.py
+MASPSX_DIR := $(TOOLS_DIR)/maspsx
+M2C_DIR := $(TOOLS_DIR)/m2c
+MASPSX := $(MASPSX_DIR)/maspsx.py
+M2C := $(M2C_DIR)/m2c.py
+PSXIMAGER_DIR := $(TOOLS_DIR)/psximager
 
 AS_FLAGS += -Iinclude -march=r3000 -mtune=r3000 -no-pad-sections -O1 -G0
 LD_FLAGS := -nostdlib --no-check-sections --noinhibit-exec
 M2C_FLAGS := 
 
-PSX_RIP := $(TOOLS_DIR)/psximager/psxrip.exe
+PSX_RIP := $(TOOLS_DIR)/psximager/src/psxrip.exe
+
+DEPENDENCIES := $(M2C) $(MASPSX) $(PSX_RIP)
 
 CC_PSYQ_40 := $(WINE) $(TOOLS_DIR)/psyq/psyq4.0/CC1PSX.EXE -quiet
 CC_PSYQ_41 := $(WINE) $(TOOLS_DIR)/psyq/psyq4.1/CC1PSX.EXE -quiet
@@ -87,3 +100,26 @@ decompile: $(SOURCE_FILES)
 $(SOURCE_FILES): src/%.c: asm/%.s
 	@mkdir -p $(dir $@)
 	@$(PYTHON) $(M2C) $(M2C_FLAGS) $< -o $@
+
+.PHONY: python-dependencies
+python-dependencies: $(VENV_DIR)
+	$(PIP) install -r $(TOOLS_DIR)/requirements-python.txt
+
+$(VENV_DIR):
+	$(WHICH_PYTHON) -m venv $(VENV_DIR)
+
+.PHONY: update-dependencies
+update-dependencies: ##@ update tools and internal dependencies
+update-dependencies: $(DEPENDENCIES)
+
+$(M2C):
+	git submodule init $(M2C_DIR)
+	git submodule update $(M2C_DIR)
+	$(PYTHON) -m pip install --upgrade pycparser
+$(MASPSX):
+	git submodule init $(MASPSX_DIR)
+	git submodule update $(MASPSX_DIR)
+$(PSX_RIP):
+	git submodule init $(PSXIMAGER_DIR)
+	git submodule update $(PSXIMAGER_DIR)
+	cd $(PSXIMAGER_DIR) && bash ./bootstrap && bash ./configure && make

@@ -58,7 +58,7 @@ segments:
     subalign: 4
     subsegments:
       - [0x800, .rodata, main]
-      - [0x80C, rodata, field]
+      - [0x80C, .rodata, field]
       - [0xB04, rodata, object]
       - [0xB68, rodata, pad]
       - [0xB88, rodata, dat]
@@ -81,7 +81,7 @@ segments:
       - [0x34AC, rodata]
       - [0x3578, rodata, lib]
       - [0x47d0, c, main]
-      - [0x59dc, asm, field]
+      - [0x59dc, c, field]
       - [0x87f0, asm, object]
       - [0x9430, asm, pad]
       - [0x97f0, asm, dat]
