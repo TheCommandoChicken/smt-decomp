@@ -16,31 +16,32 @@ s32 main(void) {
 }
 
 
-/* gcc 2.8.1 + maspsx; -gcoff -Wa,--aspsx-version=2.77 -O3 -G4 */
-/* 87.72% */
+/* gcc 2.8.1 + maspsx; -gcoff -Wa,--aspsx-version=2.77 -O3 -G8 */
+/* 100% */
+/* Matched by anon */
 void Init(void) {
     s32 temp_a0_2;
     s32 temp_a0_3;
     s32 var_v0;
     u32 temp_a0;
     u32 temp_v0;
+    u32 tmp;
+    s32 rem;
 
     SysInit();
     D_800B6C58 = 0x200000;
     D_800B6C54 = 0x8000;
     temp_v0 = &D_80125368 - D_80010308;
     temp_a0 = temp_v0 / 0x800;
-    if (temp_v0 & 0x7FF) {
-        var_v0 = (temp_a0 + 1) * 0x800;
-    } else {
-        var_v0 = temp_a0 * 0x800;
-    }
-    temp_a0_2 = D_80010308 + var_v0;
-    temp_a0_3 = temp_a0_2 + ((8 - (temp_a0_2 & 7)) & 7);
-    func_80019384(temp_a0_3, ((D_800B6C58 + 0x80000000) - temp_a0_3) - D_800B6C54);
-    func_80017FF0(Random, 0);
-    VSyncCallback(VSyncCallbackFunc);
-    DrawSyncCallback(DrawSyncCallbackFunc);
+    rem = temp_v0 % 0x800;
+    tmp = 0x80000000;
+    
+    temp_a0_2 = D_80010308 + (rem != 0 ? temp_a0 + 1 : temp_a0) * 0x800;
+    temp_a0_2 += (8 - (temp_a0_2 & 7)) & 7;
+    func_80019384(temp_a0_2, D_800B6C58 + tmp - temp_a0_2 - D_800B6C54);
+    func_80017FF0(&Random, 0);
+    VSyncCallback(&VSyncCallbackFunc);
+    DrawSyncCallback(&DrawSyncCallbackFunc);
     SetDispMask(1);
     VSync(0);
     GameInit();
@@ -207,6 +208,7 @@ void GameDataInit(void) {
 
 /* gcc 2.8.0 + maspsx; -O2 -G4 -gcoff -Wa,--aspsx-version=2.77 */
 /* 100% */
+/* Matched by MrSapps */
 void func_800145CC(s32 arg0) {
     object* temp_v0;
 
@@ -268,6 +270,7 @@ block_14:
 
 /* gcc 2.8.1 + maspsx; -O2 -G4 -gcoff -Wa,--aspsx-version=2.77 */
 /* 100% */
+/* Matched by Mc-muffin */
 s32 func_800147CC(void) {
     if (func_8004C06C(0xFE) == 0) {
         func_800145CC(func_80014804);

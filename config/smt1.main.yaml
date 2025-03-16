@@ -96,4 +96,4 @@ segments:
       - [0x6597c, asm, lib/libsnd]
       - [0x8f000, data]
       
-  - [0xa8000]
+  - [0xa7800]
