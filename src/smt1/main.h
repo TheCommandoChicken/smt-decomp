@@ -40,7 +40,7 @@ s32 D_800B6C5C;
 s32 D_800B74EC;
 
 object** FirstObjectPtrPtr;
-persistent_objects Objects;
+persistent_objects PersistentObjects;
 unknown_object_struct* UnknownStruct[2];
 
 typedef struct game_manager_data game_manager_data, *Pgame_manager_data;
@@ -419,11 +419,7 @@ typedef struct CVECTOR CVECTOR, *PCVECTOR;
 
 typedef struct POLY_FT4 POLY_FT4, *PPOLY_FT4;
 
-typedef u16 u16;
-
 typedef struct POLY_G4 POLY_G4, *PPOLY_G4;
-
-typedef u8 u8;
 
 typedef struct POLY_GT4 POLY_GT4, *PPOLY_GT4;
 
@@ -460,8 +456,6 @@ typedef struct GsCOORD2PARAM GsCOORD2PARAM, *PGsCOORD2PARAM;
 typedef struct astruct_14 astruct_14, *Pastruct_14;
 
 typedef struct tile_walls tile_walls, *Ptile_walls;
-
-typedef u32 u32;
 
 typedef struct struct_13 struct_13, *Pstruct_13;
 
