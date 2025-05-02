@@ -74,11 +74,45 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D2F4);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D348);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D474);
+long func_8002D474(short arg0) {
+    long var_v1;
+
+    if (arg0 == 0) {
+        return 0;
+    } else if (arg0 == 0x400) {
+        var_v1 = 2;
+    } else if (arg0 == 0x800) {
+        var_v1 = 4;
+    } else if (arg0 == 0xC00) {
+        var_v1 = 6;
+    } else if (arg0 == 0x2) {
+        var_v1 = 0x400;
+    } else if (arg0 == 0x4) {
+        var_v1 = 0x800;
+    } else if (arg0 == 6) {
+        var_v1 = 0xC00;
+    } else {
+        var_v1 = 0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D4EC);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D550);
+short func_8002D550(SVECTOR* arg0, SVECTOR* arg1) {
+    long var_v1;
+
+    if (arg0->vy > arg1->vy) {
+        var_v1 = 0;
+    } else if (arg0->vx < arg1->vx) {
+        var_v1 = 0x40;
+    } else if (arg0->vy < arg1->vy) {
+        var_v1 = 0x80;
+    } else if (arg0->vx > arg1->vx) {
+        var_v1 = 0xC0;
+    }
+    return var_v1;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D5C0);
 
@@ -88,15 +122,69 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D7A0);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D82C);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002D968);
+void func_800225C8(s32, s32, s32, s32, s32);                   /* extern */
+void func_80024484(s32);                                 /* extern */
+void func_80025308(s32);                                 /* extern */
+void func_8003A228(s16, s16, void*);                      /* extern */
+extern dungeon_data* DungeonData;
+extern void func_80028714;
+extern void func_8003302C;
+extern void func_800330A4;
+extern void func_80036404;
+extern void func_80037A50;
+
+void func_8002D968() {
+    s32 sp18[10];
+    object* var_v1;
+    u32 temp_v1;
+
+    func_80024484(3);
+    func_80025308(1);
+    temp_v1 = DungeonData->unk4;
+    switch (temp_v1) {
+    case 1:
+        DungeonData->return_function = &func_80028714;
+        ((object *)DungeonData->origin)->proc_func = &func_800330A4;
+        return;
+    case 2:
+        func_800225C8(2, 3, 2, 2, 2);
+        ((object *)DungeonData->origin)->proc_func = &func_80036404;
+        return;
+    case 3 ... 5:
+        ((object *)DungeonData->origin)->proc_func = &func_80037A50;
+        return;
+    case 6:
+        func_8003A228(DungeonData->grid_x_pos, DungeonData->grid_y_pos, &sp18);
+        DungeonData->return_function = &func_80028714;
+        if (sp18[8] != -1) {
+            ((object *)DungeonData->origin)->proc_func = &func_800330A4;
+        } else {
+            ((object *)DungeonData->origin)->proc_func = &func_8003302C;
+        }
+        return;
+    case 0:
+    default:
+        func_800225C8(2, 3, 2, 2, 2);
+        DungeonData->return_function = &func_80028714;
+        ((object *)DungeonData->origin)->proc_func = &func_80028714;
+        return;
+    }
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002DADC);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002DB7C);
+s16 func_8002DB7C(void) {
+    return DungeonData->unk64FC;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002DB94);
+s16 func_8002DB94(void) {
+    return DungeonData->unk4;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002DBAC);
+s32 func_8002DBAC(void) {
+    return DungeonData->unk6518 == 0;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002DBC4);
 
@@ -110,7 +198,18 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002E484);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002E4F4);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002E5F4);
+s16 func_8002E5F4(s16 arg0, s16 arg1, s16 arg2, s16 arg3) {
+    s16 var_t0;
+    u32 var_a1;
+
+    var_a1 = sqr(arg1);
+    if (arg3 == 0) {
+        var_t0 = (sqr(arg0) * arg2) / var_a1;
+    } else if (arg3 == 1) {
+        var_t0 = arg2 - ((sqr(arg1 - arg0) * arg2) / var_a1);
+    }
+    return var_t0;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002E6B4);
 

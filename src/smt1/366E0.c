@@ -6,7 +6,9 @@ INCLUDE_ASM("asm/smt1/data/nonmatchings/366E0", func_801807E8);
 
 INCLUDE_ASM("asm/smt1/data/nonmatchings/366E0", func_80180C78);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/366E0", func_80180D0C);
+void func_80180D0C(void) {
+    func_80019C58(0, 0, 9, 0, 0, 3);
+}
 
 INCLUDE_ASM("asm/smt1/data/nonmatchings/366E0", func_80180D44);
 

@@ -43,6 +43,8 @@ options:
   data_string_encoding: ASCII
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
+
+  migrate_rodata_to_functions: False
 segments:
   - [0x0, bin]
   - [0xe000, bin]
@@ -55,15 +57,15 @@ segments:
     type: code
     start: 0x36000
     vram: 0x80180000
-    subalign: 4
+    subalign: 1
     subsegments:
-      - [0x36000, .data]
-      - [0x366e0, c]
-      - [0x3b2a0, .rodata]
+      - [0x36000, .rodata]
+      - [0x366e0, c, intro]
+      - [0x3b2a0, .data]
       - [0x3b404, pad]
 
   - [0x3b800, bin, tex/map]
-  - [0x3d000, bin]
+  - [0x3d000, bin, txt/txt00]
   - [0x43000, bin]
   - [0x58000, bin]
   - [0x5a000, bin]
@@ -80,24 +82,24 @@ segments:
   - [0x71800, bin]
   - [0x73000, bin]
   - [0x73800, bin]
-  - [0x74800, bin]
-  - [0x79800, bin]
-  - [0x7b800, bin]
-  - [0x7d000, bin]
-  - [0x7d800, bin]
-  - [0x7e000, bin]
-  - [0x7e800, bin]
-  - [0x80000, bin]
+  - [0x74800, bin, txt/txt01]
+  - [0x79800, bin, txt/txt02]
+  - [0x7b800, bin, txt/txt03]
+  - [0x7d000, bin, txt/txt04]
+  - [0x7d800, bin, txt/txt05]
+  - [0x7e000, bin, txt/txt06]
+  - [0x7e800, bin, txt/txt07]
+  - [0x80000, bin, txt/txt08]
   - [0x80800, bin, tex/rnd1]
   - [0x85800, bin, tex/titlel]
   - [0x8a800, bin, tex/titler]
   - [0x8f800, bin, tex/logo]
-  - [0x94000, bin]
-  - [0x96000, bin]
-  - [0x97800, bin]
-  - [0x99000, bin]
-  - [0x99800, bin]
-  - [0x9a000, bin]
+  - [0x94000, bin, txt/txt09]
+  - [0x96000, bin, txt/txt10]
+  - [0x97800, bin, txt/txt11]
+  - [0x99000, bin, txt/txt12]
+  - [0x99800, bin, txt/txt13]
+  - [0x9a000, bin, txt/txt14]
   - [0x9a800, bin, tex/fusecaps]
   - [0xa3800, bin, tex/fusebubl]
   - [0xad000, bin, tex/flash]
@@ -295,7 +297,7 @@ segments:
   - [0x836800, bin]
   - [0x83f000, bin]
   - [0x842000, bin, field/ktjj]
-  - [0x845000, bin, field/unk]
+  - [0x845000, bin, field/aft]
   - [0x84d800, bin]
   - [0x854000, bin]
   - [0x857800, bin]

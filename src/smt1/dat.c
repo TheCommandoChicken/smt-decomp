@@ -76,7 +76,9 @@ void func_80019268(void) {
     memset(&D_800B9830, -1, 0x10);
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019294);
+s32 func_80019294(s32 arg0, s32 arg1) {
+    return arg0 == D_800B9830[arg1][0];
+}
 
 void func_800192B8(s32 arg0, s32 arg1) {
     s32 temp_v0;
@@ -95,22 +97,74 @@ s32 func_800192F4(s32* arg0) {
     return *arg0;
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019300);
+u32 func_80019300(u8* arg0, something* arg1) {
+    u8 temp_a1;
+    u32 temp_t2;
+    u32 temp_t1;
+    u32 var_a3;
+    u32 var_v1;
+    u8 temp_t0;
+    u8 temp_v0;
+    u8 temp_v0_2;
+    u8* temp_a2;
+    u8* temp_a2_2;
+    u8* var_a0;
+    u8* var_a2;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019384);
+    var_a0 = arg0;
+    var_a3 = 0;
+    var_a2 = &arg1->unk5;
+    temp_t2 = arg1->unk0;
+    temp_t1 = arg1->unk4;
+    do {
+        if (var_a2[0] == temp_t1) {
+            var_a2 += 1;
+            temp_t0 = var_a2[0];
+            var_a2 += 1;
+            temp_v0_2 = var_a2[0];
+            var_a2 += 1;
+            temp_a1 = temp_v0_2;
+            for (var_v1 = 0; var_v1 < temp_a1; var_v1++) {
+                var_a0[0] = temp_t0;
+                var_a0 += 1;
+                var_a3 += 1;
+            }
+        } else {
+            var_a0[0] = var_a2[0];
+            var_a2 += 1;
+            var_a0 += 1;
+            var_a3 += 1;
+        }
+    } while (var_a3 < temp_t2);
+    return var_a3;
+}
+
+
+/* Matched by AngheloAlf */
+void func_80019384(object_data** arg0, s32 arg1) {
+    glomper *v0 = D_800B6D60;
+
+    v0->unk0 = arg0;
+    v0->unk4 = arg0;
+    v0->unk8 = -0x3E7;
+    v0->unk4[0] = v0;
+    v0->unk4[1] = v0;
+    v0->unk4[2] = 0;
+    v0->unk4[3] = arg1;
+}
 
 object_data** func_800193C0(s32 arg0) {
     s32 temp_a0;
     s32 temp_a1;
     object_data* var_s0;
 
-    if (0 <= arg0) {
+    if (arg0 >= 0) {
         var_s0 = D_800B6D60[1];
-        temp_a1 = (arg0 + 7) & ~7;
+        arg0 = (arg0 + 7) & ~7;
         while (var_s0 != D_800B6D60) {
-            if (((var_s0->object).field2_0x8 != 1) && (temp_a0 = (var_s0->object).size, (temp_a0 >= temp_a1))) {
-                if ((temp_a0 - temp_a1) >= 0x31) {
-                    func_800194C4(var_s0, temp_a1);
+            if (((var_s0->object).field2_0x8 != 1) && (temp_a0 = (var_s0->object).size, (temp_a0 >= arg0))) {
+                if ((temp_a0 - arg0) >= 0x31) {
+                    func_800194C4(var_s0, arg0);
                 }
                 break;
             }
@@ -124,7 +178,18 @@ object_data** func_800193C0(s32 arg0) {
     return 0;
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019478);
+void func_80019478(s32* arg0) {
+    s32* temp_a0;
+
+    if (arg0 != 0) {
+        temp_a0 = arg0 - 4;
+        if (temp_a0[2] == 1) {
+            temp_a0[2] = 0;
+            func_80019520(temp_a0);
+            func_80019520(arg0[-4]);
+        }
+    }
+}
 
 void func_800194C4(object_data* arg0, s32 arg1) {
     s32* temp_a2;
@@ -144,13 +209,168 @@ void func_800194C4(object_data* arg0, s32 arg1) {
     }
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019520);
+void func_80019520(malloc_thing* arg0) {
+    s32* temp_v1;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_8001958C);
+    if (arg0->unk8 == 0) {
+        temp_v1 = arg0->unk4;
+        if (temp_v1[2] == 0) {
+            arg0->unkC += (0x10 + temp_v1[3]);
+            *arg0->unk4[1] = arg0;
+            arg0->unk4 = arg0->unk4[1];
+        }
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_800195FC);
+s32 func_8001958C(s32 arg0, s32 arg1, s32 arg2) {
+    s32 var_a1;
+    s32 var_v0;
+    u32 var_v1;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_800196B4);
+    if (!(arg0 & ~(1 << arg1))) {
+        return arg1;
+    }
+    var_a1 = arg1;
+    for (var_v1 = 1; var_v1 < 0x20; var_v1++) {
+        var_a1 += arg2;
+        if (var_a1 >= 0x20) {
+            var_a1 = 0;
+        } else if (var_a1 < 0) {
+            var_a1 = 0x1F;
+        }
+        var_v0 = 1 << var_a1;
+        if (arg0 & var_v0) {
+            break;
+        }
+    }
+    return var_a1;
+}
+
+void func_800195FC(s32 arg0, s32 arg1, pos* arg2) {
+    pos sp0;
+    u16 temp_a0;
+    u16 temp_a1;
+    s32 var_a3;
+    s32 var_t1;
+    s32 var_v0;
+    pos* var_t0;
+
+    temp_a1 = arg1;
+    temp_a0 = arg0;
+    for (var_t1 = temp_a0 + 1; var_t1 < temp_a1; var_t1++) {
+        var_a3 = var_t1 - 1;
+        sp0 = arg2[var_t1];
+        var_v0 = arg2[var_t1].y;
+        while (var_a3 >= temp_a0) {
+            if (var_v0 < arg2[var_a3].y) {
+                arg2[var_a3 + 1] = arg2[var_a3];
+                var_a3--;
+            } else {
+                break;
+            }
+        }
+        arg2[var_a3 + 1] = sp0;
+    }
+}
+
+
+/* 48.23% */
+void func_800196B4(s32 arg0, s32 arg1, thingy* arg2[], void* arg3) {
+    s16 temp_t1;
+    s16 temp_v0;
+    s16 var_t3;
+    s16 var_t4;
+    s32 temp_a0_2;
+    s32 temp_a1;
+    s32 temp_v1_2;
+    s16 var_a0;
+    s32 var_a1;
+    s32 var_t2;
+    u32 temp_a0;
+    u32 temp_v1;
+    u32 var_a1_2;
+    u32 var_t0;
+    s16* temp_v0_2;
+    s16* temp_v1_3;
+    s16* temp_v1_4;
+    thingy* var_a0_2;
+    thingy* var_a3;
+    thingy* var_v1;
+    thingy* var_v1_2;
+    u16 sp50[32];
+    u16 sp90[32];
+    thingy subroutine_arg24;
+
+    var_t4 = arg0;
+    temp_v0 = (arg0 + arg1) - 1;
+    var_t3 = temp_v0;
+    var_t2 = 0;
+    if ((temp_v0 - arg0) < 0xB) {
+        var_a0 = arg0;
+    } else {
+loop_3:
+        var_a1 = var_t4 << 0x10;
+        do {
+            temp_a1 = var_a1 >> 0x10;
+            temp_t1 = arg2[(temp_a1 + var_t3) / 2]->unk2;
+            var_a1_2 = temp_a1 - 1;
+            var_t0 = var_t3 + 1;
+            var_a3 = arg2[var_t0];
+            var_a0_2 = arg2[var_a1_2 + 1];
+loop_5:
+            var_a1_2 += 1;
+            if (temp_t1 < var_a0_2->unk2) {
+                var_v1 = arg2[var_a1_2];
+                do {
+                    var_v1 += 1;
+                    var_a0_2 += 1;
+                    var_a1_2 += 1;
+                } while (temp_t1 < var_v1->unk2);
+            }
+            var_v1_2 = arg2[var_t0];
+            do {
+                var_v1_2 -= 1;
+                var_a3 -= 1;
+                var_t0 -= 1;
+            } while (var_v1_2->unk2 < temp_t1);
+            if (var_a1_2 < var_t0) {
+                subroutine_arg24 = *var_a0_2;
+                *var_a0_2 = *var_a3;
+                *var_a3 = subroutine_arg24;
+                var_a0_2 += 1;
+                goto loop_5;
+            }
+            temp_a0 = var_a1_2 - var_t4;
+            temp_v1 = var_t3 - var_t0;
+            if (temp_v1 < temp_a0) {
+                temp_v1_2 = var_t2;
+                if (temp_a0 >= 0xB) {
+                    var_t2 += 1;
+                    sp50[temp_v1_2] = var_t4;
+                    sp90[temp_v1_2] = (s16) (var_a1_2 - 1);
+                }
+                var_t4 = var_t0 + 1;
+            } else {
+                temp_a0_2 = var_t2 * 2;
+                if (temp_v1 >= 0xB) {
+                    var_t2 += 1;
+                    sp50[temp_a0_2] = (s16) (var_t0 + 1);
+                    sp90[temp_a0_2] = var_t3;
+                }
+                var_t3 = var_a1_2 - 1;
+            }
+            var_a1 = var_t4 << 0x10;
+        } while ((var_t3 - var_t4) >= 0xB);
+        var_t2 -= 1;
+        if (var_t2 != 0) {
+            var_t4 = sp50[var_t2];
+            var_t3 = sp90[var_t2];
+            goto loop_3;
+        }
+        var_a0 = arg0;
+    }
+    func_800195FC(var_a0, arg1, var_a3);
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_800198BC);
 
@@ -204,7 +424,49 @@ void func_80019F4C(data_struct* arg0) {
     func_80019F70();
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019F70);
+void func_80019F70(data_struct* arg0) {
+    s16 temp_s0_2;
+    s32 temp_s1;
+    s32 temp_s4;
+    s32 temp_s5;
+    u8* temp_v0_2;
+    s32 temp_v1_2;
+    s32 var_a1;
+    s32* temp_s0;
+    s32* temp_v0;
+    s32* var_a0;
+    u8 temp_v1;
+
+    temp_v1 = arg0->field19_0x35;
+    temp_s5 = arg0->field12_0x28;
+    switch (temp_v1) {                              /* irregular */
+    case 0:
+        temp_s0 = arg0->data;
+        temp_s4 = *(*(s32*)arg0->data + (s32*)arg0->data);
+        temp_s1 = *(*(s32*)arg0->data + (s32*)arg0->data - 1);
+        temp_v0_2 = func_800193C0(temp_s4);
+        memcpy(temp_v0_2, arg0->data, temp_s4);
+        temp_s0_2 = func_8003F7A4(&temp_v0_2[temp_s1], -1, temp_s5);
+        var_a0 = temp_v0_2 + 4;
+        temp_v1_2 = temp_s0[0] - 2;
+        for (var_a1 = 0; var_a1 < temp_v1_2; var_a1++) {
+            *var_a0 += temp_v0_2;
+            var_a0 += 1;
+        }
+        func_8003F814((u8*)arg0->data + temp_s4, temp_s0_2);
+        func_800406F4(temp_s5, temp_s0_2, temp_v0_2);
+        arg0->field19_0x35 = 1;
+        return;
+    case 1:
+        if (func_8003F574() != 0) {
+            func_8003F480(0x7F, 0x7F);
+            arg0->field18_0x34 = 0;
+            func_80019478(arg0->data);
+            arg0->data = 0;
+        }
+        return;
+    }
+}
 
 void func_8001A0B8(data_struct* arg0) {
     u32* temp_s0;

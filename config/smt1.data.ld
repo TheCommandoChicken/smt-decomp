@@ -102,29 +102,29 @@ SECTIONS
 
     intro_ROM_START = __romPos;
     intro_VRAM = ADDR(.intro);
-    .intro 0x80180000 : AT(intro_ROM_START) SUBALIGN(4)
+    .intro 0x80180000 : AT(intro_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
         intro_TEXT_START = .;
-        build/src/smt1/data/366E0.o(.text);
+        build/src/smt1/data/intro.o(.text);
         . = ALIGN(., 16);
         intro_TEXT_END = .;
         intro_TEXT_SIZE = ABSOLUTE(intro_TEXT_END - intro_TEXT_START);
         intro_DATA_START = .;
-        build/src/smt1/data/36000.o(.data);
-        build/src/smt1/data/366E0.o(.data);
+        build/src/smt1/data/intro.o(.data);
+        build/src/smt1/data/3B2A0.o(.data);
+        . += 0x3FC;
         . = ALIGN(., 16);
         intro_DATA_END = .;
         intro_DATA_SIZE = ABSOLUTE(intro_DATA_END - intro_DATA_START);
         intro_RODATA_START = .;
-        build/src/smt1/data/366E0.o(.rodata);
-        build/src/smt1/data/3B2A0.o(.rodata);
-        . += 0x3FC;
+        build/src/smt1/data/36000.o(.rodata);
+        build/src/smt1/data/intro.o(.rodata);
         . = ALIGN(., 16);
         intro_RODATA_END = .;
         intro_RODATA_SIZE = ABSOLUTE(intro_RODATA_END - intro_RODATA_START);
         intro_BSS_START = .;
-        build/src/smt1/data/366E0.o(.bss);
+        build/src/smt1/data/intro.o(.bss);
         . = ALIGN(., 16);
         intro_BSS_END = .;
         intro_BSS_SIZE = ABSOLUTE(intro_BSS_END - intro_BSS_START);
@@ -149,19 +149,19 @@ SECTIONS
     tex_map_ROM_END = __romPos;
     tex_map_VRAM_END = .;
 
-    _3D000_ROM_START = __romPos;
-    _3D000_VRAM = ADDR(._3D000);
-    ._3D000 : AT(_3D000_ROM_START) SUBALIGN(2048)
+    txt_txt00_ROM_START = __romPos;
+    txt_txt00_VRAM = ADDR(.txt_txt00);
+    .txt_txt00 : AT(txt_txt00_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _3D000_DATA_START = .;
-        build/assets/smt1/data/3D000.o(.data);
-        _3D000_DATA_END = .;
-        _3D000_DATA_SIZE = ABSOLUTE(_3D000_DATA_END - _3D000_DATA_START);
+        txt_txt00_DATA_START = .;
+        build/assets/smt1/data/txt/txt00.o(.data);
+        txt_txt00_DATA_END = .;
+        txt_txt00_DATA_SIZE = ABSOLUTE(txt_txt00_DATA_END - txt_txt00_DATA_START);
     }
-    __romPos += SIZEOF(._3D000);
-    _3D000_ROM_END = __romPos;
-    _3D000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt00);
+    txt_txt00_ROM_END = __romPos;
+    txt_txt00_VRAM_END = .;
 
     _43000_ROM_START = __romPos;
     _43000_VRAM = ADDR(._43000);
@@ -387,117 +387,117 @@ SECTIONS
     _73800_ROM_END = __romPos;
     _73800_VRAM_END = .;
 
-    _74800_ROM_START = __romPos;
-    _74800_VRAM = ADDR(._74800);
-    ._74800 : AT(_74800_ROM_START) SUBALIGN(2048)
+    txt_txt01_ROM_START = __romPos;
+    txt_txt01_VRAM = ADDR(.txt_txt01);
+    .txt_txt01 : AT(txt_txt01_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _74800_DATA_START = .;
-        build/assets/smt1/data/74800.o(.data);
-        _74800_DATA_END = .;
-        _74800_DATA_SIZE = ABSOLUTE(_74800_DATA_END - _74800_DATA_START);
+        txt_txt01_DATA_START = .;
+        build/assets/smt1/data/txt/txt01.o(.data);
+        txt_txt01_DATA_END = .;
+        txt_txt01_DATA_SIZE = ABSOLUTE(txt_txt01_DATA_END - txt_txt01_DATA_START);
     }
-    __romPos += SIZEOF(._74800);
-    _74800_ROM_END = __romPos;
-    _74800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt01);
+    txt_txt01_ROM_END = __romPos;
+    txt_txt01_VRAM_END = .;
 
-    _79800_ROM_START = __romPos;
-    _79800_VRAM = ADDR(._79800);
-    ._79800 : AT(_79800_ROM_START) SUBALIGN(2048)
+    txt_txt02_ROM_START = __romPos;
+    txt_txt02_VRAM = ADDR(.txt_txt02);
+    .txt_txt02 : AT(txt_txt02_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _79800_DATA_START = .;
-        build/assets/smt1/data/79800.o(.data);
-        _79800_DATA_END = .;
-        _79800_DATA_SIZE = ABSOLUTE(_79800_DATA_END - _79800_DATA_START);
+        txt_txt02_DATA_START = .;
+        build/assets/smt1/data/txt/txt02.o(.data);
+        txt_txt02_DATA_END = .;
+        txt_txt02_DATA_SIZE = ABSOLUTE(txt_txt02_DATA_END - txt_txt02_DATA_START);
     }
-    __romPos += SIZEOF(._79800);
-    _79800_ROM_END = __romPos;
-    _79800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt02);
+    txt_txt02_ROM_END = __romPos;
+    txt_txt02_VRAM_END = .;
 
-    _7B800_ROM_START = __romPos;
-    _7B800_VRAM = ADDR(._7B800);
-    ._7B800 : AT(_7B800_ROM_START) SUBALIGN(2048)
+    txt_txt03_ROM_START = __romPos;
+    txt_txt03_VRAM = ADDR(.txt_txt03);
+    .txt_txt03 : AT(txt_txt03_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _7B800_DATA_START = .;
-        build/assets/smt1/data/7B800.o(.data);
-        _7B800_DATA_END = .;
-        _7B800_DATA_SIZE = ABSOLUTE(_7B800_DATA_END - _7B800_DATA_START);
+        txt_txt03_DATA_START = .;
+        build/assets/smt1/data/txt/txt03.o(.data);
+        txt_txt03_DATA_END = .;
+        txt_txt03_DATA_SIZE = ABSOLUTE(txt_txt03_DATA_END - txt_txt03_DATA_START);
     }
-    __romPos += SIZEOF(._7B800);
-    _7B800_ROM_END = __romPos;
-    _7B800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt03);
+    txt_txt03_ROM_END = __romPos;
+    txt_txt03_VRAM_END = .;
 
-    _7D000_ROM_START = __romPos;
-    _7D000_VRAM = ADDR(._7D000);
-    ._7D000 : AT(_7D000_ROM_START) SUBALIGN(2048)
+    txt_txt04_ROM_START = __romPos;
+    txt_txt04_VRAM = ADDR(.txt_txt04);
+    .txt_txt04 : AT(txt_txt04_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _7D000_DATA_START = .;
-        build/assets/smt1/data/7D000.o(.data);
-        _7D000_DATA_END = .;
-        _7D000_DATA_SIZE = ABSOLUTE(_7D000_DATA_END - _7D000_DATA_START);
+        txt_txt04_DATA_START = .;
+        build/assets/smt1/data/txt/txt04.o(.data);
+        txt_txt04_DATA_END = .;
+        txt_txt04_DATA_SIZE = ABSOLUTE(txt_txt04_DATA_END - txt_txt04_DATA_START);
     }
-    __romPos += SIZEOF(._7D000);
-    _7D000_ROM_END = __romPos;
-    _7D000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt04);
+    txt_txt04_ROM_END = __romPos;
+    txt_txt04_VRAM_END = .;
 
-    _7D800_ROM_START = __romPos;
-    _7D800_VRAM = ADDR(._7D800);
-    ._7D800 : AT(_7D800_ROM_START) SUBALIGN(2048)
+    txt_txt05_ROM_START = __romPos;
+    txt_txt05_VRAM = ADDR(.txt_txt05);
+    .txt_txt05 : AT(txt_txt05_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _7D800_DATA_START = .;
-        build/assets/smt1/data/7D800.o(.data);
-        _7D800_DATA_END = .;
-        _7D800_DATA_SIZE = ABSOLUTE(_7D800_DATA_END - _7D800_DATA_START);
+        txt_txt05_DATA_START = .;
+        build/assets/smt1/data/txt/txt05.o(.data);
+        txt_txt05_DATA_END = .;
+        txt_txt05_DATA_SIZE = ABSOLUTE(txt_txt05_DATA_END - txt_txt05_DATA_START);
     }
-    __romPos += SIZEOF(._7D800);
-    _7D800_ROM_END = __romPos;
-    _7D800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt05);
+    txt_txt05_ROM_END = __romPos;
+    txt_txt05_VRAM_END = .;
 
-    _7E000_ROM_START = __romPos;
-    _7E000_VRAM = ADDR(._7E000);
-    ._7E000 : AT(_7E000_ROM_START) SUBALIGN(2048)
+    txt_txt06_ROM_START = __romPos;
+    txt_txt06_VRAM = ADDR(.txt_txt06);
+    .txt_txt06 : AT(txt_txt06_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _7E000_DATA_START = .;
-        build/assets/smt1/data/7E000.o(.data);
-        _7E000_DATA_END = .;
-        _7E000_DATA_SIZE = ABSOLUTE(_7E000_DATA_END - _7E000_DATA_START);
+        txt_txt06_DATA_START = .;
+        build/assets/smt1/data/txt/txt06.o(.data);
+        txt_txt06_DATA_END = .;
+        txt_txt06_DATA_SIZE = ABSOLUTE(txt_txt06_DATA_END - txt_txt06_DATA_START);
     }
-    __romPos += SIZEOF(._7E000);
-    _7E000_ROM_END = __romPos;
-    _7E000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt06);
+    txt_txt06_ROM_END = __romPos;
+    txt_txt06_VRAM_END = .;
 
-    _7E800_ROM_START = __romPos;
-    _7E800_VRAM = ADDR(._7E800);
-    ._7E800 : AT(_7E800_ROM_START) SUBALIGN(2048)
+    txt_txt07_ROM_START = __romPos;
+    txt_txt07_VRAM = ADDR(.txt_txt07);
+    .txt_txt07 : AT(txt_txt07_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _7E800_DATA_START = .;
-        build/assets/smt1/data/7E800.o(.data);
-        _7E800_DATA_END = .;
-        _7E800_DATA_SIZE = ABSOLUTE(_7E800_DATA_END - _7E800_DATA_START);
+        txt_txt07_DATA_START = .;
+        build/assets/smt1/data/txt/txt07.o(.data);
+        txt_txt07_DATA_END = .;
+        txt_txt07_DATA_SIZE = ABSOLUTE(txt_txt07_DATA_END - txt_txt07_DATA_START);
     }
-    __romPos += SIZEOF(._7E800);
-    _7E800_ROM_END = __romPos;
-    _7E800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt07);
+    txt_txt07_ROM_END = __romPos;
+    txt_txt07_VRAM_END = .;
 
-    _80000_ROM_START = __romPos;
-    _80000_VRAM = ADDR(._80000);
-    ._80000 : AT(_80000_ROM_START) SUBALIGN(2048)
+    txt_txt08_ROM_START = __romPos;
+    txt_txt08_VRAM = ADDR(.txt_txt08);
+    .txt_txt08 : AT(txt_txt08_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _80000_DATA_START = .;
-        build/assets/smt1/data/80000.o(.data);
-        _80000_DATA_END = .;
-        _80000_DATA_SIZE = ABSOLUTE(_80000_DATA_END - _80000_DATA_START);
+        txt_txt08_DATA_START = .;
+        build/assets/smt1/data/txt/txt08.o(.data);
+        txt_txt08_DATA_END = .;
+        txt_txt08_DATA_SIZE = ABSOLUTE(txt_txt08_DATA_END - txt_txt08_DATA_START);
     }
-    __romPos += SIZEOF(._80000);
-    _80000_ROM_END = __romPos;
-    _80000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt08);
+    txt_txt08_ROM_END = __romPos;
+    txt_txt08_VRAM_END = .;
 
     tex_rnd1_ROM_START = __romPos;
     tex_rnd1_VRAM = ADDR(.tex_rnd1);
@@ -555,89 +555,89 @@ SECTIONS
     tex_logo_ROM_END = __romPos;
     tex_logo_VRAM_END = .;
 
-    _94000_ROM_START = __romPos;
-    _94000_VRAM = ADDR(._94000);
-    ._94000 : AT(_94000_ROM_START) SUBALIGN(2048)
+    txt_txt09_ROM_START = __romPos;
+    txt_txt09_VRAM = ADDR(.txt_txt09);
+    .txt_txt09 : AT(txt_txt09_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _94000_DATA_START = .;
-        build/assets/smt1/data/94000.o(.data);
-        _94000_DATA_END = .;
-        _94000_DATA_SIZE = ABSOLUTE(_94000_DATA_END - _94000_DATA_START);
+        txt_txt09_DATA_START = .;
+        build/assets/smt1/data/txt/txt09.o(.data);
+        txt_txt09_DATA_END = .;
+        txt_txt09_DATA_SIZE = ABSOLUTE(txt_txt09_DATA_END - txt_txt09_DATA_START);
     }
-    __romPos += SIZEOF(._94000);
-    _94000_ROM_END = __romPos;
-    _94000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt09);
+    txt_txt09_ROM_END = __romPos;
+    txt_txt09_VRAM_END = .;
 
-    _96000_ROM_START = __romPos;
-    _96000_VRAM = ADDR(._96000);
-    ._96000 : AT(_96000_ROM_START) SUBALIGN(2048)
+    txt_txt10_ROM_START = __romPos;
+    txt_txt10_VRAM = ADDR(.txt_txt10);
+    .txt_txt10 : AT(txt_txt10_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _96000_DATA_START = .;
-        build/assets/smt1/data/96000.o(.data);
-        _96000_DATA_END = .;
-        _96000_DATA_SIZE = ABSOLUTE(_96000_DATA_END - _96000_DATA_START);
+        txt_txt10_DATA_START = .;
+        build/assets/smt1/data/txt/txt10.o(.data);
+        txt_txt10_DATA_END = .;
+        txt_txt10_DATA_SIZE = ABSOLUTE(txt_txt10_DATA_END - txt_txt10_DATA_START);
     }
-    __romPos += SIZEOF(._96000);
-    _96000_ROM_END = __romPos;
-    _96000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt10);
+    txt_txt10_ROM_END = __romPos;
+    txt_txt10_VRAM_END = .;
 
-    _97800_ROM_START = __romPos;
-    _97800_VRAM = ADDR(._97800);
-    ._97800 : AT(_97800_ROM_START) SUBALIGN(2048)
+    txt_txt11_ROM_START = __romPos;
+    txt_txt11_VRAM = ADDR(.txt_txt11);
+    .txt_txt11 : AT(txt_txt11_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _97800_DATA_START = .;
-        build/assets/smt1/data/97800.o(.data);
-        _97800_DATA_END = .;
-        _97800_DATA_SIZE = ABSOLUTE(_97800_DATA_END - _97800_DATA_START);
+        txt_txt11_DATA_START = .;
+        build/assets/smt1/data/txt/txt11.o(.data);
+        txt_txt11_DATA_END = .;
+        txt_txt11_DATA_SIZE = ABSOLUTE(txt_txt11_DATA_END - txt_txt11_DATA_START);
     }
-    __romPos += SIZEOF(._97800);
-    _97800_ROM_END = __romPos;
-    _97800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt11);
+    txt_txt11_ROM_END = __romPos;
+    txt_txt11_VRAM_END = .;
 
-    _99000_ROM_START = __romPos;
-    _99000_VRAM = ADDR(._99000);
-    ._99000 : AT(_99000_ROM_START) SUBALIGN(2048)
+    txt_txt12_ROM_START = __romPos;
+    txt_txt12_VRAM = ADDR(.txt_txt12);
+    .txt_txt12 : AT(txt_txt12_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _99000_DATA_START = .;
-        build/assets/smt1/data/99000.o(.data);
-        _99000_DATA_END = .;
-        _99000_DATA_SIZE = ABSOLUTE(_99000_DATA_END - _99000_DATA_START);
+        txt_txt12_DATA_START = .;
+        build/assets/smt1/data/txt/txt12.o(.data);
+        txt_txt12_DATA_END = .;
+        txt_txt12_DATA_SIZE = ABSOLUTE(txt_txt12_DATA_END - txt_txt12_DATA_START);
     }
-    __romPos += SIZEOF(._99000);
-    _99000_ROM_END = __romPos;
-    _99000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt12);
+    txt_txt12_ROM_END = __romPos;
+    txt_txt12_VRAM_END = .;
 
-    _99800_ROM_START = __romPos;
-    _99800_VRAM = ADDR(._99800);
-    ._99800 : AT(_99800_ROM_START) SUBALIGN(2048)
+    txt_txt13_ROM_START = __romPos;
+    txt_txt13_VRAM = ADDR(.txt_txt13);
+    .txt_txt13 : AT(txt_txt13_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _99800_DATA_START = .;
-        build/assets/smt1/data/99800.o(.data);
-        _99800_DATA_END = .;
-        _99800_DATA_SIZE = ABSOLUTE(_99800_DATA_END - _99800_DATA_START);
+        txt_txt13_DATA_START = .;
+        build/assets/smt1/data/txt/txt13.o(.data);
+        txt_txt13_DATA_END = .;
+        txt_txt13_DATA_SIZE = ABSOLUTE(txt_txt13_DATA_END - txt_txt13_DATA_START);
     }
-    __romPos += SIZEOF(._99800);
-    _99800_ROM_END = __romPos;
-    _99800_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt13);
+    txt_txt13_ROM_END = __romPos;
+    txt_txt13_VRAM_END = .;
 
-    _9A000_ROM_START = __romPos;
-    _9A000_VRAM = ADDR(._9A000);
-    ._9A000 : AT(_9A000_ROM_START) SUBALIGN(2048)
+    txt_txt14_ROM_START = __romPos;
+    txt_txt14_VRAM = ADDR(.txt_txt14);
+    .txt_txt14 : AT(txt_txt14_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        _9A000_DATA_START = .;
-        build/assets/smt1/data/9A000.o(.data);
-        _9A000_DATA_END = .;
-        _9A000_DATA_SIZE = ABSOLUTE(_9A000_DATA_END - _9A000_DATA_START);
+        txt_txt14_DATA_START = .;
+        build/assets/smt1/data/txt/txt14.o(.data);
+        txt_txt14_DATA_END = .;
+        txt_txt14_DATA_SIZE = ABSOLUTE(txt_txt14_DATA_END - txt_txt14_DATA_START);
     }
-    __romPos += SIZEOF(._9A000);
-    _9A000_ROM_END = __romPos;
-    _9A000_VRAM_END = .;
+    __romPos += SIZEOF(.txt_txt14);
+    txt_txt14_ROM_END = __romPos;
+    txt_txt14_VRAM_END = .;
 
     tex_fusecaps_ROM_START = __romPos;
     tex_fusecaps_VRAM = ADDR(.tex_fusecaps);
