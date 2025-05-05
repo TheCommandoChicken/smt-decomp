@@ -3397,19 +3397,19 @@ SECTIONS
     field_ktjj_ROM_END = __romPos;
     field_ktjj_VRAM_END = .;
 
-    field_unk_ROM_START = __romPos;
-    field_unk_VRAM = ADDR(.field_unk);
-    .field_unk : AT(field_unk_ROM_START) SUBALIGN(2048)
+    field_aft_ROM_START = __romPos;
+    field_aft_VRAM = ADDR(.field_aft);
+    .field_aft : AT(field_aft_ROM_START) SUBALIGN(2048)
     {
         FILL(0x00000000);
-        field_unk_DATA_START = .;
-        build/assets/smt1/data/field/unk.o(.data);
-        field_unk_DATA_END = .;
-        field_unk_DATA_SIZE = ABSOLUTE(field_unk_DATA_END - field_unk_DATA_START);
+        field_aft_DATA_START = .;
+        build/assets/smt1/data/field/aft.o(.data);
+        field_aft_DATA_END = .;
+        field_aft_DATA_SIZE = ABSOLUTE(field_aft_DATA_END - field_aft_DATA_START);
     }
-    __romPos += SIZEOF(.field_unk);
-    field_unk_ROM_END = __romPos;
-    field_unk_VRAM_END = .;
+    __romPos += SIZEOF(.field_aft);
+    field_aft_ROM_END = __romPos;
+    field_aft_VRAM_END = .;
 
     _84D800_ROM_START = __romPos;
     _84D800_VRAM = ADDR(._84D800);

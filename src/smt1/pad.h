@@ -1,21 +1,22 @@
 #include "libpad.h"
+#include "common.h"
 
 struct input_info {
-    unsigned short last_button_state;
-    unsigned short button_state;
-    unsigned short held_buttons;
-    unsigned short just_pressed_buttons;
-    unsigned char frames_since_input_changed;
-    unsigned char unk9;
-    unsigned char control_monitoring;
-    unsigned char pad;
+    u16 last_button_state;
+    u16 button_state;
+    u16 held_buttons;
+    u16 just_pressed_buttons;
+    u8 frames_since_input_changed;
+    u8 unk9;
+    u8 control_monitoring;
+    u8 pad;
 };
 
 /* .sbss */
-unsigned char TransDataBuff;
+u8 TransDataBuff;
 
 /* .bss */
-unsigned char RawInput[2][0x22];
+u8 RawInput[2][0x22];
 struct input_info ControllerInfo[2];
 
 void InitPads(void);

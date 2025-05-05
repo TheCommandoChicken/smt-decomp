@@ -1,9 +1,11 @@
 #include "pad.h"
+#include "common.h"
+#include "memory.h"
 
 void InitPads(void) {
-    bzero(&RawInput, 0x44);
+    bzero(&RawInput[0][0], 0x44);
     bzero(&TransDataBuff, 2);
-    PadInitDirect(&RawInput[0], &RawInput[1]);
+    PadInitDirect(&RawInput[0][0], &RawInput[1][0]);
     PadSetAct(0, &TransDataBuff, 2);
     PadSetAct(0x10, &TransDataBuff, 2);
     PadStartCom();
@@ -20,7 +22,7 @@ void InitPadInfo(int pad) {
 }
 
 void InitPadInfos(void) {
-    int i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         InitPadInfo(i);
@@ -30,30 +32,30 @@ void InitPadInfos(void) {
 
 //INCLUDE_ASM("asm/smt1/main/nonmatchings/pad", func_80018D44);
 
-int GetButton(int pad, int button) {
+s32 GetButton(s32 pad, s32 button) {
     return (ControllerInfo[pad].button_state >> button) & 1;
 }
 
-int GetJustPressedButton(int pad, int button) {
+s32 GetJustPressedButton(s32 pad, s32 button) {
     return (ControllerInfo[pad].just_pressed_buttons >> button) & 1;
 }
 
-int GetHeldButton(int pad, int button) {
+s32 GetHeldButton(s32 pad, s32 button) {
     return (ControllerInfo[pad].held_buttons >> button) & 1;
 }
 
-void SetControlMonitoring(int pad, char mon) {
+void SetControlMonitoring(s32 pad, s8 mon) {
     ControllerInfo[pad].control_monitoring = mon;
 }
 
-unsigned short GetJustPressedButtons(int pad) {
+u16 GetJustPressedButtons(s32 pad) {
     return ControllerInfo[pad].just_pressed_buttons;
 }
 
-unsigned short GetHeldButtons(int pad) {
+u16 GetHeldButtons(s32 pad) {
     return ControllerInfo[pad].held_buttons;
 }
 
-char * GetRawInput(int pad) {
-    return &RawInput[pad];
+u8 * GetRawInput(s32 pad) {
+    return &RawInput[pad][0];
 }

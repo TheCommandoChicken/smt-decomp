@@ -1,4 +1,5 @@
 #include "graph.h"
+#include "memory.h"
 
 /* data */
 struct texture_data D_8009FC70[183] = {
@@ -186,22 +187,23 @@ struct texture_data D_8009FC70[183] = {
 	{8, 8, 24, 176, 0, 15, -1},
 	{42, 10, 192, 112, 0, 15, -1}
 };
-/* sbss */
-GsOT_TAG * MainOTPtr; // 0x800B73CC
-long ActiveBuffer; // 0x800B73D0
-char BackgroundR, BackgroundG, BackgroundB; // 0x800B73D4;
-GsOT_TAG D_800B73DC; // 0x800B73DC;
-short D_800B73E4;
-GsOT_TAG * OrderingTable; // 0x800B73E8
-GsOT * OTPtr; // 0x800B73EC
-/* bss */
-GsOT OTData[2]; // 0x800BA0D8
-GsOT_TAG MainOrderingTable[2][4096]; // 0x800BA108
-unsigned char D_800C2108[2][96000]; // 0x800C2108
 
-DR_ENV D_800F0F08; // 0x800F0F08
-DR_ENV D_800F0F48; // 0x800F0F48
-GsOT_TAG OrderingTable50[2][50]; // 0x800F0F88
+/* sbss */
+GsOT_TAG * MainOTPtr; /* 0x800B73CC */
+s32 ActiveBuffer; /* 0x800B73D0 */
+s8 BackgroundR, BackgroundG, BackgroundB; /* 0x800B73D4 */
+GsOT_TAG D_800B73DC; /* 0x800B73DC */
+s16 D_800B73E4;
+GsOT_TAG * OrderingTable; /* 0x800B73E8 */
+GsOT * OTPtr; /* 0x800B73EC */
+/* bss */
+GsOT OTData[2]; /* 0x800BA0D8 */
+GsOT_TAG MainOrderingTable[2][4096]; /* 0x800BA108 */
+u8 D_800C2108[2][96000]; /* 0x800C2108 */
+
+DR_ENV D_800F0F08; /* 0x800F0F08 */
+DR_ENV D_800F0F48; /* 0x800F0F48 */
+GsOT_TAG OrderingTable50[2][50]; /* 0x800F0F88 */
 
 
 void func_8001A450(void) {
@@ -239,20 +241,20 @@ void func_8001A454(void) {
 
 
 void func_8001A54C(void) {
-    long buff;
+    s32 buff;
 
     buff = GsGetActiveBuff();
 
     OrderingTable = &OrderingTable50[buff][0];
     OTPtr = &OTData[buff];
     GsSetWorkBase(&D_800C2108[buff][0]);
-    ClearOTagR((unsigned long *)OrderingTable, 0x32);
+    ClearOTagR((u32 *)OrderingTable, 0x32);
 
     MainOTPtr = &MainOrderingTable[buff][0];
-    ClearOTagR((unsigned long *)&MainOrderingTable[buff], 0x1000);
+    ClearOTagR((u32 *)&MainOrderingTable[buff], 0x1000);
 
     ActiveBuffer = buff;
-    ClearOTag((unsigned long *)&D_800B73DC, 2);
+    ClearOTag((u32 *)&D_800B73DC, 2);
 }
 
 
@@ -260,7 +262,7 @@ void func_8001A610(void) {
     DRAWENV sp10;
     DRAWENV sp70;
     RECT spD0;
-    short var_v1;
+    s16 var_v1;
     DRAWENV* var_v0;
     DRAWENV* var_v1_2;
 
@@ -279,25 +281,25 @@ void func_8001A610(void) {
     SetDrawEnv(&D_800F0F08, &sp10);
     SetDrawEnv(&D_800F0F48, &sp70);
     AddPrim(&D_800B73DC, &D_800F0F08);
-    DrawOTag((unsigned long *)&D_800B73DC);
-    MainOTPtr[0x46] |= 0xFFFFFF;
-    DrawOTag((unsigned long *)&MainOTPtr[D_800B73E4]);
+    DrawOTag((u32 *)&D_800B73DC);
+    setaddr(&MainOTPtr[70], 0xFFFFFF);
+    DrawOTag((u32 *)&MainOTPtr[D_800B73E4]);
     AddPrim(&OrderingTable[0x31], &D_800F0F48);
-    DrawOTag(&OrderingTable[0x31]);
+    DrawOTag((u32 *)&OrderingTable[0x31]);
 }
 
 
 /*
     Set background color.
 */
-void func_8001A778(char r, char g, char b) {
+void func_8001A778(s8 r, s8 g, s8 b) {
     BackgroundR = r;
     BackgroundG = g;
     BackgroundB = b;
 }
 
 
-void func_8001A78C(short arg0) {
+void func_8001A78C(s16 arg0) {
     D_800B73E4 = arg0;
 }
 
@@ -306,7 +308,7 @@ void func_8001A78C(short arg0) {
     Initialize sprite data.
 */
 void func_8001A798(struct sprite_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetSprt(&arg0->s[i]);
@@ -365,7 +367,7 @@ void func_8001A830(struct sprite_data * arg0) {
 }
 
 void func_8001AA3C(struct sprite_data * arg0, struct sprite_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x = (arg1->x - 0xA0);
     arg0->y = (arg1->y - 0x46);
@@ -389,7 +391,7 @@ void func_8001AA3C(struct sprite_data * arg0, struct sprite_init_data * arg1) {
 }
 
 void func_8001ABAC(struct poly_f4_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyF4(&arg0->p[i]);
@@ -422,7 +424,7 @@ void func_8001AC38(struct poly_f4_data * arg0) {
 }
 
 void func_8001ADD0(struct poly_f4_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -446,7 +448,7 @@ void func_8001ADD0(struct poly_f4_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001AF78(struct poly_ft4_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyFT4(&arg0->p0[i]);
@@ -566,7 +568,7 @@ void func_8001B018(struct poly_ft4_data * arg0) {
 }
 
 void func_8001B654(struct poly_ft4_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -603,7 +605,7 @@ void func_8001B654(struct poly_ft4_data * arg0, struct poly_init_data * arg1) {
 
 
 void func_8001B8EC(struct poly_g4_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyG4(&arg0->p[i]);
@@ -635,7 +637,7 @@ void func_8001B978(struct poly_g4_data* arg0) {
 }
 
 void func_8001BAEC(struct poly_g4_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -670,7 +672,7 @@ void func_8001BAEC(struct poly_g4_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001BD58(struct poly_gt4_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyGT4(&arg0->p[i]);
@@ -705,7 +707,7 @@ void func_8001BDE4(struct poly_gt4_data * arg0) {
 }
 
 void func_8001BFD4(struct poly_gt4_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -751,7 +753,7 @@ void func_8001BFD4(struct poly_gt4_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001C314(struct poly_f3_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyF3(&arg0->p[i]);
@@ -780,7 +782,7 @@ void func_8001C3A0(struct poly_f3_data * arg0) {
 }
 
 void func_8001C4A4(struct poly_f3_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -801,7 +803,7 @@ void func_8001C4A4(struct poly_f3_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001C5FC(struct poly_ft3_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyFT3(&arg0->p[i]);
@@ -830,7 +832,7 @@ void func_8001C688(struct poly_ft3_data * arg0) {
 }
 
 void func_8001C78C(struct poly_ft3_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -862,7 +864,7 @@ void func_8001C78C(struct poly_ft3_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001C9A4(struct poly_g3_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyG3(&arg0->p[i]);
@@ -893,7 +895,7 @@ void func_8001CA30(struct poly_g3_data * arg0) {
 }
 
 void func_8001CB68(struct poly_g3_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -922,7 +924,7 @@ void func_8001CB68(struct poly_g3_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001CD54(struct poly_gt3_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetPolyGT3(&arg0->p[i]);
@@ -956,7 +958,7 @@ void func_8001CDE0(struct poly_gt3_data * arg0) {
 }
 
 void func_8001CF74(struct poly_gt3_data * arg0, struct poly_init_data * arg1) {
-    long i;
+    s32 i;
 
     arg0->x0 = (arg1->x0 - 0xA0);
     arg0->y0 = (arg1->y0 - 0x46);
@@ -994,7 +996,7 @@ void func_8001CF74(struct poly_gt3_data * arg0, struct poly_init_data * arg1) {
 }
 
 void func_8001D204(struct line_f2_data * arg0) {
-    long i;
+    s32 i;
 
     for (i = 0; i < 2; i++) {
         SetLineF2(&arg0->l[i]);
@@ -1023,7 +1025,7 @@ void func_8001D290(struct line_f2_data * arg0) {
 }
 
 void func_8001D364(struct line_f2_data * arg0, struct line_init_data * arg1) {
-    long i;
+    s32 i;
     
     for (i = 0; i < 2; i++) {
         setXY2(&arg0->l[i], arg1->x, arg1->y, (arg1->x + arg1->len) - 1, arg1->y);
@@ -1038,71 +1040,70 @@ void func_8001D364(struct line_f2_data * arg0, struct line_init_data * arg1) {
     arg0->color.b = arg1->b;
 }
 
-void func_8001D440(long arg0, short * arg1) {
+void func_8001D440(s32 arg0, s16 * arg1) {
     arg1[0] = (arg0 & 0xF) * 0x40;
     arg1[1] = (arg0 & 0x10) * 0x10;
 }
 
-void func_8001D45C(unsigned long arg0, short * arg1) {
+void func_8001D45C(u32 arg0, s16 * arg1) {
     arg1[0] = ((arg0 & 0x3F) * 0x10);
     arg1[1] = ((arg0 & 0x7FC0) / 0x40);
 }
 
-void func_8001D478(long dfe, long dtd, long tpage, RECT * tw, long ot_index, DR_MODE * p) {
+void AddDrawMode(s32 dfe, s32 dtd, s32 tpage, RECT * tw, s32 ot_index, DR_MODE * p) {
     setDrawMode(p, dfe, dtd, tpage, tw);
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D534(short x, short y, short w, short h, char u, char v, unsigned long color, unsigned short clut, long ot_index, SPRT * p) {
+void AddSprt(s16 x, s16 y, s16 w, s16 h, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT * p) {
     setSprt(p);
     setXY0(p, x - 0xA0, y - 0x46);
     setUV0(p, u, v);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     setWH(p, w, h);
     p->clut = clut;
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D5C4(short x, short y, char u, char v, unsigned long color, unsigned short clut, long ot_index, SPRT_8 * p) {
+void AddSprt8(s16 x, s16 y, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT_8 * p) {
     setSprt8(p);
     setXY0(p, x - 0xA0, y - 0x46);
     setUV0(p, u, v);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     p->clut = clut;
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D644(short x, short y, char u, char v, unsigned long color, unsigned short clut, long ot_index, SPRT_16 * p) {
+void AddSprt16(s16 x, s16 y, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT_16 * p) {
     setSprt16(p);
     setXY0(p, x - 0xA0, y - 0x46);
     setUV0(p, u, v);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     p->clut = clut;
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D6C4(short * x, short * y, unsigned long color, long ot_index, LINE_F2 * p) {
+void AddLineF2(s16 * x, s16 * y, u32 color, s32 ot_index, LINE_F2 * p) {
     setLineF2(p);
     setXY2(p, x[0] - 0xA0, y[0] - 0x46, x[1] - 0xA0, y[1] - 0x46);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D754(unsigned short * arg0, unsigned short * arg1, long arg2, long arg3, long arg4, POLY_F4 * arg5) {
-    short * temp_t0;
-    short * var_t0;
-    long temp_a3;
-    long var_t1;
-    unsigned short temp_v0;
-    unsigned short temp_v0_2;
-    unsigned short * var_a0;
-    unsigned short * var_a1;
+void func_8001D754(u16 * arg0, u16 * arg1, s32 arg2, s32 arg3, s32 arg4, POLY_F4 * arg5) {
+    s16 * temp_t0;
+    s16 * var_t0;
+    s32 temp_a3;
+    s32 var_t1;
+    u16 temp_v0;
+    u16 temp_v0_2;
+    u16 * var_a0;
+    u16 * var_a1;
 
     var_a0 = arg0;
     var_a1 = arg1;
-    var_t1 = 0;
     var_t0 = &arg5->x0;
-    *((char*)&arg5->tag + 3) = arg2 + 2;
+    *((s8*)&arg5->tag + 3) = arg2 + 2;
     temp_a3 = (arg3 & 0xFFFFFF) | 0x4C000000;
     memcpy(&arg5->r0, &temp_a3, 4);
     for (var_t1 = 0; var_t1 < arg2; var_t1++) {
@@ -1113,40 +1114,40 @@ void func_8001D754(unsigned short * arg0, unsigned short * arg1, long arg2, long
         var_a0++;
         var_a1++;
     }
-    *(unsigned long*)var_t0 = 0x55555555;
+    *(u32*)var_t0 = 0x55555555;
     AddPrim(&OrderingTable[arg4], arg5);
 }
 
-void func_8001D7F8(short x, short y, short w, short h, unsigned long color, long ot_index, POLY_F4 * p) {
+void AddPolyF4(s16 x, s16 y, s16 w, s16 h, u32 color, s32 ot_index, POLY_F4 * p) {
     setPolyF4(p);
     setXYWH(p, x - 0xA0, y - 0x46, w, h);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D890(short x, short y, short w, short h, unsigned long * color, long ot_index, POLY_G4 * p) {
+void AddPolyG4(s16 x, s16 y, s16 w, s16 h, u32 * color, s32 ot_index, POLY_G4 * p) {
     setPolyG4(p);
     setXYWH(p, x - 0xA0, y - 0x46, w, h);
-    setRGB0FromLong(p, color[0]);
-    setRGB1FromLong(p, color[1]);
-    setRGB2FromLong(p, color[2]);
-    setRGB3FromLong(p, color[3]);
+    setRGB0FromU32(p, color[0]);
+    setRGB1FromU32(p, color[1]);
+    setRGB2FromU32(p, color[2]);
+    setRGB3FromU32(p, color[3]);
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001D9C4(short x, short y, short w, short h, unsigned char u, unsigned char v, char tw, char th, unsigned long color, unsigned short tpage, unsigned short clut, long ot_index, POLY_FT4 * p) {
+void AddPolyFT4(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, s8 tw, s8 th, u32 color, s16 tpage, s16 clut, s32 ot_index, POLY_FT4 * p) {
     setPolyFT4(p);
     setXYWH(p, x - 0xA0, y - 0x46, w, h);
-    setRGB0FromLong(p, color);
+    setRGB0FromU32(p, color);
     setUVWH(p, u, v, tw, th);
     p->tpage = tpage;
     p->clut = clut;
     AddPrim(&OrderingTable[ot_index], p);
 }
 
-void func_8001DAA4(POLY_FT4 * arg0) {
-    short x0;
-    short x2;
+void FlipPolyFT4H(POLY_FT4 * arg0) {
+    s16 x0;
+    s16 x2;
 
     x0 = arg0->x0;
     x2 = arg0->x2;
@@ -1156,9 +1157,9 @@ void func_8001DAA4(POLY_FT4 * arg0) {
     arg0->x3 = x2;
 }
 
-void func_8001DAC8(POLY_FT4 * arg0) {
-    short y0;
-    short y1;
+void FlipPolyFT4V(POLY_FT4 * arg0) {
+    s16 y0;
+    s16 y1;
 
     y0 = arg0->y0;
     y1 = arg0->y1;
@@ -1168,16 +1169,16 @@ void func_8001DAC8(POLY_FT4 * arg0) {
     arg0->y3 = y1;
 }
 
-void func_8001DAEC(long arg0, long arg1, char arg2, long arg3, POLY_FT4 * arg4) {
-    short temp_a0;
-    short temp_t1;
-    short temp_v1;
-    short temp_v1_3;
-    long temp_a0_2;
-    long temp_a1;
-    long temp_a1_2;
-    unsigned char temp_a2;
-    long temp_v1_2;
+void func_8001DAEC(s32 arg0, s32 arg1, s8 arg2, s32 arg3, POLY_FT4 * arg4) {
+    s16 temp_a0;
+    s16 temp_t1;
+    s16 temp_v1;
+    s16 temp_v1_3;
+    s32 temp_a0_2;
+    s32 temp_a1;
+    s32 temp_a1_2;
+    u8 temp_a2;
+    s32 temp_v1_2;
 
     temp_a0 = arg4->x1 - arg4->x0;
     temp_v1 = arg4->x3 - arg4->x2;
@@ -1231,25 +1232,25 @@ void func_8001DAEC(long arg0, long arg1, char arg2, long arg3, POLY_FT4 * arg4) 
     }
 }
 
-void func_8001DD90(long arg0, long arg1, short arg2, short arg3, POLY_FT4 * arg4) {
+void func_8001DD90(s32 zr, s32 xr, s16 xt, s16 yt, POLY_FT4 * arg4) {
     SVECTOR sp10[4];
     SVECTOR sp30[4];
     MATRIX sp50;
-    unsigned long sp70;
+    s32 sp70;
     SVECTOR * var_s4;
-    long temp_s0;
-    long temp_s1;
-    long i;
+    s32 temp_s0;
+    s32 temp_s1;
+    s32 i;
     SVECTOR * var_s5;
 
     sp50 = D_801112F8;
-    RotMatrixZ(arg0 & 0xFFF, &sp50);
-    RotMatrixX(arg1 & 0xFFF, &sp50);
+    RotMatrixZ(zr & 0xFFF, &sp50);
+    RotMatrixX(xr & 0xFFF, &sp50);
     SetRotMatrix(&sp50);
     temp_s1 = (arg4->x1 - arg4->x0) >> 1;
     temp_s0 = (arg4->y2 - arg4->y0) >> 1;
-    sp50.t[0] = arg4->x0 + temp_s1 + arg2;
-    sp50.t[1] = arg4->y0 + temp_s0 + arg3;
+    sp50.t[0] = arg4->x0 + temp_s1 + xt;
+    sp50.t[1] = arg4->y0 + temp_s0 + yt;
     SetTransMatrix(&sp50);
     sp10[0].vx = -temp_s1;
     sp10[0].vy = -temp_s0;
@@ -1276,26 +1277,24 @@ void func_8001DD90(long arg0, long arg1, short arg2, short arg3, POLY_FT4 * arg4
     arg4->y3 = sp30[3].vy;
 }
 
-struct texture_data func_8001DF7C(long arg1) {
+struct texture_data GetTextureInitData(s32 arg1) {
     struct texture_data sp0;
 
     memcpy(&sp0, &D_8009FC70[arg1], 0xC);
     return sp0;
 }
 
-struct object * func_8001E004(short arg0, short arg1, short arg2, short arg3, long arg4) {
+struct object * func_8001E004(s16 tid, s16 x, s16 y, s16 ot_index, s32 arg4) {
     struct sprite_init_data sp18;
     struct texture_data sp30;
-    unsigned short var_a1;
+    u16 var_a1;
     struct object * temp_v0;
 
-    temp_v0 = func_800180DC(0, 0, FirstObjectPtrPtr->first, arg4, 1, 0x78);
-    if (temp_v0 == 0) {
-        return 0;
-    }
-    sp30 = func_8001DF7C(arg0);
-    sp18.x = arg1;
-    sp18.y = arg2;
+    temp_v0 = CreateObject(0, 0, FirstObjectPtrPtr->first, arg4, 1, sizeof(struct sprite_data));
+    if (temp_v0 == NULL) return NULL;
+    sp30 = GetTextureInitData(tid);
+    sp18.x = x;
+    sp18.y = y;
     sp18.w = sp30.w;
     sp18.h = sp30.h;
     if (sp30.unkA == -1) {
@@ -1311,15 +1310,15 @@ struct object * func_8001E004(short arg0, short arg1, short arg2, short arg3, lo
     sp18.r = 0x80;
     sp18.u = sp30.u;
     sp18.v = sp30.v;
-    sp18.ot_index = arg3;
-    sp18.tpage = ((var_a1 & 3) << 5) | 0x10 | (((0x2C0 - (sp30.unk6 << 6)) & 0x3FF) >> 6);
+    sp18.ot_index = ot_index;
+    sp18.tpage = getTPage(0, var_a1, 0x2C0 - (sp30.unk6 << 6), 0x100);
     sp18.clut = ((((sp30.unk8) >> 0x4) + 0x1E0) << 6) | (sp30.unk8 & 0xF);
     func_8001AA3C(temp_v0->data, &sp18);
     return temp_v0;
 }
 
 void func_8001E16C(struct sprite_data * arg0) {
-    long i;
+    s32 i;
     
     for (i = 0; i < 0x1C; i++) {
         func_8001A798(&arg0[i]);
@@ -1328,7 +1327,7 @@ void func_8001E16C(struct sprite_data * arg0) {
 }
 
 void func_8001E1B4(struct box_data * arg0) {
-    long var_s4;
+    s32 var_s4;
 
     for (var_s4 = 0; var_s4 < 2; var_s4++) {
         func_80095A9C(&arg0->l0[var_s4]);
@@ -1349,7 +1348,7 @@ void func_8001E1B4(struct box_data * arg0) {
 }
 
 void func_8001E294(struct box_data * arg0) {
-    short temp_v1;
+    s16 temp_v1;
     LINE_F2* l0;
     LINE_F2* l1;
     LINE_F2* l2;
@@ -1388,8 +1387,8 @@ void func_8001E294(struct box_data * arg0) {
     arg0->buffer ^= 1;
 }
 
-void func_8001E578(struct box_data * arg0, struct box_init_data * arg1) {
-    long i;
+void func_8001E578(struct filled_box_data * arg0, struct box_init_data * arg1) {
+    s32 i;
     LINE_F2* l3;
     LINE_F2* l2;
     LINE_F2* l1;
@@ -1397,7 +1396,7 @@ void func_8001E578(struct box_data * arg0, struct box_init_data * arg1) {
 
     
     for (i = 0; i < 2; i++) {
-        l0 = &arg0->l0[i];
+        l0 = &arg0->b.l0[i];
         setXY2(l0, (arg1->x - 0xA0), (arg1->y - 0x46), ((arg1->x + arg1->w) - 0xA0), (arg1->y - 0x46));
         l1 = l0 + 2;
         setXY2(l1, ((arg1->x + arg1->w) - 0xA0), (arg1->y - 0x46), ((arg1->x + arg1->w) - 0xA0), ((arg1->y + arg1->h) - 0x46));
@@ -1410,59 +1409,60 @@ void func_8001E578(struct box_data * arg0, struct box_init_data * arg1) {
         setRGB0(l2, arg1->r0, arg1->g0, arg1->b0);
         setRGB0(l3, arg1->r0, arg1->g0, arg1->b0);
     }
-    arg0->x = (arg1->x - 0xA0);
-    arg0->y = (arg1->y - 0x46);
-    arg0->w = arg1->w;
-    arg0->h = arg1->h;
-    arg0->ot_index = arg1->ot_index;
-    arg0->r = arg1->r0;
-    arg0->g = arg1->g0;
-    arg0->b = arg1->b0;
+    arg0->b.x = (arg1->x - 0xA0);
+    arg0->b.y = (arg1->y - 0x46);
+    arg0->b.w = arg1->w;
+    arg0->b.h = arg1->h;
+    arg0->b.ot_index = arg1->ot_index;
+    arg0->b.r = arg1->r0;
+    arg0->b.g = arg1->g0;
+    arg0->b.b = arg1->b0;
 }
 
-void func_8001E7CC(struct object * arg0) {
-    unsigned short temp_a1;
-    unsigned short temp_v1;
-    void * temp_a0;
-    struct filled_box_data * temp_s0;
 
-    temp_s0 = arg0->data;
-    if (arg0->initialized > 0) {
-        if (!(temp_s0->unk118 & 0x10)) {
-            temp_s0->b.x = (temp_s0->x - 0xA0);
-            temp_s0->b.y = (temp_s0->y - 0x46);
-            temp_s0->b.w = temp_s0->w;
-            temp_s0->b.h = temp_s0->h;
-            func_8001E294(&temp_s0->b);
+/*
+    Procedure function for a filled box object.
+*/
+void FilledBoxProc(struct object * self) {
+    struct filled_box_data * data;
+
+    data = self->data;
+    if (self->initialized > 0) {
+        if (!(data->unk118 & 0x10)) {
+            data->b.x = (data->x - 160);
+            data->b.y = (data->y - 70);
+            data->b.w = data->w;
+            data->b.h = data->h;
+            func_8001E294(&data->b);
         }
-        if (temp_s0->unk118 & 1) {
-            setXYWH(&temp_s0->p, (temp_s0->x - 0xA0), (temp_s0->y - 0x46), temp_s0->w, temp_s0->h);
-            func_8001AC38(&temp_s0->p);
-        } else if (temp_s0->unk118 & 2) {
-            setXYWH(&temp_s0->p, (temp_s0->x - 0xA0), (temp_s0->y - 0x46), temp_s0->w, temp_s0->h);
-            func_8001B978(&temp_s0->p);
+        if (data->unk118 & 1) { // The polygon is a POLY_F4.
+            setXYWH(&data->p.f, (data->x - 160), (data->y - 70), data->w, data->h);
+            func_8001AC38(&data->p.f);
+        } else if (data->unk118 & 2) { // The polygon is a POLY_G4.
+            setXYWH(&data->p.g, (data->x - 160), (data->y - 70), data->w, data->h);
+            func_8001B978(&data->p.g);
         }
-        func_8001D478(0, 1, getTPage(0, temp_s0->abr, 0, 0) | 0x1B, 0, temp_s0->ot_index, &temp_s0->unk128[temp_s0->unk140]);
-        temp_s0->buffer ^= 1;
+        AddDrawMode(0, 1, getTPage(0, data->abr, 0, 0) | 0x1B, 0, data->ot_index, &data->unk128[data->buffer]);
+        data->buffer ^= 1;
     }
 }
 
-struct object * func_8001E9BC(short arg0, short arg1, short arg2, short arg3, unsigned long arg4, unsigned long arg5, unsigned long arg6, unsigned long arg7, unsigned long arg8, short arg9, short argA, long argB, long argC) {
+struct object * func_8001E9BC(s16 arg0, s16 arg1, s16 arg2, s16 arg3, u32 arg4, u32 arg5, u32 arg6, u32 arg7, u32 arg8, s16 arg9, s16 argA, s32 argB, s32 argC) {
     struct box_init_data sp18;
     struct poly_init_data sp28;
     struct filled_box_data * temp_s0;
     struct object * temp_v0;
 
-    temp_v0 = func_800180DC(&func_8001E7CC, 0, *FirstObjectPtrPtr, argB, 0, 0x144);
+    temp_v0 = CreateObject(FilledBoxProc, 0, FirstObjectPtrPtr->first, argB, 0, sizeof(struct filled_box_data));
     if (temp_v0 == 0) return 0;
     temp_s0 = temp_v0->data;
     if ((arg9 & 0x10) == 0) {
         func_8001E1B4(&temp_s0->b);
     }
     if (arg9 & 1) {
-        func_8001ABAC(&temp_s0->p);
+        func_8001ABAC(&temp_s0->p.f);
     } else if (arg9 & 2) {
-        func_8001B8EC(&temp_s0->p);
+        func_8001B8EC(&temp_s0->p.g);
     }
     temp_s0->x = arg0;
     temp_s0->y = arg1;
@@ -1474,16 +1474,16 @@ struct object * func_8001E9BC(short arg0, short arg1, short arg2, short arg3, un
         sp18.y = temp_s0->y;
         sp18.w = temp_s0->w;
         sp18.h = temp_s0->h;
-        setRGB0FromLong(&sp18, arg4);
+        setRGB0Froms32(&sp18, arg4);
         sp18.ot_index = argC;
         func_8001E578(temp_s0, &sp18);
     }
     setXYWH(&sp28, temp_s0->x, temp_s0->y, temp_s0->w, temp_s0->h);
-    setRGB0FromLong(&sp28, arg5);
+    setRGB0FromU32(&sp28, arg5);
     if (arg9 & 2) {
-        setRGB1FromLong(&sp28, arg6);
-        setRGB2FromLong(&sp28, arg7);
-        setRGB3FromLong(&sp28, arg8);
+        setRGB1FromU32(&sp28, arg6);
+        setRGB2FromU32(&sp28, arg7);
+        setRGB3FromU32(&sp28, arg8);
     }
     if (argA != -1) {
         sp28.abe = 1;
@@ -1499,70 +1499,13 @@ struct object * func_8001E9BC(short arg0, short arg1, short arg2, short arg3, un
     sp28.ot_index = argC;
     
     if (arg9 & 1) {
-        func_8001ADD0(&temp_s0->p, &sp28);
+        func_8001ADD0(&temp_s0->p.f, &sp28);
     } else if (arg9 & 2) {
-        func_8001BAEC(&temp_s0->p, &sp28);
+        func_8001BAEC(&temp_s0->p.g, &sp28);
     }
     temp_s0->unk118 = arg9;
     temp_s0->ot_index = argC;
     return temp_v0;
 }
 
-
-void func_8001ECB0(TIM_IMAGE * arg0, thingy* arg1) {
-    RECT** temp_v1_2;
-
-    arg1->unk0 = 0;
-    arg1->unk2 = 0;
-    arg1->unk4 = arg0->mode;
-    arg1->unk6 = arg0->mode >> 0x10;
-    temp_v1_2 = &arg0->crect;
-    arg1->unk10 = temp_v1_2;
-    arg1->unk8 = temp_v1_2;
-    temp_v1_2 += 0xF;
-    arg1->unk14 = temp_v1_2;
-    arg1->unkC = temp_v1_2;
-}
-
-s32 func_8001ECE8(thingy* arg0) {
-    if (arg0->unk4 <= arg0->unk0) {
-        arg0->unk0 = 0;
-        arg0->unk10 = arg0->unk8;
-        arg0->unk14 = arg0->unkC;
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-void func_8001ED24(thingy* arg0) {
-    if (arg0->unk2 >= (arg0->unk10[0] - 1)) {
-        arg0->unk2 = 0;
-        arg0->unk0++;
-        arg0->unk10++;
-        arg0->unk14 = (arg0->unk14 + 0x29);
-        return;
-    }
-    arg0->unk2 += 1;
-}
-
-TIM_IMAGE* func_8001ED7C(s32 arg0) {
-    return D_800A0504[arg0][1];
-}
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001ED98);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001EE1C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001EE8C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001EF80);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001F134);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001F148);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001F15C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/graph", func_8001F170);
 

@@ -1,24 +1,26 @@
 #include "object.h"
 #include "graph.h"
-#include <stddef.h>
+#include "memory.h"
+#include "libapi.h"
 
 /* .sdata */
-struct object_ptrs ObjectPtrs = {NULL, NULL}; // 0x800B73B4
-short ObjectIndex = 0; // 0x800B73BC
-short D_800B73BE = 0; // 0x800B73BE
-struct object_ptrs * FirstObjectPtrPtr = NULL; // 0x800B73C0
+struct object_ptrs ObjectPtrs = {NULL, NULL}; /* 0x800B73B4 */
+s16 ObjectIndex = 0; /* 0x800B73BC */
+s16 D_800B73BE = 0; /* 0x800B73BE */
+struct object_ptrs * FirstObjectPtrPtr = NULL; /* 0x800B73C0 */
 
 /* .bss */
-struct object Objects[128]; // 0x800B7510
-struct object * ObjectsList[128]; // 0x800B9510
-struct unk_data_12 D_800B9710; // 0x800B9710
-struct unk_data_13 D_800B9740; // 0x800B9740
-struct unk_data_12 D_800B9780; // 0x800B9780
+struct object Objects[128]; /* 0x800B7510 */
+struct object * ObjectsList[128]; /* 0x800B9510 */
+struct unk_data_4 D_800B9710; /* 0x800B9710 */
+struct unk_data_6 D_800B9740; /* 0x800B9740 */
+struct unk_data_4 D_800B9780; /* 0x800B9780 */
 
-void func_80017FF0(void (*func)(struct object *), int arg1) {
-	struct object *var_s0;
-	struct object **var_s1;
-	int i;
+
+void func_80017FF0(void (* func)(struct object *), s32 arg1) {
+	struct object * var_s0;
+	struct object ** var_s1;
+	s32 i;
 
 	for (i = 0; i < 0x80; i++) {
 		func_80018BD8(&Objects[i]);
@@ -46,12 +48,13 @@ void func_80017FF0(void (*func)(struct object *), int arg1) {
 void func_800180D4(void) {
 }
 
-struct object* func_800180DC(void (* proc_func)(struct object *), void (* kill_func)(struct object *), void * origin, unsigned int priority, unsigned int type, int data_size) {
-	struct object_data* var_s2;
-	struct object* temp_v1;
-	struct object* var_s0;
-	struct object* var_s1;
-	int temp;
+/* Creates an object. */
+struct object * CreateObject(void (* proc_func)(struct object *), void (* kill_func)(struct object *), void * origin, u32 priority, u32 type, s32 data_size) {
+	void * var_s2;
+	struct object * temp_v1;
+	struct object * var_s0;
+	struct object * var_s1;
+	s32 temp;
 
 	var_s1 = FirstObjectPtrPtr->first;
 	var_s0 = 0;
@@ -121,11 +124,11 @@ struct object* func_800180DC(void (* proc_func)(struct object *), void (* kill_f
 
 
 /* Removes the provided object from the object list. */
-void func_8001830C(struct object * arg0) {
+void RemoveObject(struct object * arg0) {
 	void (* kill_func)(struct object *);
-	struct object *var_a0;
+	struct object * var_a0;
 
-	if ((arg0 != 0) && (arg0->unk2E == 0)) {
+	if ((arg0 != NULL) && (arg0->unk2E == 0)) {
 		var_a0 = FirstObjectPtrPtr->first;
 		while (var_a0->next != NO_OBJ) {
 			if (var_a0 != arg0) {
@@ -158,8 +161,8 @@ void func_8001830C(struct object * arg0) {
 	}
 }
 
-int func_80018410(struct object* arg0, void (*arg1)(struct object *)) {
-	int temp_v1;
+s32 func_80018410(struct object * arg0, void (* arg1)(struct object *)) {
+	s32 temp_v1;
 
 	if (arg0 == NULL) {
 		return -1;
@@ -175,8 +178,8 @@ int func_80018410(struct object* arg0, void (*arg1)(struct object *)) {
 	}
 }
 
-int func_80018448(struct object* arg0) {
-	int temp_v1;
+s32 func_80018448(struct object * arg0) {
+	s32 temp_v1;
 
 	if (arg0 == 0) {
 		return -1;
@@ -193,12 +196,11 @@ int func_80018448(struct object* arg0) {
 
 void func_8001847C(void) {
 	void (* var_v0)(struct object *);
-	int i;
-	unsigned int * var_a0;
+	s32 i;
+	u32 * var_a0;
 	struct object * var_s0;
 	struct object * var_s0_2;
 
-	var_s0 = &Objects[0];
 	for (i = 0; i < 0x80; i++) {
 		var_a0 = &Objects[i].active;
 		if (*var_a0 != 2) {
@@ -263,12 +265,12 @@ void func_8001847C(void) {
 }
 
 void func_800186A0(void) {
-	struct object* var_s1;
-	struct object** temp_v0_2;
-	int temp_v1;
-	int var_s2;
-	unsigned short temp_v0;
-	unsigned short temp_v1_2;
+	struct object * var_s1;
+	struct object ** temp_v0_2;
+	s32 temp_v1;
+	s32 var_s2;
+	u16 temp_v0;
+	u16 temp_v1_2;
 
 	var_s1 = &Objects[0];
 	var_s2 = 0;
@@ -297,10 +299,10 @@ void func_800186A0(void) {
 	} while (var_s2 < 0x80);
 }
 
-int func_80018774(void) {
-	struct object* var_a0;
-	int var_a1;
-	int var_v1;
+s32 func_80018774(void) {
+	struct object * var_a0;
+	s32 var_a1;
+	s32 var_v1;
 
 	var_a1 = 0;
 	var_a0 = &Objects[0];
@@ -315,7 +317,7 @@ int func_80018774(void) {
 	return var_a1;
 }
 
-void func_800187AC(int arg0, int arg1) {
+void func_800187AC(s32 arg0, s32 arg1) {
 	D_800B9710.unk0[D_800B9710.unk20][0] = arg0;
 	D_800B9710.unk0[D_800B9710.unk20][1] = arg1;
 	D_800B9710.unk20 += 1;
@@ -324,9 +326,9 @@ void func_800187AC(int arg0, int arg1) {
 
 void func_80018808(void) {
 	struct object* var_s0;
-	int temp_v0;
-	int temp_s1;
-	int temp_s2;
+	s32 temp_v0;
+	s32 temp_s1;
+	s32 temp_s2;
 
 	while (D_800B9710.unk20 != 0) {
 		D_800B9710.unk20 -= 1;
@@ -334,8 +336,8 @@ void func_80018808(void) {
 		temp_s1 = D_800B9710.unk0[D_800B9710.unk20][1];
 		var_s0 = &Objects[0];
 		while (var_s0->priority <= temp_s1) {
-			if (temp_s2 <= var_s0) {
-				func_8001830C(var_s0);
+			if (temp_s2 <= (s32)var_s0) {
+				RemoveObject(var_s0);
 			}
 			var_s0 = var_s0->next;
 			if (var_s0 == 0) {
@@ -345,9 +347,9 @@ void func_80018808(void) {
 	}
 }
 
-void func_800188CC(int arg0, int arg1, void (* arg2)(struct object *)) {
-	int temp_a0;
-	int temp_a3;
+void func_800188CC(s32 arg0, s32 arg1, void (* arg2)(struct object *)) {
+	s32 temp_a0;
+	s32 temp_a3;
 
 	D_800B9740.unk0[D_800B9740.unk30].unk0 = arg0;
 	D_800B9740.unk0[D_800B9740.unk30].unk4 = arg1;
@@ -358,13 +360,13 @@ void func_800188CC(int arg0, int arg1, void (* arg2)(struct object *)) {
 
 void func_80018954(void) {
 	struct object* var_a1;
-	int temp_v1;
-	int temp_v1_2;
-	int var_v0;
-	unsigned int temp_a0;
-	unsigned int temp_a3;
-	unsigned int temp_t1;
-	int * temp_v0;
+	s32 temp_v1;
+	s32 temp_v1_2;
+	s32 var_v0;
+	u32 temp_a0;
+	u32 temp_a3;
+	u32 temp_t1;
+	s32 * temp_v0;
 	struct poly_ft4_data * temp_v1_3;
 	struct sprite_data * temp_v1_4;
 
@@ -395,7 +397,7 @@ void func_80018954(void) {
 	}
 }
 
-void func_80018A74(int arg0, int arg1) {
+void func_80018A74(s32 arg0, s32 arg1) {
 	D_800B9780.unk0[D_800B9780.unk20][0] = arg0;
 	D_800B9780.unk0[D_800B9780.unk20][1] = arg1;
 	D_800B9780.unk20 += 1;
@@ -404,10 +406,10 @@ void func_80018A74(int arg0, int arg1) {
 
 /* 99.14% matching */
 void func_80018AD0(void) {
-	struct object* var_a0;
-	unsigned int temp_a2;
-	unsigned int temp_a3;
-	int * temp_v0_2;
+	struct object * var_a0;
+	u32 temp_a2;
+	u32 temp_a3;
+	s32 * temp_v0_2;
 	struct poly_ft4_data * temp_v1;
 	struct sprite_data * temp_v1_2;
 
@@ -418,7 +420,7 @@ void func_80018AD0(void) {
 		temp_a2 = temp_v0_2[1];
 		temp_a3 = temp_v0_2[0];
 		while (temp_a2 >= var_a0->priority) {
-			if (var_a0 >= temp_a3) {
+			if ((s32)var_a0 >= temp_a3) {
 				if (var_a0->hidden == 1) {
 					var_a0->hide_func = 0;
 					var_a0->hidden = var_a0->unk24;
@@ -460,5 +462,5 @@ void func_80018BD8(struct object* arg0) {
 	arg0->unk2E = 0;
 	arg0->data = 0;
 	arg0->unk30 = 0;
-	bzero(&arg0->type, 8);
+	bzero((u8 *)&arg0->type, 8);
 }

@@ -1,15 +1,129 @@
 #include "field.h"
+#include "libapi.h"
+
+/* .data */
+s8 D_8009E80C[8][2] = {
+	{ 0, -2},
+	{ 2, -2},
+	{ 2,  0},
+	{ 2,  2},
+	{ 0,  2},
+	{-2,  2},
+	{-2,  0},
+	{-2, -2}
+};
+
+s8 D_8009E820[5][4] = {
+	{0x32, 0x07, 0x3C, 0x15},
+	{0x52, 0x08, 0x6C, 0x27},
+	{0x0C, 0x08, 0x63, 0x65},
+	{0x0A, 0x0B, 0x64, 0x67},
+	{0x00, 0x00, 0xFF, 0xFF}
+};
+
+u32 OverlayColors[2][4] = {
+	{0x184A4A, 0x184A4A, 0x081818, 0x081818},
+	{0x081818, 0x081818, 0x184A4A, 0x184A4A}
+};
+
+char * Locations[59] = {
+    "NO DATA",
+    "SHINJUKU",
+    "YOYOGI",
+    "SENDAGAYA",
+    "SHINANOMACHI",
+    "YOTSUYA",
+    "ICHIGAYA",
+    "JINGU-GAIEN",
+    "AKASAKA",
+    "KICHIJOJI",
+    "IKEBUKURO",
+    "SUGAMO",
+    "TABATA",
+    "UENO",
+    "ITABASHI",
+    "NIPPORI",
+    "MINAMISENJU",
+    "OCHIAI",
+    "MEJIRO",
+    "ZOHSHIGAYA",
+    "OHTSUKA",
+    "KOISHIKAWA",
+    "KOMAGOME",
+    "ASAKUSA",
+    "OHKUBO",
+    "TAKADANOBABA",
+    "WASEDA",
+    "KAGURAZAKA",
+    "IIDABASHI",
+    "KOHRAKUEN",
+    "YUSHIMA",
+    "OKACHIMACHI",
+    "SUIDOUBASHI",
+    "OCHANOMIZU",
+    "AKIHABARA",
+    "KOHJIMACHI",
+    "KUDAN",
+    "KOHKYO",
+    "JINBOHCHO",
+    "KANDA",
+    "MARUNOUCHI",
+    "NIHONBASHI",
+    "NAGATACHO",
+    "KASUMIGASEKI",
+    "GINZA",
+    "T.D.L.",
+    "SHIBUYA",
+    "AOYAMA",
+    "TORANOMON",
+    "AZABU",
+    "ROPPONGI",
+    "SHIBA",
+    "HIROO",
+    "SHINAGAWA",
+    "MEGURO",
+    "EBISU",
+    "SHIROGANEDAI",
+    "TAKANAWA",
+    "CATHEDRAL"
+};
+
+u16 D_800A2D2C[10][4] = {
+	{0x8E, 0x147, 0x179, 0x00}, 
+	{0x57, 0x179, 0x18A, 0x32}, 
+	{0x8F, 0x18A, 0x1A9, 0x43}, 
+	{0x90, 0x1A9, 0x1D9, 0x62}, 
+	{0x65, 0x1D9, 0x1DB, 0x92}, 
+	{0x66, 0x1DB, 0x1E2, 0x94}, 
+	{0xEC, 0x1E3, 0x1E4, 0x9C}, 
+	{0xA8, 0x1E4, 0x1E5, 0x9D}, 
+	{0x80, 0x1E2, 0x1E3, 0x9B}, 
+	{0xFFFF, 0, 0, 0}
+};
+
+/* .sbss */
+s32 D_800B6C68 = 0;
+s8 D_800B6C6C = -1;
+s32 D_800B6D48 = 0;
+s32 D_800B6D5C;
+
+/* .bss */
+struct field_map_data * FieldMapData;
+s16 D_800B73AC;
+s16 D_800B73AE;
+
+struct unk_data_3 D_800B74F0;
 
 /* 96.33% */
-void func_800151DC(struct return_thing * arg0) {
+void CreateFieldMap(struct return_thing * arg0) {
     struct object* temp_v0;
     struct field_map_data * temp_v0_2;
 
     if (D_800B6C68 == 0) {
         D_800B6C68 = 1;
-        temp_v0 = func_800180DC(0, FieldMapKill, FirstObjectPtrPtr->first, 0x40000, 0, 0x8534);
+        temp_v0 = CreateObject(0, FieldMapKill, FirstObjectPtrPtr->first, 0x40000, 0, sizeof(struct field_map_data));
         if (temp_v0 != 0) {
-            bzero(temp_v0->data, 0x8534);
+            bzero(temp_v0->data, sizeof(struct field_map_data));
             temp_v0_2 = temp_v0->data;
             temp_v0_2->origin = temp_v0;
             temp_v0->initialized = 1;
@@ -29,13 +143,13 @@ void func_800151DC(struct return_thing * arg0) {
     D_800B6C6C = -1;
 }
 
-
+/* 97.82% */
 void func_800152D0(struct object* arg0) {
-    unsigned short sp10[4];
-    unsigned short sp18[4];
+    u16 sp10[4];
+    u16 sp18[4];
     void * var_a0;
 
-    switch ((short)FieldMapData->event) {
+    switch ((s16)FieldMapData->event) {
     case 0:
         func_8004ECCC(0);
         EncounterBarProc();
@@ -212,8 +326,8 @@ void FieldMapKill(struct object * arg0) {
     if (D_800B6C68 != 0) {
         func_80019478(((unsigned int *)D_800B74F0.dat0)[2]);
         ((unsigned int *)D_800B74F0.dat0)[2] = 0;
-        func_8001830C(FieldMapData->unk8524);
-        FieldMapData->unk8524 = 0;
+        RemoveObject(FieldMapData->unk8524);
+        FieldMapData->unk8524 = NULL;
         func_8004505C();
         D_800B6C68 = 0;
     }
@@ -222,7 +336,7 @@ void FieldMapKill(struct object * arg0) {
 void func_800158A0(struct object * arg0) {
     FieldMapData->unk1C = 0;
     func_800441F0(1, &FieldMapData->next);
-    func_8001830C(FieldMapData->origin);
+    RemoveObject(FieldMapData->origin);
     FieldMapData->origin = 0;
 }
 
@@ -262,8 +376,8 @@ void FieldMapClose1(struct object * arg0) {
 }
 
 void FieldMapSleepEvent(struct object * arg0) {
-    int var_a0;
-    int var_a1;
+    s32 var_a0;
+    s32 var_a1;
 
     switch (FieldMapData->event) {
     case 0:
@@ -360,35 +474,35 @@ void FieldMapSleep(struct object * arg0) {
 
 typedef struct something {
     DVECTOR sp10;
-    int pad1;
+    s32 pad1;
     DVECTOR sp14;
-    int pad2;
-    short sp20;
-    short sp22;
-    int pad4;
+    s32 pad2;
+    s16 sp20;
+    s16 sp22;
+    s32 pad4;
     DVECTOR sp30;
-    int pad3;
+    s32 pad3;
     struct field_map_graphics_container* sp40;
-    int sp44;
+    s32 sp44;
 } something;
 
 void UpdateField(void) {
     struct something stack;
-    int var_s4;
-    int var_s5;
-    short temp_v0;
-    short temp_v0_4;
-    short temp_v0_7;
-    short var_a1;
-    short var_a1_2;
-    short x;
-    short y;
-    short i;
-    unsigned int temp_a3;
-    unsigned int temp_a3_2;
-    int var_a2;
-    int var_2;
-    int var_1;
+    s32 var_s4;
+    s32 var_s5;
+    s16 temp_v0;
+    s16 temp_v0_4;
+    s16 temp_v0_7;
+    s16 var_a1;
+    s16 var_a1_2;
+    s16 x;
+    s16 y;
+    s16 i;
+    u32 temp_a3;
+    u32 temp_a3_2;
+    s32 var_a2;
+    s32 var_2;
+    s32 var_1;
     struct field_pos* temp_a0;
     SPRT_16* temp_s0_2;
     struct field_map_graphics* temp_s7;
@@ -447,9 +561,9 @@ void UpdateField(void) {
             var_2 = (var_a1 - temp_a3) * 0x10;
             var_1 = func_80016DB8(temp_v0_4, var_s5);
             
-            func_8001D644(stack.sp10.vx + (x * 0x10), stack.sp10.vy + (y * 0x10), var_2 & 0xf0, temp_a3 & 0xf0, 0x80808080, var_1, 0x22, &temp_s7->tiles1[i]);
+            AddSprt16(stack.sp10.vx + (x * 0x10), stack.sp10.vy + (y * 0x10), var_2 & 0xf0, temp_a3 & 0xf0, 0x80808080, var_1, 0x22, &temp_s7->tiles1[i]);
             (&temp_s7->tiles1[i])->code |= 2;
-            func_8001D478(0, 1, var_s4, 0, 0x22, &temp_s7->tiles1_dr_modes[i]);
+            AddDrawMode(0, 1, var_s4, 0, 0x22, &temp_s7->tiles1_dr_modes[i]);
             x += 1;
             if (x >= 0x14) {
                 x = 0;
@@ -490,8 +604,8 @@ block_27:
         var_2 = (var_a1_2 - temp_a3_2) * 0x10;
         var_1 = func_80016DB8(temp_v0_7, 0);
             
-        func_8001D644(stack.sp10.vx + (x * 0x10), stack.sp10.vy + (y * 0x10), var_2 & 0xf0, temp_a3_2 & 0xf0, 0x80808080, var_1, 0x22, &temp_s7->tiles0[i]);
-        func_8001D478(0, 1, var_s4, 0, 0x22, &temp_s7->tiles0_dr_modes[i]);
+        AddSprt16(stack.sp10.vx + (x * 0x10), stack.sp10.vy + (y * 0x10), var_2 & 0xf0, temp_a3_2 & 0xf0, 0x80808080, var_1, 0x22, &temp_s7->tiles0[i]);
+        AddDrawMode(0, 1, var_s4, 0, 0x22, &temp_s7->tiles0_dr_modes[i]);
         x += 1;
         if (x >= 0x14) {
             x = 0;
@@ -505,28 +619,24 @@ block_27:
 
 /* Matched by MatBourgon and Mc-muffin */
 void FieldMovement(void) {
-    short sp10[22];
-    int temp_v0;
-    short var_v0_2;
-    int temp_s0;
-    int temp_v0_2;
-    char * tx;
-    char temp_v1;
-    char temp_a1;
-    char var_v1;
-    unsigned char var_v0_3;
-    unsigned char var_v0_4;
-    int temp_a2;
-    struct field_map_data* var_v0;
+    DVECTOR sp10;
+    DVECTOR sp14;
+    DVECTOR sp18;
+    DVECTOR sp1C;
+    DVECTOR sp20;
+    DVECTOR sp24;
+    s32 temp_v0_2;
+    s32 temp_s0;
 
     FieldMapData->pos.x_motion = 0;
     FieldMapData->pos.y_motion = 0;
     
-    if (func_80018EE8(0, 0xE) != 0) {
+    if (func_80018EE8(0, 0xE)) {
         FieldMapData->pos.speed_modifier = 2;
     } else {
         FieldMapData->pos.speed_modifier = 1;
     }
+
     temp_v0_2 = func_8004541C();
     if (temp_v0_2 < 0) {
         return;
@@ -542,28 +652,28 @@ void FieldMovement(void) {
             FieldMapData->pos.motion_countdown = 7;
         }
         
-        func_80016A10(&sp10[0], &sp10[4], &sp10[8]);
+        func_80016A10(&sp10, &sp14, &sp18);
         FieldMapData->pos.screen_edge_flags = 0;
-        if (sp10[0] <= (D_8009E820[FieldMapData->unk852E][0] + sp10[4])) {
+        if (sp10.vx <= (D_8009E820[FieldMapData->unk852E][0] + sp14.vx)) {
             FieldMapData->pos.screen_edge_flags |= 1;
-        } else if (sp10[0] >= (D_8009E820[FieldMapData->unk852E][2] + sp10[8])) {
+        } else if (sp10.vx >= (D_8009E820[FieldMapData->unk852E][2] + sp18.vx)) {
             FieldMapData->pos.screen_edge_flags |= 2;
         }
-        if (sp10[1] <= (D_8009E820[FieldMapData->unk852E][1] + sp10[5])) {
+        if (sp10.vy <= (D_8009E820[FieldMapData->unk852E][1] + sp14.vy)) {
             FieldMapData->pos.screen_edge_flags |= 4;
-        } else if (sp10[1] >= (D_8009E820[FieldMapData->unk852E][3] + sp10[9])) {
+        } else if (sp10.vy >= (D_8009E820[FieldMapData->unk852E][3] + sp18.vy)) {
             FieldMapData->pos.screen_edge_flags |= 8;
         }
+
         func_80045A34();
         EncounterBarProc();
         temp_s0 = func_800460AC() & 0xF;
         if (temp_s0 == 9) {
-            func_80016A10(&sp10[12], &sp10[16], &sp10[20]);
-            func_800457A4(sp10[12], sp10[13], &FieldMapData->next);
+            func_80016A10(&sp1C, &sp20, &sp24);
+            func_800457A4(sp1C.vx, sp1C.vy, &FieldMapData->next);
             FieldMapData->flags |= 8;
             return;
-        }
-        if ((temp_s0 != 8) && (func_8004C06C(0xFA) == 0) && ((func_8004C06C(0xA2) == 1) || (func_8004C06C(0xA6) == 1)) && (temp_s0 == 0xA)) {
+        } else if ((temp_s0 != 8) && (func_8004C06C(0xFA) == 0) && ((func_8004C06C(0xA2) == 1) || (func_8004C06C(0xA6) == 1)) && (temp_s0 == 0xA)) {
             func_800456C8(1, 1, &FieldMapData->next);
             FieldMapData->unk84F4 = 0;
             FieldMapData->event = 0;
@@ -573,10 +683,11 @@ void FieldMovement(void) {
     }
 }
 
-int func_80016504(void) {
-    struct object* var_v1;
-    unsigned int temp_v1;
-    unsigned int temp_s1;
+
+s32 func_80016504(void) {
+    struct object * var_v1;
+    u32 temp_v1;
+    u32 temp_s1;
 
     FieldMapData->unk8528 = func_80045588(FieldMapData->pos.x, FieldMapData->pos.y);
     temp_v1 = FieldMapData->unk84F4 & 0xF;
@@ -601,16 +712,16 @@ int func_80016504(void) {
 }
 
 void ExecuteFieldMovement() {
-    short temp_v0_3;
-    short temp_v0_4;
-    short var_s1;
-    short var_v1;
-    short var_v1_2;
-    int temp_v0_2;
-    int temp_v0_5;
-    int temp_v0_6;
-    int var_v0;
-    unsigned short temp_v0;
+    s16 temp_v0_3;
+    s16 temp_v0_4;
+    s16 var_s1;
+    s16 var_v1;
+    s16 var_v1_2;
+    s32 temp_v0_2;
+    s32 temp_v0_5;
+    s32 temp_v0_6;
+    s32 var_v0;
+    u16 temp_v0;
     struct field_pos * temp_s0;
     void * var_v0_2;
     void * var_v0_3;
@@ -704,8 +815,8 @@ void ExecuteFieldMovement() {
 
 
 void func_80016A10(DVECTOR * arg0, DVECTOR * arg1, DVECTOR * arg2) {
-    short temp_v0;
-    short temp_v0_2;
+    s16 temp_v0;
+    s16 temp_v0_2;
 
     arg0->vx = FieldMapData->pos.x;
     arg0->vy = FieldMapData->pos.y;
@@ -759,10 +870,10 @@ int func_80016B10(void) {
 //INCLUDE_ASM("asm/smt1/main/nonmatchings/field", func_80016B74);
 
 /* CLUT related code. */
-int func_80016DB8(int arg0, unsigned short arg1) {
-    short sp10[4];
-    short * x;
-    short var_a0;
+s32 func_80016DB8(s32 arg0, u16 arg1) {
+    s16 sp10[4];
+    s16 * x;
+    s16 var_a0;
 
     x = D_800B74F0.dat0 + D_800B74F0.dat0[4];
     x = x + arg0 + 1;
@@ -789,11 +900,11 @@ void AddFieldOverlays(void) {
 
     temp_s0 = &FieldMapData->g;
     temp_s0_2 = &temp_s0->g[temp_s0->buffer];
-    func_8001D890(0x10, 0x10, 0x120, 0x68, &OverlayColors[0], 0x1D, &temp_s0_2->upper_overlay);
+    AddPolyG4(0x10, 0x10, 0x120, 0x68, &OverlayColors[0], 0x1D, &temp_s0_2->upper_overlay);
     temp_s0_2->upper_overlay.code |= 2;
-    func_8001D890(0x10, 0x78, 0x120, 0x68, &OverlayColors[1], 0x1D, &temp_s0_2->lower_overlay);
+    AddPolyG4(0x10, 0x78, 0x120, 0x68, &OverlayColors[1], 0x1D, &temp_s0_2->lower_overlay);
     temp_s0_2->lower_overlay.code |= 2;
-    func_8001D478(0, 1, 0x20, 0, 0x1D, &temp_s0_2->overlay_dr_mode);
+    AddDrawMode(0, 1, 0x20, 0, 0x1D, &temp_s0_2->overlay_dr_mode);
 }
 
 
@@ -831,8 +942,8 @@ void EncounterBarProc(void) {
 
 void func_80017164(struct return_thing* arg0) {
     bzero(arg0, 0x24);
-    arg0->unk8 = FieldMapData->pos.x;
-    arg0->unkC = FieldMapData->pos.y;
+    arg0->init_x = FieldMapData->pos.x;
+    arg0->init_y = FieldMapData->pos.y;
     arg0->unk10 = FieldMapData->pos.movement_dir;
     arg0->unk14 = FieldMapData->unk8504;
 }
@@ -842,8 +953,8 @@ int func_800171C8(struct return_thing* arg0) {
 
     var_a2 = 0;
     if ((FieldMapData->flags & 8) > 0) {
-        arg0->unk8 = FieldMapData->unkC;
-        arg0->unkC = (int)FieldMapData->unk10;
+        arg0->init_x = FieldMapData->unkC;
+        arg0->init_y = (int)FieldMapData->unk10;
         var_a2 = 1;
         FieldMapData->flags &= 0xF7;
     }
@@ -852,7 +963,7 @@ int func_800171C8(struct return_thing* arg0) {
 
 void func_80017218(void) {
     if (D_800B6C68 != 0) {
-        func_8001830C(FieldMapData->origin);
+        RemoveObject(FieldMapData->origin);
         FieldMapData->origin = 0;
     }
 }
@@ -860,8 +971,8 @@ void func_80017218(void) {
 void func_80017258(struct return_thing* arg0) {
     DVECTOR p;
 
-    FieldMapData->pos.x = arg0->unk8;
-    FieldMapData->pos.y = arg0->unkC;
+    FieldMapData->pos.x = arg0->init_x;
+    FieldMapData->pos.y = arg0->init_y;
     FieldMapData->pos.movement_dir = arg0->unk10;
     FieldMapData->x_scroll = (FieldMapData->pos.x - 9);
     FieldMapData->y_scroll = (FieldMapData->pos.y - 7);
@@ -894,21 +1005,21 @@ void func_80017258(struct return_thing* arg0) {
     FieldMapData->unk8504 = -1;
 }
 
-int func_80017474(void) {
+s32 func_80017474(void) {
     return FieldMapData->flags & 1;
 }
 
-int func_8001748C(void) {
-    int temp_v0;
+s32 func_8001748C(void) {
+    s32 temp_v0;
 
     temp_v0 = FieldMapData->random_encounter;
     FieldMapData->random_encounter = 0;
     return temp_v0;
 }
 
-int func_800174A4(void) {
-    int var_s0;
-    int var_v0;
+s32 func_800174A4(void) {
+    s32 var_s0;
+    s32 var_v0;
 
     var_s0 = 0;
     if (D_800B6C68 != 0) {
@@ -927,7 +1038,7 @@ int func_800174A4(void) {
     return var_v0;
 }
 
-void func_8001753C(short arg0) {    
+void func_8001753C(s16 arg0) {    
     if (arg0 == 0) {
         FieldMapData->flags &= 0xEF;
     } else if (arg0 == 1) {
@@ -956,13 +1067,13 @@ void func_80017640(int arg0, int arg1) {
     func_800458A8(FieldMapData->pos.x, FieldMapData->pos.y, arg0, arg1);
 }
 
-int func_8001767C(void) {
+s32 func_8001767C(void) {
     return FieldMapData->unk8528 + 0xA5;
 }
 
-short func_80017694(void) {
-    int temp_a1;
-    int temp_a0;
+s16 func_80017694(void) {
+    s32 temp_a1;
+    s32 temp_a0;
 
     temp_a1 = func_80045658(FieldMapData->pos.x, FieldMapData->pos.y);
     temp_a0 = FieldMapData->unk8504;
@@ -981,9 +1092,9 @@ void func_80017708(void) {
     FieldMapData->unk8530 = 0;
 }
 
-int func_8001771C(void) {
-    unsigned short sp18[4];
-    unsigned short sp20[4];
+s32 func_8001771C(void) {
+    u16 sp18[4];
+    u16 sp20[4];
 
     switch (FieldMapData->unk8530) {
         case 0:
@@ -1065,9 +1176,9 @@ void func_800179AC(void) {
 
 /* Matched by Mc-muffin */
 void func_80017B4C(void) {
-    int sp10[9];
+    s32 sp10[9];
     enum story_section story_section;
-    int var_a0;
+    s32 var_a0;
 
     if (D_800B6D48 == 0) {
         D_800B6D48 = 1;
@@ -1127,16 +1238,16 @@ void func_80017B4C(void) {
 
     story_section = func_8004ED78();
     {
-        char str0[16];
-        char str1[] = "HAKAI_BEF";
-        char str2[] = "HAKAI_AFT";
-        char str3[] = "NEBI_KILL";
-        char str4[] = "KOZUI";
-        char str5[] = "NO_DATA";
-        char* sp80[5] = {
+        s8 str0[16];
+        s8 str1[] = "HAKAI_BEF";
+        s8 str2[] = "HAKAI_AFT";
+        s8 str3[] = "NEBI_KILL";
+        s8 str4[] = "KOZUI";
+        s8 str5[] = "NO_DATA";
+        s8* sp80[5] = {
             str1, str2, str3, str4, str5,
         };
-        int x;
+        s32 x;
 
         if (story_section == HAKAI_BEF) {
             var_a0 = HAKAI_BEF;

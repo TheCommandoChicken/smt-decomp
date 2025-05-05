@@ -1,33 +1,36 @@
-#include "common.h"
+#include "dat.h"
+#include "memory.h"
 
-void func_80018FF0(void) {
+TIM_IMAGE Tim;
+struct unk_data_9 * D_800B6D60;
+s32 D_800B9830[2][2];
+
+void func_80018FF0(u32 * addr) {
     TIM_IMAGE sp10;
-    u16 temp_lo;
 
-    OpenTIM();
+    OpenTIM(addr);
     ReadTIM(&sp10);
     LoadImage(sp10.prect, sp10.paddr);
     if ((sp10.mode >> 3) & 1) {
-        temp_lo = sp10.crect->w * sp10.crect->h;
-        sp10.prect->w = temp_lo;
-        sp10.prect->h = 1U;
+        sp10.crect->w = sp10.crect->w * sp10.crect->h;
+        sp10.crect->h = 1;
         LoadImage(sp10.crect, sp10.caddr);
     }
     DrawSync(0);
     Tim = sp10;
 }
 
-TIM_IMAGE* func_800190B0(void) {
+TIM_IMAGE * func_800190B0(void) {
     return &Tim;
 }
 
-void func_800190BC(s32 arg0, pos* arg1, RECT* arg2) {
+void func_800190BC(u32 * addr, SVECTOR * arg1, RECT * arg2) {
     TIM_IMAGE sp10;
 
-    OpenTIM(arg0);
+    OpenTIM(addr);
     ReadTIM(&sp10);
-    sp10.prect->x = arg1->x;
-    sp10.prect->y = arg1->y;
+    sp10.prect->x = arg1->vx;
+    sp10.prect->y = arg1->vy;
     LoadImage(sp10.prect, sp10.paddr);
     if ((sp10.mode >> 3) & 1) {
         LoadImage(arg2, sp10.caddr);
@@ -35,28 +38,26 @@ void func_800190BC(s32 arg0, pos* arg1, RECT* arg2) {
     DrawSync(0);
 }
 
-void func_80019150(void) {
+void func_80019150(u32 * addr) {
     TIM_IMAGE sp10;
-    u16 temp_lo;
 
-    OpenTIM();
+    OpenTIM(addr);
     ReadTIM(&sp10);
     LoadImage(sp10.prect, sp10.paddr);
     if ((sp10.mode >> 3) & 1) {
-        temp_lo = sp10.crect->w * sp10.crect->h;
-        sp10.crect->w = temp_lo;
+        sp10.crect->w = sp10.crect->w * sp10.crect->h;
         sp10.crect->h = 1;
         LoadImage(sp10.crect, sp10.caddr);
     }
     DrawSync(0);
 }
 
-s32 func_800191E4(s32* arg0, s32 arg1) {
+void * func_800191E4(s32 * arg0, s32 arg1) {
     s32 temp_a0;
-    s32 temp_v0;
+    void * temp_v0;
     s32 var_s1;
-    s32* temp_v1;
-    s32* var_s2;
+    s32 * temp_v1;
+    s32 * var_s2;
 
     var_s2 = arg0;
     temp_a0 = *var_s2;
@@ -82,7 +83,6 @@ s32 func_80019294(s32 arg0, s32 arg1) {
 
 void func_800192B8(s32 arg0, s32 arg1) {
     s32 temp_v0;
-    s32* temp_a1;
 
     temp_v0 = D_800B9830[arg1][0];
     D_800B9830[arg1][0] = arg0;
@@ -93,11 +93,11 @@ s32 func_800192D8(s32 arg0) {
     return D_800B9830[arg0][1];
 }
 
-s32 func_800192F4(s32* arg0) {
-    return *arg0;
+s32 func_800192F4(s32 * arg0) {
+    return * arg0;
 }
 
-u32 func_80019300(u8* arg0, something* arg1) {
+u32 func_80019300(u8 * arg0, struct unk_data_8 * arg1) {
     u8 temp_a1;
     u32 temp_t2;
     u32 temp_t1;
@@ -141,83 +141,83 @@ u32 func_80019300(u8* arg0, something* arg1) {
 
 
 /* Matched by AngheloAlf */
-void func_80019384(object_data** arg0, s32 arg1) {
-    glomper *v0 = D_800B6D60;
+void func_80019384(struct unk_data_9 * arg0, s32 arg1) {
+    struct unk_data_9 * v0 = D_800B6D60->unk0;
 
     v0->unk0 = arg0;
     v0->unk4 = arg0;
     v0->unk8 = -0x3E7;
-    v0->unk4[0] = v0;
-    v0->unk4[1] = v0;
-    v0->unk4[2] = 0;
-    v0->unk4[3] = arg1;
+    v0->unk4->unk0 = v0;
+    v0->unk4->unk4 = v0;
+    v0->unk4->unk8 = 0;
+    v0->unk4->unkC = arg1;
 }
 
-object_data** func_800193C0(s32 arg0) {
+void * func_800193C0(s32 arg0) {
     s32 temp_a0;
     s32 temp_a1;
-    object_data* var_s0;
+    struct unk_data_9 * var_s0;
 
     if (arg0 >= 0) {
-        var_s0 = D_800B6D60[1];
+        var_s0 = D_800B6D60->unk4;
         arg0 = (arg0 + 7) & ~7;
         while (var_s0 != D_800B6D60) {
-            if (((var_s0->object).field2_0x8 != 1) && (temp_a0 = (var_s0->object).size, (temp_a0 >= arg0))) {
-                if ((temp_a0 - arg0) >= 0x31) {
+            if ((var_s0->unk8 != 1) && (var_s0->unkC >= arg0)) {
+                if ((var_s0->unkC - arg0) >= 0x31) {
                     func_800194C4(var_s0, arg0);
                 }
                 break;
             }
-            var_s0 = (var_s0->object).next;
+            var_s0 = var_s0->unk4;
         }
         if (var_s0 != D_800B6D60) {
-            (var_s0->object).field2_0x8 = 1;
-            return &(var_s0->object).field4_0x10;
+            var_s0->unk8 = 1;
+            return &var_s0[1];
         }
     }
     return 0;
 }
 
-void func_80019478(s32* arg0) {
-    s32* temp_a0;
+void func_80019478(struct unk_data_9* arg0) {
+    struct unk_data_9 * temp_a0;
 
-    if (arg0 != 0) {
-        temp_a0 = arg0 - 4;
-        if (temp_a0[2] == 1) {
-            temp_a0[2] = 0;
+    if (arg0 != NULL) {
+        temp_a0 = &arg0[-1];
+        if (temp_a0->unk8 == 1) {
+            temp_a0->unk8 = 0;
             func_80019520(temp_a0);
-            func_80019520(arg0[-4]);
+            func_80019520(temp_a0->unk0);
         }
     }
 }
 
-void func_800194C4(object_data* arg0, s32 arg1) {
-    s32* temp_a2;
-    object_data* temp_v0;
+void func_800194C4(struct unk_data_9 * arg0, s32 arg1) {
+    struct unk_data_9 * temp_a2;
+    struct unk_data_9 * temp_v0;
 
     temp_v0 = (s8*)arg0 + arg1;
-    temp_v0->object.field4_0x10 = arg0;
-    temp_a2 = &temp_v0->object.field4_0x10;
-    temp_a2[1] = arg0->object.next;
-    temp_a2[2] = 0;
-    temp_a2[3] = ((arg0->object.size - arg1) - 0x10);
-    arg0->object.next->object.origin = temp_a2;
-    arg0->object.next = temp_a2;
-    arg0->object.size = arg1;
-    if (arg0 == D_800B6D60[0]) {
-        D_800B6D60[0] = temp_a2;
+    temp_v0[1].unk0 = arg0;
+    temp_a2 = &temp_v0[1];
+    temp_a2->unk4 = arg0->unk4;
+    temp_a2->unk8 = 0;
+    temp_a2->unkC = ((arg0->unkC - arg1) - 0x10);
+    arg0->unk4->unk0 = temp_a2;
+    arg0->unk4 = temp_a2;
+    arg0->unkC = arg1;
+    if (arg0 == D_800B6D60->unk0) {
+        D_800B6D60->unk0 = temp_a2;
     }
 }
 
-void func_80019520(malloc_thing* arg0) {
-    s32* temp_v1;
+void func_80019520(struct unk_data_9 * arg0) {
+    struct unk_data_9 * temp_v1;
 
     if (arg0->unk8 == 0) {
         temp_v1 = arg0->unk4;
-        if (temp_v1[2] == 0) {
-            arg0->unkC += (0x10 + temp_v1[3]);
-            *arg0->unk4[1] = arg0;
-            arg0->unk4 = arg0->unk4[1];
+        if (temp_v1->unk8 == 0) {
+            arg0->unkC += (0x10 + temp_v1->unkC);
+            arg0->unk4->unk4->unk0 = arg0;
+            arg0->unk4 = arg0->unk4->unk4;
         }
     }
 }
@@ -246,23 +246,23 @@ s32 func_8001958C(s32 arg0, s32 arg1, s32 arg2) {
     return var_a1;
 }
 
-void func_800195FC(s32 arg0, s32 arg1, pos* arg2) {
-    pos sp0;
+void func_800195FC(s32 arg0, s32 arg1, DVECTOR * arg2) {
+    DVECTOR sp0;
     u16 temp_a0;
     u16 temp_a1;
     s32 var_a3;
     s32 var_t1;
     s32 var_v0;
-    pos* var_t0;
+    DVECTOR * var_t0;
 
     temp_a1 = arg1;
     temp_a0 = arg0;
     for (var_t1 = temp_a0 + 1; var_t1 < temp_a1; var_t1++) {
         var_a3 = var_t1 - 1;
         sp0 = arg2[var_t1];
-        var_v0 = arg2[var_t1].y;
+        var_v0 = arg2[var_t1].vy;
         while (var_a3 >= temp_a0) {
-            if (var_v0 < arg2[var_a3].y) {
+            if (var_v0 < arg2[var_a3].vy) {
                 arg2[var_a3 + 1] = arg2[var_a3];
                 var_a3--;
             } else {
@@ -379,7 +379,61 @@ void func_80019950(void) {
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019958);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019C58);
+s32 func_80019C58(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
+    void* var_v0;
+    void* var_v0_2;
+    s32 temp_a0;
+    s32 temp_v1;
+    u32 temp_a0_2;
+    data_struct* temp_s0;
+
+    temp_s0 = &DataContainer.data[DataContainer.write_index];
+    bzero(temp_s0, 0x40);
+    if (arg2 < 8) {
+        if (func_80019294(arg2, arg5) == 1) {
+            return 0;
+        }
+        temp_s0->function = func_80019F20;
+    } else if (arg2 == 0x26C) {
+        temp_s0->function = func_80019F4C;
+        temp_s0->field18_0x34 = 1;
+    } else if (arg2 > 0x26C && arg2 < 0x286) {
+        temp_s0->function = func_80019F70;
+        temp_s0->field18_0x34 = 1;
+        if (arg2 == 0x278) {
+            temp_s0->field12_0x28 = 1;
+        } else {
+            func_80040680(arg2 - 0x26D);
+            temp_s0->field12_0x28 = 0;
+        }
+    } else if (arg2 == 13) {
+        temp_s0->function = func_8001A1F4;
+    } else if ((arg2 == 12) || (arg2 > 13 && arg2 < 16)) {
+        temp_s0->function = func_8001A254;
+    } else if (arg2 == 10) {
+        temp_s0->function = func_8001A2C0;
+    } else if (arg2 == 9) {
+        temp_s0->function = func_8001A128;
+    } else if (arg2 > 24 && arg2 < 34) {
+        temp_s0->function = func_8001A1CC;
+    } else if (arg5 == 7) {
+        temp_s0->function = func_8001A0B8;
+    } else if (arg5 == 6) {
+        temp_s0->function = func_8001A408;
+    }
+    temp_s0->field1_0x4 = arg5;
+    temp_s0->field7_0x14 = arg1;
+    temp_s0->field9_0x1c = arg3;
+    temp_s0->status = 1;
+    temp_s0->sector_offset = arg2;
+    temp_s0->size0 = arg4;
+    temp_a0 = 1 << DataContainer.write_index;
+    DataContainer.write_index += 1;
+    if (DataContainer.write_index == 0x20) {
+        DataContainer.write_index = 0;
+    }
+    return temp_a0;
+}
 
 s32 func_80019E48(s32 arg0) {
     return DataContainer.data[func_8001958C(arg0, 0, 1)].data_mirror;

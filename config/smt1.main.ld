@@ -28,6 +28,7 @@ SECTIONS
         build/src/smt1/main/pad.o(.rodata);
         build/src/smt1/main/dat.o(.rodata);
         build/src/smt1/main/graph.o(.rodata);
+        build/src/smt1/main/unk.o(.rodata);
         build/src/smt1/main/overlay.o(.rodata);
         build/src/smt1/main/dungeon.o(.rodata);
         build/src/smt1/main/dgraph.o(.rodata);
@@ -45,7 +46,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.rodata);
         build/asm/smt1/main/data/34AC.rodata.o(.rodata);
         build/asm/smt1/main/data/lib.rodata.o(.rodata);
-        build/src/smt1/main/unk.o(.rodata);
         build/src/smt1/main/unk3.o(.rodata);
         build/src/smt1/main/lib/libcd.o(.rodata);
         build/src/smt1/main/lib/libds.o(.rodata);
@@ -83,6 +83,7 @@ SECTIONS
         build/src/smt1/main/pad.o(.data);
         build/src/smt1/main/dat.o(.data);
         build/src/smt1/main/graph.o(.data);
+        build/src/smt1/main/unk.o(.data);
         build/src/smt1/main/overlay.o(.data);
         build/src/smt1/main/dungeon.o(.data);
         build/src/smt1/main/dgraph.o(.data);
@@ -100,7 +101,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.data);
         build/asm/smt1/main/data/34AC.rodata.o(.data);
         build/asm/smt1/main/data/lib.rodata.o(.data);
-        build/src/smt1/main/unk.o(.data);
         build/src/smt1/main/unk3.o(.data);
         build/src/smt1/main/lib/libcd.o(.data);
         build/src/smt1/main/lib/libds.o(.data);
@@ -117,6 +117,7 @@ SECTIONS
         build/src/smt1/main/pad.o(.bss);
         build/src/smt1/main/dat.o(.bss);
         build/src/smt1/main/graph.o(.bss);
+        build/src/smt1/main/unk.o(.bss);
         build/src/smt1/main/overlay.o(.bss);
         build/src/smt1/main/dungeon.o(.bss);
         build/src/smt1/main/dgraph.o(.bss);
@@ -134,7 +135,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.bss);
         build/asm/smt1/main/data/34AC.rodata.o(.bss);
         build/asm/smt1/main/data/lib.rodata.o(.bss);
-        build/src/smt1/main/unk.o(.bss);
         build/src/smt1/main/unk3.o(.bss);
         build/src/smt1/main/lib/libcd.o(.bss);
         build/src/smt1/main/lib/libds.o(.bss);
