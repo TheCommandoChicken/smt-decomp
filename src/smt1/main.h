@@ -19,8 +19,8 @@ struct intro_manager {
 
 
 /* Created by func_800145CC */
-struct unk_data_0 { 
-	s32 (* unk0)(void);
+struct unk_data_0 {
+	s32 (*unk0)(void);
 	u8 counter;
 	u8 pad0, pad1, pad2;
 };
@@ -28,7 +28,7 @@ struct unk_data_0 {
 
 /* Created by func_80014A2C */
 /* Likely used for displaying menus. */
-struct unk_data_1 { 
+struct unk_data_1 {
 	struct object * unk0;
 	u16 * unk4[3];
 	POLY_G4 g[2][5];
@@ -87,16 +87,16 @@ struct unknown_object_struct {
 
 
 struct persistent_objects {
-	struct object * intro_manager;			/* Handles the game's intro sequence. */
-	struct object * screen_overlay;			/* An overlay used to fade the screen to and from black. */
-	struct object * party_hud;				/* UI element which displays the current party in 3D and during battles. */
-	struct object * moon_hud;				/* UI element which displays the current moon phase. */
-	struct object * money_hud;				/* UI element displaying the player's money. */
-	struct object * mag_hud;				/*  UI element displaying the player's magnetite. */
-	struct object * nav_hud;				/* Combination of the UI element showing the location in 2D, as well as the compass shown in 3D. */
-	struct object * enc_bar;				/* Colored bar used to indicate the proximity of an encounter. */
-	struct object * border;					/* The border drawn around the edges of the screen. */
-	struct object * field_char;				/* The player character sprite shown in 2D. */
+	struct object * intro_manager;	/* Handles the game's intro sequence. */
+	struct object * screen_overlay; /* An overlay used to fade the screen to and from black. */
+	struct object * party_hud;		/* UI element which displays the current party in 3D and during battles. */
+	struct object * moon_hud;		/* UI element which displays the current moon phase. */
+	struct object * money_hud;		/* UI element displaying the player's money. */
+	struct object * mag_hud;		/*  UI element displaying the player's magnetite. */
+	struct object * nav_hud;		/* Combination of the UI element showing the location in 2D, as well as the compass shown in 3D. */
+	struct object * enc_bar;		/* Colored bar used to indicate the proximity of an encounter. */
+	struct object * border;			/* The border drawn around the edges of the screen. */
+	struct object * field_char;		/* The player character sprite shown in 2D. */
 	struct unknown_object_struct * unk0;
 	u32 * unk1;
 };
@@ -170,7 +170,7 @@ void EmptyProc(struct object * self);
 void GameDataInit(void);
 void func_800145CC(s32 (*)(void));
 void func_80014698(struct object *);
-s32 func_800147CC(void); 
+s32 func_800147CC(void);
 s32 func_80014804(void);
 void func_8001489C(s32, s32, s32);
 void func_800148D4(void);
@@ -211,8 +211,8 @@ extern struct object * func_80065F38(s32, s32, s32, s32, s32, s32, void *, s32, 
 const u32 D_80010308 = 0x80117790;
 
 /* Treated as extern by Init(), but placed in .sdata, suggesting that they are defined in another file. */
-extern s32 D_800B6C54 /*= 0x8000*/; 
-extern s32 D_800B6C58 /*= 0x800000*/; 
+extern s32 D_800B6C54 /*= 0x8000*/;
+extern s32 D_800B6C58 /*= 0x800000*/;
 
 extern u8 D_80125368;
 extern struct object_ptrs * FirstObjectPtrPtr;

@@ -1,7 +1,4 @@
-Rename each of your games like:
-smt1.cue
-smt1.bin
-smt2.cue
-smt2.bin
-smtif.cue
-smtif.bin
+Hashes are:
+smt1: d03640be56d4e1316d0dab1e061ace9b
+smt2: c88dae2abd5b929074778f8f7e647c7e
+smtif: e21a96340bdf8f709de25e17272fce4a
