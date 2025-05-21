@@ -1,6 +1,6 @@
 #include "unk.h"
-#include "memory.h"
-#include "libapi.h"
+#include "lib/memory.h"
+#include "lib/libapi.h"
 
 struct whatever_this_is D_800A0504[4] = {
 	{0, 0, -1, 0, 0, 0, 0, 0, 0},

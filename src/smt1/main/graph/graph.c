@@ -1,5 +1,5 @@
 #include "graph.h"
-#include "memory.h"
+#include "lib/memory.h"
 
 /* data */
 struct texture_data D_8009FC70[183] = {
@@ -186,7 +186,6 @@ struct texture_data D_8009FC70[183] = {
 	{10, 8, 110, 232, 0, 6, -1},
 	{8, 8, 24, 176, 0, 15, -1},
 	{42, 10, 192, 112, 0, 15, -1}};
-
 /* sbss */
 GsOT_TAG * MainOTPtr;					  /* 0x800B73CC */
 s32 ActiveBuffer;						  /* 0x800B73D0 */

@@ -1,7 +1,7 @@
-#include "sys/types.h"
-#include "libgte.h"
-#include "libgpu.h"
-#include "libgs.h"
+#include "lib/sys/types.h"
+#include "lib/libgte.h"
+#include "lib/libgpu.h"
+#include "lib/libgs.h"
 #include "common.h"
 
 #ifndef _DAT_H_

@@ -1,5 +1,9 @@
 #include "common.h"
 
+INCLUDE_ASM("asm/smt1/main/nonmatchings/unk", func_8001F15C);
+
+INCLUDE_ASM("asm/smt1/main/nonmatchings/unk", func_8001F170);
+
 INCLUDE_ASM("asm/smt1/main/nonmatchings/unk", func_8001F17C);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/unk", func_8001F25C);

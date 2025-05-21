@@ -89,7 +89,7 @@ segments:
       - [0xac50, c, graph]
       - [0xf95c, c, unk]
       - [0xfdec, c, overlay]
-      - [0x18e44, c, dungeon]
+      - [0x18f14, c, dungeon]
       - [0x19B98, c, dgraph]
       - [0x22A80, c, dunk1]
       - [0x23508, c, dunk2]

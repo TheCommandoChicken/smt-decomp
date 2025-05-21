@@ -1,32 +1,4 @@
-#include "dungeon.h"
-
-/*INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028640);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002864C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028714);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028774);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_800287C0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028904);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028948);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028B20);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028C20);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028DA0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80029210);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002925C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_800292AC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80029398);
+/*INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80029398);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80029558);
 

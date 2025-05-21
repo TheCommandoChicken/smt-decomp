@@ -37,6 +37,7 @@ options:
 
   extensions_path: tools/splat_ext
 
+  section_order: [".rodata", ".text", ".data", ".bss"]
   subalign: 0x800
 
   string_encoding: ASCII
@@ -44,26 +45,76 @@ options:
   rodata_string_guesser_level: 2
   data_string_guesser_level: 2
 
-  migrate_rodata_to_functions: False
+  migrate_rodata_to_functions: True
 segments:
-  - [0x0, bin]
-  - [0xe000, bin]
-  - [0x18000, bin]
-  - [0x20800, bin]
-  - [0x22000, bin]
+  - name: ovr0
+    type: code
+    start: 0x0
+    vram: 0x80117790
+    exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
+    subalign: 1
+    subsegments:
+      - [0x0, .rodata, ovr0]
+      - [0x614, c, ovr0]
+      - [0xd754, .data, ovr0]
+  - name: ovr1
+    type: code
+    start: 0xe000
+    vram: 0x80117790
+    exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
+    subalign: 1
+    subsegments:
+      - [0xe000, .rodata, ovr1]
+      - [0xe514, c, ovr1]
+      - [0x16f7c, .data, ovr1]
+  - name: ovr2
+    type: code
+    start: 0x18000
+    vram: 0x80117790
+    exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
+    subalign: 1
+    subsegments:
+      - [0x18000, .rodata, ovr2]
+      - [0x18480, c, ovr2]
+      - [0x1f8ac, .data, ovr2]
+  - name: ovr3
+    type: code
+    start: 0x20800
+    vram: 0x80117790
+    exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
+    subalign: 1
+    subsegments:
+      - [0x20800, .rodata, ovr3]
+      - [0x20844, c, ovr3]
+      - [0x21b20, pad]
+  - name: ovr4
+    type: code
+    start: 0x22000
+    vram: 0x80117790
+    exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
+    subalign: 1
+    subsegments:
+      - [0x22000, .rodata, ovr4]
+      - [0x22374, c, ovr4]
+      - [0x2e890, .data, ovr2]
   - [0x2f800, bin]
   - [0x33800, bin]
   - name: intro
     type: code
     start: 0x36000
-    vram: 0x80180000
+    vram: 0x80117790
+    exclusive_ram_id: overlay
     subalign: 1
     subsegments:
-      - [0x36000, .rodata]
+      - [0x36000, .rodata, intro]
       - [0x366e0, c, intro]
-      - [0x3b2a0, .data]
+      - [0x3b2a0, .data, intro]
       - [0x3b404, pad]
-
   - [0x3b800, bin, tex/map]
   - [0x3d000, bin, txt/txt00]
   - [0x43000, bin]

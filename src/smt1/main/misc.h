@@ -851,21 +851,7 @@ typedef struct navigation_hud_object_data {
 	u8 field478_0x2ff;
 } navigation_hud_object_data;
 
-typedef struct color_anim { /* Not 100% but this seems related to animating colors */
-	s8 loops;
-	s8 max_loops;
-	s8 iteration;
-	s8 max_iterations;
-	s8 dir;
-	u8 field5_0x5;
-	u8 field6_0x6;
-	u8 field7_0x7;
-	CVECTOR forward_cvector;
-	CVECTOR backward_cvector;
-	int r;
-	int g;
-	int b;
-} color_anim;
+
 
 typedef struct encounter_bar_geometry_2d {
 	DR_MODE field0_0x0;
@@ -1164,28 +1150,7 @@ typedef struct border_object_data {
 
 
 
-typedef struct screen_overlay {
-	POLY_F4 p[2];
-	DR_MODE dr_modes[2];
-	struct color_anim color_anim;
-	s16 x;
-	s16 y;
-	s16 w;
-	s16 h;
-	CVECTOR color;
-	s8 t_page;
-	u8 animating;
-	s8 size;
-	s8 buffer;
-	u8 field12_0x74;
-	u8 field13_0x75;
-	u8 field14_0x76;
-	u8 field15_0x77;
-	u8 field16_0x78;
-	u8 field17_0x79;
-	u8 field18_0x7a;
-	u8 field19_0x7b;
-} screen_overlay;
+
 
 
 

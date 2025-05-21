@@ -1,6 +1,6 @@
-#include "sys/types.h"
-#include "libgte.h"
-#include "libgpu.h"
+#include "lib/sys/types.h"
+#include "lib/libgte.h"
+#include "lib/libgpu.h"
 #include "object.h"
 #include "common.h"
 

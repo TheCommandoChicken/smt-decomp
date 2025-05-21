@@ -1,10 +1,5 @@
 #include "common.h"
 
-void func_80028644(void) {
-}
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002864C);
-
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028714);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_80028774);

@@ -2,75 +2,167 @@ SECTIONS
 {
     __romPos = 0;
     _gp = 0x800B6C5C;
-    _0_ROM_START = __romPos;
-    _0_VRAM = ADDR(._0);
-    ._0 : AT(_0_ROM_START) SUBALIGN(2048)
+    ovr0_ROM_START = __romPos;
+    ovr0_VRAM = ADDR(.ovr0);
+    .ovr0 0x80117790 : AT(ovr0_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
-        _0_DATA_START = .;
-        build/assets/smt1/data/0.o(.data);
-        _0_DATA_END = .;
-        _0_DATA_SIZE = ABSOLUTE(_0_DATA_END - _0_DATA_START);
+        ovr0_RODATA_START = .;
+        build/src/smt1/data/ovr0.o(.rodata);
+        . = ALIGN(., 16);
+        ovr0_RODATA_END = .;
+        ovr0_RODATA_SIZE = ABSOLUTE(ovr0_RODATA_END - ovr0_RODATA_START);
+        ovr0_TEXT_START = .;
+        build/src/smt1/data/ovr0.o(.text);
+        . = ALIGN(., 16);
+        ovr0_TEXT_END = .;
+        ovr0_TEXT_SIZE = ABSOLUTE(ovr0_TEXT_END - ovr0_TEXT_START);
+        ovr0_DATA_START = .;
+        build/src/smt1/data/ovr0.o(.data);
+        . = ALIGN(., 16);
+        ovr0_DATA_END = .;
+        ovr0_DATA_SIZE = ABSOLUTE(ovr0_DATA_END - ovr0_DATA_START);
+        ovr0_BSS_START = .;
+        build/src/smt1/data/ovr0.o(.bss);
+        . = ALIGN(., 16);
+        ovr0_BSS_END = .;
+        ovr0_BSS_SIZE = ABSOLUTE(ovr0_BSS_END - ovr0_BSS_START);
     }
-    __romPos += SIZEOF(._0);
-    _0_ROM_END = __romPos;
-    _0_VRAM_END = .;
+    __romPos += SIZEOF(.ovr0);
+    __romPos = ALIGN(__romPos, 16);
+    . = ALIGN(., 16);
+    ovr0_ROM_END = __romPos;
+    ovr0_VRAM_END = .;
 
-    E000_ROM_START = __romPos;
-    E000_VRAM = ADDR(.E000);
-    .E000 : AT(E000_ROM_START) SUBALIGN(2048)
+    ovr1_ROM_START = __romPos;
+    ovr1_VRAM = ADDR(.ovr1);
+    .ovr1 0x80117790 : AT(ovr1_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
-        E000_DATA_START = .;
-        build/assets/smt1/data/E000.o(.data);
-        E000_DATA_END = .;
-        E000_DATA_SIZE = ABSOLUTE(E000_DATA_END - E000_DATA_START);
+        ovr1_RODATA_START = .;
+        build/src/smt1/data/ovr1.o(.rodata);
+        . = ALIGN(., 16);
+        ovr1_RODATA_END = .;
+        ovr1_RODATA_SIZE = ABSOLUTE(ovr1_RODATA_END - ovr1_RODATA_START);
+        ovr1_TEXT_START = .;
+        build/src/smt1/data/ovr1.o(.text);
+        . = ALIGN(., 16);
+        ovr1_TEXT_END = .;
+        ovr1_TEXT_SIZE = ABSOLUTE(ovr1_TEXT_END - ovr1_TEXT_START);
+        ovr1_DATA_START = .;
+        build/src/smt1/data/ovr1.o(.data);
+        . = ALIGN(., 16);
+        ovr1_DATA_END = .;
+        ovr1_DATA_SIZE = ABSOLUTE(ovr1_DATA_END - ovr1_DATA_START);
+        ovr1_BSS_START = .;
+        build/src/smt1/data/ovr1.o(.bss);
+        . = ALIGN(., 16);
+        ovr1_BSS_END = .;
+        ovr1_BSS_SIZE = ABSOLUTE(ovr1_BSS_END - ovr1_BSS_START);
     }
-    __romPos += SIZEOF(.E000);
-    E000_ROM_END = __romPos;
-    E000_VRAM_END = .;
+    __romPos += SIZEOF(.ovr1);
+    __romPos = ALIGN(__romPos, 16);
+    . = ALIGN(., 16);
+    ovr1_ROM_END = __romPos;
+    ovr1_VRAM_END = .;
 
-    _18000_ROM_START = __romPos;
-    _18000_VRAM = ADDR(._18000);
-    ._18000 : AT(_18000_ROM_START) SUBALIGN(2048)
+    ovr2_ROM_START = __romPos;
+    ovr2_VRAM = ADDR(.ovr2);
+    .ovr2 0x80117790 : AT(ovr2_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
-        _18000_DATA_START = .;
-        build/assets/smt1/data/18000.o(.data);
-        _18000_DATA_END = .;
-        _18000_DATA_SIZE = ABSOLUTE(_18000_DATA_END - _18000_DATA_START);
+        ovr2_RODATA_START = .;
+        build/src/smt1/data/ovr2.o(.rodata);
+        . = ALIGN(., 16);
+        ovr2_RODATA_END = .;
+        ovr2_RODATA_SIZE = ABSOLUTE(ovr2_RODATA_END - ovr2_RODATA_START);
+        ovr2_TEXT_START = .;
+        build/src/smt1/data/ovr2.o(.text);
+        . = ALIGN(., 16);
+        ovr2_TEXT_END = .;
+        ovr2_TEXT_SIZE = ABSOLUTE(ovr2_TEXT_END - ovr2_TEXT_START);
+        ovr2_DATA_START = .;
+        build/src/smt1/data/ovr2.o(.data);
+        . = ALIGN(., 16);
+        ovr2_DATA_END = .;
+        ovr2_DATA_SIZE = ABSOLUTE(ovr2_DATA_END - ovr2_DATA_START);
+        ovr2_BSS_START = .;
+        build/src/smt1/data/ovr2.o(.bss);
+        . = ALIGN(., 16);
+        ovr2_BSS_END = .;
+        ovr2_BSS_SIZE = ABSOLUTE(ovr2_BSS_END - ovr2_BSS_START);
     }
-    __romPos += SIZEOF(._18000);
-    _18000_ROM_END = __romPos;
-    _18000_VRAM_END = .;
+    __romPos += SIZEOF(.ovr2);
+    __romPos = ALIGN(__romPos, 16);
+    . = ALIGN(., 16);
+    ovr2_ROM_END = __romPos;
+    ovr2_VRAM_END = .;
 
-    _20800_ROM_START = __romPos;
-    _20800_VRAM = ADDR(._20800);
-    ._20800 : AT(_20800_ROM_START) SUBALIGN(2048)
+    ovr3_ROM_START = __romPos;
+    ovr3_VRAM = ADDR(.ovr3);
+    .ovr3 0x80117790 : AT(ovr3_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
-        _20800_DATA_START = .;
-        build/assets/smt1/data/20800.o(.data);
-        _20800_DATA_END = .;
-        _20800_DATA_SIZE = ABSOLUTE(_20800_DATA_END - _20800_DATA_START);
+        ovr3_RODATA_START = .;
+        build/src/smt1/data/ovr3.o(.rodata);
+        . = ALIGN(., 16);
+        ovr3_RODATA_END = .;
+        ovr3_RODATA_SIZE = ABSOLUTE(ovr3_RODATA_END - ovr3_RODATA_START);
+        ovr3_TEXT_START = .;
+        build/src/smt1/data/ovr3.o(.text);
+        . = ALIGN(., 16);
+        ovr3_TEXT_END = .;
+        ovr3_TEXT_SIZE = ABSOLUTE(ovr3_TEXT_END - ovr3_TEXT_START);
+        ovr3_DATA_START = .;
+        build/src/smt1/data/ovr3.o(.data);
+        . += 0x4E0;
+        . = ALIGN(., 16);
+        ovr3_DATA_END = .;
+        ovr3_DATA_SIZE = ABSOLUTE(ovr3_DATA_END - ovr3_DATA_START);
+        ovr3_BSS_START = .;
+        build/src/smt1/data/ovr3.o(.bss);
+        . = ALIGN(., 16);
+        ovr3_BSS_END = .;
+        ovr3_BSS_SIZE = ABSOLUTE(ovr3_BSS_END - ovr3_BSS_START);
     }
-    __romPos += SIZEOF(._20800);
-    _20800_ROM_END = __romPos;
-    _20800_VRAM_END = .;
+    __romPos += SIZEOF(.ovr3);
+    __romPos = ALIGN(__romPos, 16);
+    . = ALIGN(., 16);
+    ovr3_ROM_END = __romPos;
+    ovr3_VRAM_END = .;
 
-    _22000_ROM_START = __romPos;
-    _22000_VRAM = ADDR(._22000);
-    ._22000 : AT(_22000_ROM_START) SUBALIGN(2048)
+    ovr4_ROM_START = __romPos;
+    ovr4_VRAM = ADDR(.ovr4);
+    .ovr4 0x80117790 : AT(ovr4_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
-        _22000_DATA_START = .;
-        build/assets/smt1/data/22000.o(.data);
-        _22000_DATA_END = .;
-        _22000_DATA_SIZE = ABSOLUTE(_22000_DATA_END - _22000_DATA_START);
+        ovr4_RODATA_START = .;
+        build/src/smt1/data/ovr4.o(.rodata);
+        . = ALIGN(., 16);
+        ovr4_RODATA_END = .;
+        ovr4_RODATA_SIZE = ABSOLUTE(ovr4_RODATA_END - ovr4_RODATA_START);
+        ovr4_TEXT_START = .;
+        build/src/smt1/data/ovr4.o(.text);
+        . = ALIGN(., 16);
+        ovr4_TEXT_END = .;
+        ovr4_TEXT_SIZE = ABSOLUTE(ovr4_TEXT_END - ovr4_TEXT_START);
+        ovr4_DATA_START = .;
+        build/src/smt1/data/ovr4.o(.data);
+        build/src/smt1/data/ovr2.o(.data);
+        . = ALIGN(., 16);
+        ovr4_DATA_END = .;
+        ovr4_DATA_SIZE = ABSOLUTE(ovr4_DATA_END - ovr4_DATA_START);
+        ovr4_BSS_START = .;
+        build/src/smt1/data/ovr4.o(.bss);
+        . = ALIGN(., 16);
+        ovr4_BSS_END = .;
+        ovr4_BSS_SIZE = ABSOLUTE(ovr4_BSS_END - ovr4_BSS_START);
     }
-    __romPos += SIZEOF(._22000);
-    _22000_ROM_END = __romPos;
-    _22000_VRAM_END = .;
+    __romPos += SIZEOF(.ovr4);
+    __romPos = ALIGN(__romPos, 16);
+    . = ALIGN(., 16);
+    ovr4_ROM_END = __romPos;
+    ovr4_VRAM_END = .;
 
     _2F800_ROM_START = __romPos;
     _2F800_VRAM = ADDR(._2F800);
@@ -102,9 +194,14 @@ SECTIONS
 
     intro_ROM_START = __romPos;
     intro_VRAM = ADDR(.intro);
-    .intro 0x80180000 : AT(intro_ROM_START) SUBALIGN(1)
+    .intro 0x80117790 : AT(intro_ROM_START) SUBALIGN(1)
     {
         FILL(0x00000000);
+        intro_RODATA_START = .;
+        build/src/smt1/data/intro.o(.rodata);
+        . = ALIGN(., 16);
+        intro_RODATA_END = .;
+        intro_RODATA_SIZE = ABSOLUTE(intro_RODATA_END - intro_RODATA_START);
         intro_TEXT_START = .;
         build/src/smt1/data/intro.o(.text);
         . = ALIGN(., 16);
@@ -112,17 +209,10 @@ SECTIONS
         intro_TEXT_SIZE = ABSOLUTE(intro_TEXT_END - intro_TEXT_START);
         intro_DATA_START = .;
         build/src/smt1/data/intro.o(.data);
-        build/src/smt1/data/3B2A0.o(.data);
         . += 0x3FC;
         . = ALIGN(., 16);
         intro_DATA_END = .;
         intro_DATA_SIZE = ABSOLUTE(intro_DATA_END - intro_DATA_START);
-        intro_RODATA_START = .;
-        build/src/smt1/data/36000.o(.rodata);
-        build/src/smt1/data/intro.o(.rodata);
-        . = ALIGN(., 16);
-        intro_RODATA_END = .;
-        intro_RODATA_SIZE = ABSOLUTE(intro_RODATA_END - intro_RODATA_START);
         intro_BSS_START = .;
         build/src/smt1/data/intro.o(.bss);
         . = ALIGN(., 16);
