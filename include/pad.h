@@ -1,6 +1,14 @@
 #include "lib/libpad.h"
 #include "common.h"
 
+enum controller_inputs {
+    PAD_UP=4,
+    PAD_RIGHT=5,
+    PAD_DOWN=6,
+    PAD_LEFT=7,
+    PAD_CIRCLE=13,
+};
+
 struct input_info {
     u16 last_button_state;
     u16 button_state;

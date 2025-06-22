@@ -35,7 +35,7 @@ SECTIONS
         build/src/smt1/main/dunk1.o(.rodata);
         build/src/smt1/main/dunk2.o(.rodata);
         build/src/smt1/main/sound.o(.rodata);
-        build/asm/smt1/main/data/1788.rodata.o(.rodata);
+        build/src/smt1/main/unk3.o(.rodata);
         build/asm/smt1/main/data/19D4.rodata.o(.rodata);
         build/asm/smt1/main/data/1C68.rodata.o(.rodata);
         build/asm/smt1/main/data/1DF4.rodata.o(.rodata);
@@ -46,7 +46,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.rodata);
         build/asm/smt1/main/data/34AC.rodata.o(.rodata);
         build/asm/smt1/main/data/lib.rodata.o(.rodata);
-        build/src/smt1/main/unk3.o(.rodata);
         build/src/smt1/main/lib/libcd.o(.rodata);
         build/src/smt1/main/lib/libds.o(.rodata);
         build/src/smt1/main/lib/libspu.o(.rodata);
@@ -90,7 +89,7 @@ SECTIONS
         build/src/smt1/main/dunk1.o(.data);
         build/src/smt1/main/dunk2.o(.data);
         build/src/smt1/main/sound.o(.data);
-        build/asm/smt1/main/data/1788.rodata.o(.data);
+        build/src/smt1/main/unk3.o(.data);
         build/asm/smt1/main/data/19D4.rodata.o(.data);
         build/asm/smt1/main/data/1C68.rodata.o(.data);
         build/asm/smt1/main/data/1DF4.rodata.o(.data);
@@ -101,7 +100,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.data);
         build/asm/smt1/main/data/34AC.rodata.o(.data);
         build/asm/smt1/main/data/lib.rodata.o(.data);
-        build/src/smt1/main/unk3.o(.data);
         build/src/smt1/main/lib/libcd.o(.data);
         build/src/smt1/main/lib/libds.o(.data);
         build/src/smt1/main/lib/libspu.o(.data);
@@ -124,7 +122,7 @@ SECTIONS
         build/src/smt1/main/dunk1.o(.bss);
         build/src/smt1/main/dunk2.o(.bss);
         build/src/smt1/main/sound.o(.bss);
-        build/asm/smt1/main/data/1788.rodata.o(.bss);
+        build/src/smt1/main/unk3.o(.bss);
         build/asm/smt1/main/data/19D4.rodata.o(.bss);
         build/asm/smt1/main/data/1C68.rodata.o(.bss);
         build/asm/smt1/main/data/1DF4.rodata.o(.bss);
@@ -135,7 +133,6 @@ SECTIONS
         build/asm/smt1/main/data/3448.rodata.o(.bss);
         build/asm/smt1/main/data/34AC.rodata.o(.bss);
         build/asm/smt1/main/data/lib.rodata.o(.bss);
-        build/src/smt1/main/unk3.o(.bss);
         build/src/smt1/main/lib/libcd.o(.bss);
         build/src/smt1/main/lib/libds.o(.bss);
         build/src/smt1/main/lib/libspu.o(.bss);

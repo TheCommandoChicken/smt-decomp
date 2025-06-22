@@ -1,7 +1,7 @@
 #include "object.h"
 #include "graph.h"
 #include "memory.h"
-#include "libapi.h"
+#include "lib/libapi.h"
 
 /* .sdata */
 struct object_ptrs ObjectPtrs = {NULL, NULL};  /* 0x800B73B4 */
@@ -49,113 +49,117 @@ void func_800180D4(void) {
 }
 
 /* Creates an object. */
-struct object * CreateObject(void (*proc_func)(struct object *), void (*kill_func)(struct object *), void * origin, u32 priority, u32 type, s32 data_size) {
+struct object * CreateObject(
+	void (*proc_func)(struct object *), 
+	void (*kill_func)(struct object *), 
+	void * origin, u32 priority, u32 type, size_t data_size
+) {
 	void * var_s2;
-	struct object * temp_v1;
-	struct object * var_s0;
-	struct object * var_s1;
+	struct object * next;
+	struct object * obj;
+	struct object * prev;
 	s32 temp;
 
-	var_s1 = FirstObjectPtrPtr->first;
-	var_s0 = 0;
+	prev = FirstObjectPtrPtr->first;
+	obj = NULL;
 	if (ObjectIndex != D_800B73BE) {
 		if (data_size < 1) {
-			var_s2 = 0;
+			var_s2 = NULL;
 		} else {
 			var_s2 = func_800193C0(data_size);
-			if (var_s2 == 0) return 0;
+			if (var_s2 == NULL) return NULL;
 		}
-		var_s0 = ObjectsList[ObjectIndex++];
-		func_80018BD8(var_s0);
-		var_s0->data = var_s2;
-		var_s0->origin = origin;
-		var_s0->proc_func = proc_func;
-		var_s0->kill_func = kill_func;
-		var_s0->priority = priority;
-		var_s0->type = type;
-		temp_v1 = var_s1->next;
-		while (priority >= temp_v1->priority) {
-			var_s1 = temp_v1;
-			temp_v1 = var_s1->next;
+		obj = ObjectsList[ObjectIndex++];
+		func_80018BD8(obj);
+		obj->data = var_s2;
+		obj->origin = origin;
+		obj->proc_func = proc_func;
+		obj->kill_func = kill_func;
+		obj->priority = priority;
+		obj->type = type;
+		next = prev->next;
+		while (priority >= next->priority) {
+			prev = next;
+			next = prev->next;
 		}
-		var_s0->prev = var_s1;
-		var_s0->next = var_s1->next;
-		var_s1->next->prev = var_s0;
-		var_s1->next = var_s0;
+		obj->prev = prev;
+		obj->next = prev->next;
+		prev->next->prev = obj;
+		prev->next = obj;
 		switch (type) {
-		case 1:
-			func_8001A798(var_s0->data);
+		case OBJ_TYPE_SPRITE:
+			func_8001A798(obj->data);
 			break;
-		case 2:
-			func_8001C314(var_s0->data);
+		case OBJ_TYPE_POLY_F3:
+			func_8001C314(obj->data);
 			break;
-		case 3:
-			func_8001C5FC(var_s0->data);
+		case OBJ_TYPE_POLY_FT3:
+			func_8001C5FC(obj->data);
 			break;
-		case 4:
-			func_8001C9A4(var_s0->data);
+		case OBJ_TYPE_POLY_G3:
+			func_8001C9A4(obj->data);
 			break;
-		case 5:
-			func_8001CD54(var_s0->data);
+		case OBJ_TYPE_POLY_GT3:
+			func_8001CD54(obj->data);
 			break;
-		case 6:
-			func_8001ABAC(var_s0->data);
+		case OBJ_TYPE_POLY_F4:
+			func_8001ABAC(obj->data);
 			break;
-		case 7:
-			func_8001AF78(var_s0->data);
+		case OBJ_TYPE_POLY_FT4:
+			func_8001AF78(obj->data);
 			break;
-		case 8:
-			func_8001B8EC(var_s0->data);
+		case OBJ_TYPE_POLY_G4:
+			func_8001B8EC(obj->data);
 			break;
-		case 9:
-			func_8001BD58(var_s0->data);
+		case OBJ_TYPE_POLY_GT4:
+			func_8001BD58(obj->data);
 			break;
-		case 10:
-			func_8001D204(var_s0->data);
+		case OBJ_TYPE_LINE_F2:
+			func_8001D204(obj->data);
 			break;
-		case 0:
+		case OBJ_TYPE_DEFAULT:
 			break;
 		}
-		var_s0->initialized = 1;
+		obj->initialized = 1;
 		ObjectIndex &= 0x7F;
 	}
-	return var_s0;
+	return obj;
 }
 
 
 /* Removes the provided object from the object list. */
-void RemoveObject(struct object * arg0) {
+void RemoveObject(struct object * obj) {
 	void (*kill_func)(struct object *);
 	struct object * var_a0;
 
-	if ((arg0 != NULL) && (arg0->unk2E == 0)) {
+	if ((obj != NULL) && (obj->unk2E == 0)) {
 		var_a0 = FirstObjectPtrPtr->first;
 		while (var_a0->next != NO_OBJ) {
-			if (var_a0 != arg0) {
+			if (var_a0 != obj) {
 				var_a0 = var_a0->next;
 			} else {
 				break;
 			}
 		}
-		if (var_a0 == arg0) {
-			if (arg0->unk2C != 0) {
-				if (arg0->active != 1) {
-					if (arg0->active == 0) {
-						arg0->unk2E = 1;
-					} else if (arg0->active == 2) {
+		if (var_a0 == obj) {
+			if (obj->unk2C != 0) {
+				if (obj->active != 1) {
+					if (obj->active == 0) {
+						obj->unk2E = 1;
+					} else if (obj->active == 2) {
 						return;
 					}
 				} else {
-					arg0->unk2E = 2;
+					obj->unk2E = 2;
 				}
-				kill_func = arg0->kill_func;
+				kill_func = obj->kill_func;
 				if (kill_func != NULL) {
-					kill_func(arg0);
+					kill_func(obj);
 				}
-				arg0->active = 2;
-				arg0->unk2C = 0;
-				arg0->next->prev = arg0->prev;
-				arg0->prev->next = arg0->next;
+				obj->active = 2;
+				obj->unk2C = 0;
+				obj->next->prev = obj->prev;
+				obj->prev->next = obj->next;
 			}
 		}
 	}
@@ -181,7 +185,7 @@ s32 func_80018410(struct object * arg0, void (*arg1)(struct object *)) {
 s32 func_80018448(struct object * arg0) {
 	s32 temp_v1;
 
-	if (arg0 == 0) {
+	if (arg0 == NULL) {
 		return -1;
 	}
 	temp_v1 = arg0->unk24;
@@ -189,7 +193,7 @@ s32 func_80018448(struct object * arg0) {
 		return -2;
 	} else {
 		arg0->hidden = temp_v1;
-		arg0->hide_func = 0;
+		arg0->hide_func = NULL;
 		return 0;
 	}
 }
@@ -226,43 +230,44 @@ void func_8001847C(void) {
 	while (var_s0_2->next != NO_OBJ) {
 		if (var_s0_2->initialized > 0) {
 			switch (var_s0_2->type) {
-			case 1:
+			case OBJ_TYPE_SPRITE:
 				func_8001A830(var_s0_2->data);
 				break;
-			case 2:
+			case OBJ_TYPE_POLY_F3:
 				func_8001C3A0(var_s0_2->data);
 				break;
-			case 3:
+			case OBJ_TYPE_POLY_FT3:
 				func_8001C688(var_s0_2->data);
 				break;
-			case 4:
+			case OBJ_TYPE_POLY_G3:
 				func_8001CA30(var_s0_2->data);
 				break;
-			case 5:
+			case OBJ_TYPE_POLY_GT3:
 				func_8001CDE0(var_s0_2->data);
 				break;
-			case 6:
+			case OBJ_TYPE_POLY_F4:
 				func_8001AC38(var_s0_2->data);
 				break;
-			case 7:
+			case OBJ_TYPE_POLY_FT4:
 				func_8001B018(var_s0_2->data);
 				break;
-			case 8:
+			case OBJ_TYPE_POLY_G4:
 				func_8001B978(var_s0_2->data);
 				break;
-			case 9:
+			case OBJ_TYPE_POLY_GT4:
 				func_8001BDE4(var_s0_2->data);
 				break;
-			case 10:
+			case OBJ_TYPE_LINE_F2:
 				func_8001D290(var_s0_2->data);
 				break;
-			case 0:
+			case OBJ_TYPE_DEFAULT:
 				break;
 			}
 		}
 		var_s0_2 = var_s0_2->next;
 	}
 }
+
 
 void func_800186A0(void) {
 	struct object * var_s1;
@@ -273,13 +278,12 @@ void func_800186A0(void) {
 	u16 temp_v1_2;
 
 	var_s1 = &Objects[0];
-	var_s2 = 0;
-	do {
+	for (var_s2 = 0; var_s2 < 0x80; var_s2++) {
 		temp_v1 = var_s1->active;
 		if (temp_v1 == 2) {
 			temp_v0 = var_s1->unk2E;
 			if (temp_v0 != 1) {
-				if (temp_v0 == temp_v1) {
+				if (temp_v0 == 2) {
 					var_s1->unk2E = 1U;
 				}
 			} else {
@@ -295,8 +299,7 @@ void func_800186A0(void) {
 			}
 		}
 		var_s1 += 1;
-		var_s2 += 1;
-	} while (var_s2 < 0x80);
+	}
 }
 
 s32 func_80018774(void) {
@@ -340,7 +343,7 @@ void func_80018808(void) {
 				RemoveObject(var_s0);
 			}
 			var_s0 = var_s0->next;
-			if (var_s0 == 0) {
+			if (var_s0 == NULL) {
 				break;
 			}
 		}

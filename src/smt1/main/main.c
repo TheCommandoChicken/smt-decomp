@@ -2,8 +2,15 @@
 #include "lib/memory.h"
 
 /* sdata */
-s32 D_800B6C5C = 0;											   /* 0x800B6C5C */
-struct pos_pair D_800B6C60 = {0x0018, 0x0088, 0x0018, 0x006F}; /* 0x800B6C60 */
+/* 0x800B6C5C */
+s32 D_800B6C5C = 0;											   
+ /* 0x800B6C60 */
+struct pos_pair D_800B6C60 = {
+	0x0018,
+	0x0088, 
+	0x0018, 
+	0x006F
+};
 /* bss */
 struct persistent_objects PersistentObjects; /* 0x800B74C0 */
 
@@ -127,7 +134,7 @@ struct object * GameInit(void) {
 
 	GameDataInit();
 	PersistentObjects.intro_manager = CreateObject(IntroManagerProc, EmptyProc,
-		FirstObjectPtrPtr->first, 1, 0, sizeof(struct intro_manager));
+		FirstObjectPtrPtr->first, 1, OBJ_TYPE_DEFAULT, sizeof(struct intro_manager));
 	temp_s0 = PersistentObjects.intro_manager->data;
 	bzero((u8 *)temp_s0, sizeof(*temp_s0));
 	temp_s0->data_struct = func_80019C58(0, (void *)D_80010308, 7, 0, 0, 1);
@@ -138,22 +145,22 @@ struct object * GameInit(void) {
 /* 100% */
 /* Procedure function for the intro manager object. */
 void IntroManagerProc(struct object * self) {
-	struct intro_manager * data;
+	struct intro_manager * dat;
 
-	data = self->data;
-	switch (data->frame_counter) {
+	dat = self->data;
+	switch (dat->frame_counter) {
 	case 0:
 		func_80018F6C(0, 1);
-		data->frame_counter += 1;
+		dat->frame_counter += 1;
 	case 1: /* When this case is true it causes the Atlus intro to play. */
-		if (func_80019ECC(data->data_struct) != 0) {
-			data->obj = func_80117E70(data->unk8);
-			data->frame_counter += 1;
+		if (func_80019ECC(dat->data_struct) != 0) {
+			dat->obj = func_80117E70(dat->unk8);
+			dat->frame_counter += 1;
 		case 2:
-			if (data->obj->hidden == 1) {
-				RemoveObject(data->obj);
-				data->obj = NULL;
-				data->frame_counter += 1;
+			if (dat->obj->hidden == 1) {
+				RemoveObject(dat->obj);
+				dat->obj = NULL;
+				dat->frame_counter += 1;
 			case 3:
 				func_800529E8(PersistentObjects.unk0);
 				func_8004407C();
@@ -166,12 +173,12 @@ void IntroManagerProc(struct object * self) {
 /* 100% */
 /* Seems to be responsible for restarting the intro sequence. */
 void func_800144D4(s8 arg0) {
-	struct intro_manager * data;
+	struct intro_manager * dat;
 
-	data = PersistentObjects.intro_manager->data;
-	data->frame_counter = 1;
-	data->unk8 = arg0;
-	data->data_struct = func_80019C58(0, (void *)D_80010308, 7, 0, 0, 1);
+	dat = PersistentObjects.intro_manager->data;
+	dat->frame_counter = 1;
+	dat->unk8 = arg0;
+	dat->data_struct = func_80019C58(0, (void *)D_80010308, 7, 0, 0, 1);
 }
 
 /* 100% */
@@ -194,20 +201,21 @@ void GameDataInit(void) {
 	func_8005645C();
 }
 
+
 /* 100% */
 /* Matched by MrSapps */
 void func_800145CC(s32 (*arg0)(void)) {
 	struct object * obj;
-	struct unk_data_0 * data;
+	struct unk_data_0 * dat;
 
 	func_80018F6C(0, 0);
-	obj = CreateObject(func_80014698, NULL, FirstObjectPtrPtr->first, -3, 0,
-		sizeof(struct unk_data_0));
+	obj = CreateObject(func_80014698, NULL, FirstObjectPtrPtr->first, 
+		-3, OBJ_TYPE_DEFAULT, sizeof(struct unk_data_0));
 	if (obj == NULL)
 		return;
-	data = obj->data;
-	data->counter = 0;
-	data->unk0 = arg0;
+	dat = obj->data;
+	dat->counter = 0;
+	dat->unk0 = arg0;
 	func_80044318(1);
 	PersistentObjects.unk0->flags = 0x82;
 	func_8004018C(func_800408BC(0), 60, 0, 3);
@@ -216,29 +224,30 @@ void func_800145CC(s32 (*arg0)(void)) {
 	func_8001F6B8();
 }
 
+
 /* 100% */
 void func_80014698(struct object * self) {
-	struct unk_data_0 * data;
+	struct unk_data_0 * dat;
 
-	data = self->data;
-	switch (data->counter) { /* irregular */
+	dat = self->data;
+	switch (dat->counter) {
 	case 0:
 		if (func_8001F920() == 2) {
 			func_80044178();
 			ClearUnknownStruct();
-			data->counter += 1;
+			dat->counter += 1;
 		}
 		break;
 	case 1:
 		func_800187AC(0x10, 0x0FFFFFFF);
 		func_800187AC(-4, -4);
-		data->counter += 1;
+		dat->counter += 1;
 		break;
 	case 2:
 		if (func_80018774() <= 0) {
-			if ((data->unk0 == NULL) || (data->unk0() == 0)) {
+			if ((dat->unk0 == NULL) || (dat->unk0() == 0)) {
 				GameDataInit();
-				data->counter += 1;
+				dat->counter += 1;
 			}
 		}
 		break;
@@ -252,6 +261,7 @@ void func_80014698(struct object * self) {
 	}
 }
 
+
 /* 100% */
 /* Matched by Mc-muffin */
 s32 func_800147CC(void) {
@@ -261,6 +271,7 @@ s32 func_800147CC(void) {
 	}
 	return 0;
 }
+
 
 /* 100% */
 s32 func_80014804(void) {
@@ -278,22 +289,29 @@ s32 func_80014804(void) {
 			D_800B6C5C = 0;
 			return 0;
 		}
-		return 1; /* This is redundant but required for the function to match.
-				   */
+		return 1; /* This is redundant but required for the function to match. */
 	}
 	return 1;
 }
+
 
 /* 100% */
 void func_8001489C(s32 arg0, s32 arg1, s32 arg2) {
 	func_80052910(PersistentObjects.unk0, arg0, arg1, 0, arg2);
 }
 
-/* 100% */
-void func_800148D4(void) { func_8005286C(PersistentObjects.unk0); }
 
 /* 100% */
-void func_800148FC(s32 arg0) { func_80052890(PersistentObjects.unk0, arg0); }
+void func_800148D4(void) { 
+	func_8005286C(PersistentObjects.unk0); 
+}
+
+
+/* 100% */
+void func_800148FC(s32 arg0) { 
+	func_80052890(PersistentObjects.unk0, arg0); 
+}
+
 
 /* 100% */
 void func_80014928(s32 arg0) {
@@ -306,8 +324,12 @@ void func_80014928(s32 arg0) {
 	PersistentObjects.unk0->flags = 2;
 }
 
+
 /* 100% */
-struct object * func_80014964(void) { return PersistentObjects.unk0->sprite9; }
+struct object * func_80014964(void) { 
+	return PersistentObjects.unk0->sprite9; 
+}
+
 
 /* 100% */
 void ClearUnknownStruct(void) {
@@ -318,14 +340,19 @@ void ClearUnknownStruct(void) {
 	PersistentObjects.unk0->flags = 0x80;
 }
 
+
 /* 100% */
 /* Sets PersistentObjects.unk1 to the provided value. */
-void func_800149E4(u32 * arg0) { PersistentObjects.unk1 = arg0; }
+void func_800149E4(u32 * arg0) { 
+	PersistentObjects.unk1 = arg0; 
+}
+
 
 /* 100% */
 u32 * func_800149F0(s32 arg0) {
 	return &PersistentObjects.unk1[PersistentObjects.unk1[arg0] >> 2];
 }
+
 
 /* 100% */
 /* Gets if the provided unk_data_1 object's unk269 field is equal to 0. */
@@ -333,12 +360,13 @@ s32 func_80014A18(struct object * arg0) {
 	return ((struct unk_data_1 *)arg0->data)->unk269 == 0;
 }
 
+
 /* 100% */
 struct object * func_80014A2C(void) {
 	struct object * temp_v0;
 
 	temp_v0 = CreateObject(func_80014AF4, NULL, FirstObjectPtrPtr->first,
-		0xC00000, 0, sizeof(struct unk_data_1));
+		0xC00000, OBJ_TYPE_DEFAULT, sizeof(struct unk_data_1));
 	if (temp_v0 == NULL)
 		return NULL;
 	bzero(temp_v0->data, sizeof(struct unk_data_1));
@@ -348,36 +376,38 @@ struct object * func_80014A2C(void) {
 }
 
 /* 100% */
-void func_80014AF4(struct object * arg0) {
+void func_80014AF4(struct object * self) {
 	struct unk_data_2 * temp_s0;
-	struct unk_data_1 * temp_s1;
-	void (*sp[3])(struct object *) = {func_80014E34, func_80014F44, func_800150A0};
+	struct unk_data_1 * dat;
+	void (*sp[3])(struct object *) = {
+		func_80014E34, func_80014F44, func_800150A0
+	};
 
-	temp_s1 = arg0->data;
-	switch (temp_s1->counter) { /* irregular */
+	dat = self->data;
+	switch (dat->counter) {
 	case 0:
-		temp_s1->unk0 = func_8001513C(temp_s1);
+		dat->unk0 = func_8001513C(dat);
 		func_80018CEC();
-		temp_s1->counter += 1;
+		dat->counter += 1;
 	case 1:
-		temp_s0 = temp_s1->unk0->data;
-		if (func_80018F14(0, 12) != 0) {
-			temp_s1->buffer ^= 1;
+		temp_s0 = dat->unk0->data;
+		if (func_80018F14(0, 12)) {
+			dat->buffer ^= 1;
 		}
-		if (func_80018F14(0, 3) != 0) {
-			temp_s0->field39_0x28 = 0;
+		if (func_80018F14(0, 3)) {
+			temp_s0->unk28 = 0;
 		}
-		if (temp_s1->buffer != 0) {
-			func_80014CD4(temp_s1, temp_s0->field38_0x26);
+		if (dat->buffer != 0) {
+			func_80014CD4(dat, temp_s0->unk26);
 		}
-		if (temp_s0->field42_0x2c != 0) {
-			switch (temp_s0->field39_0x28) { /* switch 1; irregular */
-			case 1:							 /* switch 1 */
-				arg0->proc_func = sp[temp_s0->field38_0x26];
+		if (temp_s0->unk2C != 0) {
+			switch (temp_s0->unk28) {
+			case 1:
+				self->proc_func = sp[temp_s0->unk26];
 				break;
-			case 2: /* switch 1 */
-			case 0: /* switch 1 */
-				temp_s1->unk269 = 1;
+			case 2:
+			case 0:
+				dat->unk269 = 1;
 				if (func_80044114() == 0) {
 					func_800225C8(0, 1, 1, 0, 0);
 				} else {
@@ -386,16 +416,15 @@ void func_80014AF4(struct object * arg0) {
 				func_8001F984(0, 0, 320, 240, 0x40404040, 0, 2, 8, 24);
 				break;
 			}
-			RemoveObject(temp_s1->unk0);
-			temp_s1->unk0 = NULL;
-			temp_s1->counter = 0;
+			RemoveObject(dat->unk0);
+			dat->unk0 = NULL;
+			dat->counter = 0;
 		}
-		return;
 	}
 }
 
 /* 100% */
-void func_80014CD4(struct unk_data_1 * arg0, s32 arg1) {
+void func_80014CD4(struct unk_data_1 * dat, s32 arg1) {
 	struct pos_pair pos_lookup;
 	s32 temp_s0;
 	DVECTOR * temp_s0_2;
@@ -407,39 +436,39 @@ void func_80014CD4(struct unk_data_1 * arg0, s32 arg1) {
 	temp_s0_2 = &pos_lookup.pos[temp_s0];
 	func_80021DBC(temp, temp_s0_2->vx + 4, temp_s0_2->vy + 2, 5, 0, 0, 21);
 	if (func_80044114() == 0) {
-		func_80020AAC(temp_s0_2->vx, temp_s0_2->vy, 272, 16, 21, &arg0->f[arg0->buffer], 0);
+		func_80020AAC(temp_s0_2->vx, temp_s0_2->vy, 272, 16, 21, &dat->f[dat->buffer], 0);
 	} else {
-		func_800209F0(temp_s0_2->vx, temp_s0_2->vy, 272, 16, 21, &arg0->g[arg0->buffer], 1);
+		func_800209F0(temp_s0_2->vx, temp_s0_2->vy, 272, 16, 21, &dat->g[dat->buffer], 1);
 	}
-	arg0->buffer ^= 1;
+	dat->buffer ^= 1;
 }
 
 /* 100% */
-void func_80014E34(struct object * arg0) {
+void func_80014E34(struct object * self) {
 	void * temp_s1;
-	struct unk_data_1 * temp_s0;
+	struct unk_data_1 * dat;
 
-	temp_s0 = arg0->data;
-	switch (temp_s0->counter) { /* irregular */
+	dat = self->data;
+	switch (dat->counter) { /* irregular */
 	case 0:
-		temp_s0->unk0 = func_8005B67C(2, 0, 0x900000);
-		temp_s0->counter += 1;
+		dat->unk0 = func_8005B67C(2, 0, 0x900000);
+		dat->counter += 1;
 	case 1:
-		temp_s1 = temp_s0->unk0->data;
+		temp_s1 = dat->unk0->data;
 		if (func_8005D870(temp_s1) != 0) {
 			if (func_8005D8BC(temp_s1) != 0) {
 				func_800145CC(NULL);
-				arg0->proc_func = 0;
+				self->proc_func = 0;
 				return;
 			}
 			func_8004440C();
-			temp_s0->counter += 1;
+			dat->counter += 1;
 		case 2:
 			if (func_80040A68(0) == 0) {
-				arg0->proc_func = &func_80014AF4;
-				RemoveObject(temp_s0->unk0);
-				temp_s0->unk0 = NULL;
-				temp_s0->counter = 0;
+				self->proc_func = &func_80014AF4;
+				RemoveObject(dat->unk0);
+				dat->unk0 = NULL;
+				dat->counter = 0;
 			}
 		} else {
 			return;
@@ -449,30 +478,30 @@ void func_80014E34(struct object * arg0) {
 }
 
 /* 100% */
-void func_80014F44(struct object * arg0) {
+void func_80014F44(struct object * self) {
 	void * temp_s1;
-	struct unk_data_1 * temp_s0;
+	struct unk_data_1 * dat;
 	u32 * temp_v0;
 
-	temp_s0 = arg0->data;
-	switch (temp_s0->counter) {
+	dat = self->data;
+	switch (dat->counter) {
 	case 0:
-		temp_s0->unk0 = func_8005B67C(3, 0, 0x900000);
-		temp_s0->counter += 1;
+		dat->unk0 = func_8005B67C(3, 0, 0x900000);
+		dat->counter += 1;
 	case 1:
-		temp_s1 = temp_s0->unk0->data;
+		temp_s1 = dat->unk0->data;
 		if (func_8005D870(temp_s1) != 0) {
 			if (func_8005D8BC(temp_s1) == 0) {
 				func_8004440C();
-				temp_s0->counter = 3;
+				dat->counter = 3;
 				return;
 			}
 			func_8001F6B8();
-			temp_s0->counter += 1;
+			dat->counter += 1;
 		case 2:
 			if (func_8001F920() == 2) {
-				RemoveObject(temp_s0->unk0);
-				RemoveObject(arg0);
+				RemoveObject(dat->unk0);
+				RemoveObject(self);
 				temp_v0 = func_8004C5A8();
 				func_800441F0(temp_v0[1], temp_v0);
 				return;
@@ -483,9 +512,9 @@ void func_80014F44(struct object * arg0) {
 		break;
 	case 3:
 		if (func_80040A68(0) == 0) {
-			arg0->proc_func = func_80014AF4;
-			RemoveObject(temp_s0->unk0);
-			temp_s0->counter = 0;
+			self->proc_func = func_80014AF4;
+			RemoveObject(dat->unk0);
+			dat->counter = 0;
 		}
 		break;
 	}
@@ -496,7 +525,7 @@ void func_800150A0(struct object * arg0) {
 	struct unk_data_1 * temp_s0;
 
 	temp_s0 = arg0->data;
-	switch (temp_s0->counter) { /* irregular */
+	switch (temp_s0->counter) {
 	case 0:
 		temp_s0->unk0 = func_800494D0(0xC00000);
 		temp_s0->counter += 1;

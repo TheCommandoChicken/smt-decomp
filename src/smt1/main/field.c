@@ -1,5 +1,5 @@
 #include "field.h"
-#include "libapi.h"
+#include "lib/libapi.h"
 
 /* .data */
 s8 D_8009E80C[8][2] = {
@@ -26,7 +26,7 @@ u32 OverlayColors[2][4] = {
 	{0x081818, 0x081818, 0x184A4A, 0x184A4A}
 };
 
-char * Locations[59] = {
+char * FieldMapLocations[59] = {
     "NO DATA",
     "SHINJUKU",
     "YOYOGI",
@@ -101,52 +101,48 @@ u16 D_800A2D2C[10][4] = {
 	{0xFFFF, 0, 0, 0}
 };
 
-/* .sbss */
 s32 D_800B6C68 = 0;
 s8 D_800B6C6C = -1;
 s32 D_800B6D48 = 0;
 s32 D_800B6D5C;
 
-/* .bss */
 struct field_map_data * FieldMapData;
-s16 D_800B73AC;
-s16 D_800B73AE;
+DVECTOR D_800B73AC;
 
 struct unk_data_3 D_800B74F0;
 
 /* 96.33% */
+/* This is behaviorally matching it just doesn't match when D_800B6C68 gets set to 1. */
 void CreateFieldMap(struct return_thing * arg0) {
-    struct object* temp_v0;
+    struct object* obj;
     struct field_map_data * temp_v0_2;
 
     if (D_800B6C68 == 0) {
         D_800B6C68 = 1;
-        temp_v0 = CreateObject(0, FieldMapKill, FirstObjectPtrPtr->first, 0x40000, 0, sizeof(struct field_map_data));
-        if (temp_v0 != 0) {
-            bzero(temp_v0->data, sizeof(struct field_map_data));
-            temp_v0_2 = temp_v0->data;
-            temp_v0_2->origin = temp_v0;
-            temp_v0->initialized = 1;
-            FieldMapData = temp_v0_2;
-            temp_v0_2->event = 0;
-            func_80017258(arg0);
-            FieldMapData->flags = 0;
-            ((struct object *)FieldMapData->origin)->proc_func = func_800152D0;
-        } else {
-            return;
-        }
+        obj = CreateObject(NULL, FieldMapKill, FirstObjectPtrPtr->first, 
+            0x40000, OBJ_TYPE_DEFAULT, sizeof(struct field_map_data));
+        if (obj == NULL) return;
+        bzero(obj->data, sizeof(struct field_map_data));
+        temp_v0_2 = obj->data;
+        temp_v0_2->origin = obj;
+        obj->initialized = 1;
+        FieldMapData = temp_v0_2;
+        temp_v0_2->event = 0;
+        func_80017258(arg0);
+        FieldMapData->flags = 0;
+        FieldMapData->origin->proc_func = func_800152D0;
     } else {
         FieldMapData->event = 4;
         func_80017258(arg0);
-        ((struct object *)FieldMapData->origin)->proc_func = func_800152D0;
+        FieldMapData->origin->proc_func = func_800152D0;
     }
     D_800B6C6C = -1;
 }
 
 /* 97.82% */
 void func_800152D0(struct object* arg0) {
-    u16 sp10[4];
-    u16 sp18[4];
+    RECT sp10;
+    RECT sp18;
     void * var_a0;
 
     switch ((s16)FieldMapData->event) {
@@ -176,17 +172,17 @@ void func_800152D0(struct object* arg0) {
             var_a0 = D_800B74F0.dat1;
         }
         
-        sp10[0] = 0x140;
-        sp10[1] = 0;
-        sp10[2] = 0x100;
-        sp10[3] = 0x100;
-        sp18[0] = 0;
-        sp18[1] = 0x1F4;
-        sp18[2] = 0xE0;
-        sp18[3] = 1;
+        sp10.x = 0x140;
+        sp10.y = 0;
+        sp10.w = 0x100;
+        sp10.h = 0x100;
+        sp18.x = 0;
+        sp18.y = 0x1F4;
+        sp18.w = 0xE0;
+        sp18.h = 1;
         func_800190BC(var_a0, &sp10, &sp18, 4);
         if (func_8004ED78() != 0) {
-            sp10[0] += 0x40;
+            sp10.x += 0x40;
             func_800190BC(D_800B74F0.dat2, &sp10, &sp18, 4);
             func_80019478(D_800B74F0.dat1);
             D_800B74F0.dat1 = 0;
@@ -240,9 +236,9 @@ void func_800152D0(struct object* arg0) {
         }
         break;
     case 6:
-        SetSpadStack(0x1F8003FC);
+        //SetSpadStack(0x1F8003FC);
         UpdateField();
-        ResetSpadStack();
+        //ResetSpadStack();
         if ((func_800245B4() == 2) && (func_80040A68(0) == 0)) {
             FieldMapData->unk84F4 = 0;
             FieldMapData->random_encounter = 0;
@@ -276,8 +272,8 @@ void FieldMapProc(struct object * arg0) {
 void FieldMapKill(struct object * arg0) {
     FntPrint("\n\n\n\n\n\n  __FieldMapKill");
     if (D_800B6C68 != 0) {
-        func_80019478(((unsigned int *)D_800B74F0.dat0)[2]);
-        ((unsigned int *)D_800B74F0.dat0)[2] = 0;
+        func_80019478(D_800B74F0.dat0[2]);
+        D_800B74F0.dat0[2] = 0;
         RemoveObject(FieldMapData->unk8524);
         FieldMapData->unk8524 = NULL;
         func_8004505C();
@@ -292,7 +288,7 @@ void func_800158A0(struct object * arg0) {
     FieldMapData->origin = 0;
 }
 
-void FieldMapClose1(struct object * arg0) {
+void FieldMapClose1(struct object * self) {
     FntPrint("\n\n\n\n\n\n  __FieldMapClose1");
     if (D_800B6C68 != 0) {
         SetSpadStack(0x1F8003FC);
@@ -308,15 +304,12 @@ void FieldMapClose1(struct object * arg0) {
         } 
             
         if (func_8001F920() == 2) {
-            arg0->proc_func = func_800158A0;
+            self->proc_func = func_800158A0;
         }
     }
 }
 
-void FieldMapSleepEvent(struct object * arg0) {
-    s32 var_a0;
-    s32 var_a1;
-
+void FieldMapSleepEvent(struct object * self) {
     switch (FieldMapData->event) {
     case 0:
         func_80024484(1);
@@ -335,14 +328,11 @@ void FieldMapSleepEvent(struct object * arg0) {
         }
         break;
     case 3:
-        if (func_8004C06C(0xF9) != 0) {
-            var_a0 = 1;
-            var_a1 = 0x1F;
+        if (func_8004C06C(0xF9)) {
+            func_8001489C(1, 0x1F, 1);
         } else {
-            var_a0 = FieldMapData->unk18;
-            var_a1 = FieldMapData->unk20;
+            func_8001489C(FieldMapData->unk18, FieldMapData->unk20, 1);
         }
-        func_8001489C(var_a0, var_a1, 1);
     case 4:
         FieldMapData->event = 5;
         break;
@@ -359,7 +349,7 @@ void FieldMapSleepEvent(struct object * arg0) {
     case 7:
         if (func_8001F920() == 2) {
             func_80024484(0);
-            ((struct object *)FieldMapData->origin)->proc_func = FieldMapData->unk84F0;
+            FieldMapData->origin->proc_func = FieldMapData->unk84F0;
         }
         break;
     }
@@ -369,7 +359,7 @@ void FieldMapSleepEvent(struct object * arg0) {
     FntPrint("\n\n\n\n\n\n  __FieldMapSleep_Event");
 }
 
-void FieldMapSleep(struct object * arg0) {
+void FieldMapSleep(struct object * self) {
     if ((FieldMapData->flags & 0x10) > 0) {
         SetSpadStack(0x1F8003FC);
         UpdateField();
@@ -406,7 +396,7 @@ void UpdateField(void) {
     s16 i;
     u32 temp_a3;
     u32 temp_a3_2;
-    s32 var_a2;
+    s32 spd;
     s32 var_2;
     s32 var_1;
     struct field_pos* temp_a0;
@@ -426,19 +416,19 @@ void UpdateField(void) {
     temp_a0 = &FieldMapData->pos;
     if (temp_a0->motion_countdown != -1) {
         if (temp_a0->speed_modifier == 2) {
-            var_a2 = 4;
+            spd = 4;
         } else {
-            var_a2 = 8;
+            spd = 8;
         }
         if ((FieldMapData->pos.screen_edge_flags & 3) > 0) {
-            stack.sp14.vx = temp_a0->x_motion * (var_a2 - temp_a0->motion_countdown);
+            stack.sp14.vx = temp_a0->x_motion * (spd - temp_a0->motion_countdown);
         } else {
-            stack.sp10.vx = temp_a0->x_motion * (var_a2 - temp_a0->motion_countdown);
+            stack.sp10.vx = temp_a0->x_motion * (spd - temp_a0->motion_countdown);
         }
         if ((FieldMapData->pos.screen_edge_flags & 0xC) > 0) {
-            stack.sp14.vy = temp_a0->y_motion * (var_a2 - temp_a0->motion_countdown);
+            stack.sp14.vy = temp_a0->y_motion * (spd - temp_a0->motion_countdown);
         } else {
-            stack.sp10.vy = temp_a0->y_motion * (var_a2 - temp_a0->motion_countdown);
+            stack.sp10.vy = temp_a0->y_motion * (spd - temp_a0->motion_countdown);
         }
     }
     y = 0;
@@ -583,8 +573,8 @@ void FieldMovement(void) {
             func_800456C8(1, 1, &FieldMapData->next);
             FieldMapData->unk84F4 = 0;
             FieldMapData->event = 0;
-            FieldMapData->unk84F0 = ((struct object *)FieldMapData->origin)->proc_func;
-            ((struct object *)FieldMapData->origin)->proc_func = FieldMapSleepEvent;
+            FieldMapData->unk84F0 = FieldMapData->origin->proc_func;
+            FieldMapData->origin->proc_func = FieldMapSleepEvent;
         }
     }
 }
@@ -603,8 +593,8 @@ s32 func_80016504(void) {
         func_800456C8(FieldMapData->pos.x, FieldMapData->pos.y, &FieldMapData->next);
         FieldMapData->unk84F4 = 0;
         FieldMapData->event = 0;
-        FieldMapData->unk84F0 = ((struct object *)FieldMapData->origin)->proc_func;
-        ((struct object *)FieldMapData->origin)->proc_func = FieldMapSleepEvent;
+        FieldMapData->unk84F0 = FieldMapData->origin->proc_func;
+        FieldMapData->origin->proc_func = FieldMapSleepEvent;
     }
     else if (temp_v1 == 9) {
         func_80018F6C(0, 0, FieldMapData);
@@ -612,52 +602,37 @@ s32 func_80016504(void) {
         func_8004C6E8(FieldMapData->unk18);
         func_80024484(1);
         temp_s1 = 1;
-        ((struct object *)FieldMapData->origin)->proc_func = &FieldMapClose1;
+        FieldMapData->origin->proc_func = &FieldMapClose1;
     }
     return temp_s1;
 }
 
 void ExecuteFieldMovement() {
-    s16 temp_v0_3;
-    s16 temp_v0_4;
     s16 var_s1;
-    s16 var_v1;
-    s16 var_v1_2;
-    s32 temp_v0_2;
-    s32 temp_v0_5;
-    s32 temp_v0_6;
-    s32 var_v0;
-    u16 temp_v0;
+    s16 temp_v0_2;
     struct field_pos * temp_s0;
-    void * var_v0_2;
-    void * var_v0_3;
 
     temp_s0 = &FieldMapData->pos;
-    temp_v0 = temp_s0->motion_countdown - 1;
-    temp_s0->motion_countdown = temp_v0;
-    if ((temp_v0 * 0x10000) <= 0) {
+    temp_s0->motion_countdown -= 1;
+    if (temp_s0->motion_countdown <= 0) {
         FieldMapData->step_counter += 1;
         func_8004F9A0();
         temp_v0_2 = func_8004FD4C(FieldMapData->step_counter);
         if ((temp_v0_2 & 4) > 0) {
             var_s1 = 0x51;
-        }
-        else if ((temp_v0_2 & 2) > 0) {
+        } else if ((temp_v0_2 & 2) > 0) {
             var_s1 = 0x52;
-        }
-        else if ((temp_v0_2 & 1) > 0) {
+        } else if ((temp_v0_2 & 1) > 0) {
             var_s1 = 0x4F;
         }
-        var_v0 = temp_v0_2 * 0x10000;
-        if (var_v0 > 0) {
+        if (temp_v0_2 > 0) {
             func_8002459C();
             func_8003FFE4(var_s1);
         }
         if (func_8004F628() == 0) {
             func_800147CC();
         }
-        temp_v0_3 = temp_s0->x_motion;
-        if (temp_v0_3 < 0) {
+        if (temp_s0->x_motion < 0) {
             if (FieldMapData->pos.screen_edge_flags & 2) {
                 temp_s0->character_x_offset += 0x10;
             } else if (temp_s0->character_x_offset < 0x90) {
@@ -666,7 +641,7 @@ void ExecuteFieldMovement() {
                 FieldMapData->x_scroll += 1;
             }
             FieldMapData->pos.x += 1;
-        } else if (temp_v0_3 > 0) {
+        } else if (temp_s0->x_motion > 0) {
             if (FieldMapData->pos.screen_edge_flags & 1) {
                 temp_s0->character_x_offset -= 0x10;
             } else if (temp_s0->character_x_offset >= 0x91) {
@@ -676,8 +651,7 @@ void ExecuteFieldMovement() {
             }
             FieldMapData->pos.x -= 1;
         }
-        temp_v0_4 = temp_s0->y_motion;
-        if (temp_v0_4 < 0) {
+        if (temp_s0->y_motion < 0) {
             if (FieldMapData->pos.screen_edge_flags & 8) {
                 temp_s0->character_y_offset += 0x10;
             } else if (temp_s0->character_y_offset < 0x68) {
@@ -686,7 +660,7 @@ void ExecuteFieldMovement() {
                 FieldMapData->y_scroll += 1;
             }
             FieldMapData->pos.y += 1;
-        } else if (temp_v0_4 > 0) {
+        } else if (temp_s0->y_motion > 0) {
             if (FieldMapData->pos.screen_edge_flags & 4) {
                 temp_s0->character_y_offset -= 0x10;
             } else if (temp_s0->character_y_offset >= 0x69) {
@@ -701,74 +675,62 @@ void ExecuteFieldMovement() {
         temp_s0->x_motion = 0;
         temp_s0->y_motion = 0;
         temp_s0->motion_countdown = -1;
-        temp_v0_5 = func_800453B0(FieldMapData->pos.x, FieldMapData->pos.y);
-        FieldMapData->unk84F4 = temp_v0_5;
-        if (((temp_v0_5 & 0xF) - 8) >= 2) {
-            temp_v0_6 = func_8004F28C();
-            if (temp_v0_6 == 1) {
-                FieldMapData->random_encounter = temp_v0_6;
+        FieldMapData->unk84F4 = func_800453B0(FieldMapData->pos.x, FieldMapData->pos.y);
+        if ((FieldMapData->unk84F4 & 0xF) < 8 || (FieldMapData->unk84F4 & 0xF) >= 10) {
+            if (func_8004F28C() == 1) {
+                FieldMapData->random_encounter = 1;
                 return;
             }
         }
         if ((func_8004C06C(0xF9) != 0) && ((temp_s0->motion_countdown == -1))) {
             FieldMapData->unk84F4 = 0;
             FieldMapData->event = 0;
-            FieldMapData->unk84F0 = ((struct object *)FieldMapData->origin)->proc_func;
-            ((struct object *)FieldMapData->origin)->proc_func = FieldMapSleepEvent;
+            FieldMapData->unk84F0 = FieldMapData->origin->proc_func;
+            FieldMapData->origin->proc_func = FieldMapSleepEvent;
         }
     }
 }
 
 
 void func_80016A10(DVECTOR * arg0, DVECTOR * arg1, DVECTOR * arg2) {
-    s16 temp_v0;
-    s16 temp_v0_2;
-
     arg0->vx = FieldMapData->pos.x;
     arg0->vy = FieldMapData->pos.y;
-    temp_v0 = FieldMapData->pos.x_motion;
-    if (temp_v0 > 0) {
+    if (FieldMapData->pos.x_motion > 0) {
         arg0->vx -= 1;
         arg1->vx = 0;
         arg2->vx = -1;
-    } else if (temp_v0 < 0) {
+    } else if (FieldMapData->pos.x_motion < 0) {
         arg0->vx += 1;
         arg1->vx = 1;
         arg2->vx = 0;
     }
-    temp_v0_2 = FieldMapData->pos.y_motion;
-    if (temp_v0_2 > 0) {
+    if (FieldMapData->pos.y_motion > 0) {
         arg0->vy -= 1;
         arg1->vy = 0;
         arg2->vy = -1;
-    } else if (temp_v0_2 < 0) {
+    } else if (FieldMapData->pos.y_motion < 0) {
         arg0->vy += 1;
         arg1->vy = 1;
         arg2->vy = 0;
     }
 }
 
-int func_80016AF0(void) {
+s32 func_80016AF0(void) {
     return func_800460F0() != 0;
 }
 
-int func_80016B10(void) {
-    unsigned int temp_v0;
-    int var_v0;
+s32 func_80016B10(void) {
+    s32 temp_v0;
 
     temp_v0 = func_8004ED78();
-
     if (temp_v0 == 3) {
         return 3;
+    } else if (temp_v0 < 3 && temp_v0 > 0) {
+        return 2;
+    } else if (temp_v0 == 0) {
+        return (FieldMapData->pos.x > 0x47);
     } else {
-        if ((temp_v0 - 1) < 2) {
-            return 2;
-        } else {
-            if (temp_v0 == 0) {
-                return (FieldMapData->pos.x > 0x47);
-            }
-            return 4;
-        } 
+        return 4;
     }
 }
 
@@ -815,9 +777,9 @@ void AddFieldOverlays(void) {
 
 
 void EncounterBarProc(void) {
-    int var_a0;
-    int var_s0;
-    int temp_v0;
+    s32 var_a0;
+    s32 var_s0;
+    s32 temp_v0;
 
     temp_v0 = func_8004ED18();
     if ((temp_v0 << 0x10) == 0 || 
@@ -854,13 +816,13 @@ void func_80017164(struct return_thing* arg0) {
     arg0->unk14 = FieldMapData->unk8504;
 }
 
-int func_800171C8(struct return_thing* arg0) {
-    int var_a2;
+s32 func_800171C8(struct return_thing* arg0) {
+    s32 var_a2;
 
     var_a2 = 0;
     if ((FieldMapData->flags & 8) > 0) {
         arg0->init_x = FieldMapData->unkC;
-        arg0->init_y = (int)FieldMapData->unk10;
+        arg0->init_y = (s32)FieldMapData->unk10;
         var_a2 = 1;
         FieldMapData->flags &= 0xF7;
     }
@@ -930,7 +892,7 @@ s32 func_800174A4(void) {
     var_s0 = 0;
     if (D_800B6C68 != 0) {
         if (func_8001F920() == 2) {
-            if (((struct object *)FieldMapData->origin)->proc_func == FieldMapProc) {
+            if (FieldMapData->origin->proc_func == FieldMapProc) {
                 if (FieldMapData->pos.motion_countdown == -1) {
                     if (((FieldMapData->unk84F4 & 0xF) - 8) >= 2U) {
                         var_s0 = 1;
@@ -953,17 +915,17 @@ void func_8001753C(s16 arg0) {
         return;
     }
     
-    if (((struct object *)FieldMapData->origin)->proc_func != FieldMapSleep) {
+    if (FieldMapData->origin->proc_func != FieldMapSleep) {
         func_80024484(1);
         FieldMapData->unk84F0 = FieldMapProc;
-        ((struct object *)FieldMapData->origin)->proc_func = FieldMapSleep;
+        FieldMapData->origin->proc_func = FieldMapSleep;
     }
 }
 
 void func_800175F0(void) {
     if (D_800B6C68 != 0) {
         EncounterBarProc();
-        ((struct object *)FieldMapData->origin)->proc_func = FieldMapData->unk84F0;
+        FieldMapData->origin->proc_func = FieldMapData->unk84F0;
         func_80024484(0);
         func_800238A8(2);
     }
@@ -999,8 +961,8 @@ void func_80017708(void) {
 }
 
 s32 func_8001771C(void) {
-    u16 sp18[4];
-    u16 sp20[4];
+    RECT sp18;
+    RECT sp20;
 
     switch (FieldMapData->unk8530) {
         case 0:
@@ -1023,16 +985,16 @@ s32 func_8001771C(void) {
                 &D_800B74F0.dat0[D_800B74F0.dat0[2] / 4],
                 &D_800B74F0.dat0[D_800B74F0.dat0[3] / 4], D_800B74F0.dat2, D_800B74F0.dat3
             );
-            sp18[0] = 0x140;
-            sp18[1] = 0;
-            sp18[2] = 0x100;
-            sp18[3] = 0x100;
-            sp20[0] = 0;
-            sp20[1] = 0x1F4;
-            sp20[2] = 0xE0;
-            sp20[3] = 1;
+            sp18.x = 0x140;
+            sp18.y = 0;
+            sp18.w = 0x100;
+            sp18.h = 0x100;
+            sp20.x = 0;
+            sp20.y = 0x1F4;
+            sp20.w = 0xE0;
+            sp20.h = 1;
             if (func_8004ED78() != 0) {
-                sp18[0] += 0x40;
+                sp18.x += 0x40;
             }
             func_800190BC(D_800B74F0.dat2, &sp18, &sp20, 4);
             func_80019478(D_800B74F0.dat2);
@@ -1082,76 +1044,75 @@ void func_800179AC(void) {
 
 /* Matched by Mc-muffin */
 void func_80017B4C(void) {
-    s32 sp10[9];
+    struct return_thing sp10;
     enum story_section story_section;
     s32 var_a0;
 
     if (D_800B6D48 == 0) {
         D_800B6D48 = 1;
-        D_800B73AC = FieldMapData->pos.x;
-        D_800B73AE = FieldMapData->pos.y;
+        D_800B73AC.vx = FieldMapData->pos.x;
+        D_800B73AC.vy = FieldMapData->pos.y;
     } else if (D_800B6D48 == 1) {
-        if ((func_80018EE8(0, 7) != 0) && (func_80018EE8(0, 0xB) != 0)) {
-            if (--D_800B73AC < 0) {
-                D_800B73AC = 0x7F;
+        if ((func_80018EE8(0, 7)) && (func_80018EE8(0, 0xB))) {
+            if (--D_800B73AC.vx < 0) {
+                D_800B73AC.vx = 0x7F;
             }
-        } else if ((func_80018EE8(0, 5) != 0) && (func_80018EE8(0, 0xB) != 0)) {
-            if (++D_800B73AC >= 0x80) {
-                D_800B73AC = 0;
+        } else if ((func_80018EE8(0, 5)) && (func_80018EE8(0, 0xB))) {
+            if (++D_800B73AC.vx >= 0x80) {
+                D_800B73AC.vx = 0;
             }
-        } else if ((func_80018EE8(0, 4) != 0) && (func_80018EE8(0, 0xB) != 0)) {
-            if (++D_800B73AE >= 0x80) {
-                D_800B73AE = 0;
+        } else if ((func_80018EE8(0, 4)) && (func_80018EE8(0, 0xB))) {
+            if (++D_800B73AC.vy >= 0x80) {
+                D_800B73AC.vy = 0;
             }
-        } else if ((func_80018EE8(0, 6) != 0) && (func_80018EE8(0, 0xB) != 0)) {
-            if (--D_800B73AE < 0) {
-                D_800B73AE = 0x7F;
+        } else if ((func_80018EE8(0, 6)) && (func_80018EE8(0, 0xB))) {
+            if (--D_800B73AC.vy < 0) {
+                D_800B73AC.vy = 0x7F;
             }
-        } else if (func_80018F14(0, 7) != 0) {
-            if (--D_800B73AC < 0) {
-                D_800B73AC = 0x7F;
+        } else if (func_80018F14(0, 7)) {
+            if (--D_800B73AC.vx < 0) {
+                D_800B73AC.vx = 0x7F;
             }
-        } else if (func_80018F14(0, 5) != 0) {
-            if (++D_800B73AC >= 0x80) {
-                D_800B73AC = 0;
+        } else if (func_80018F14(0, 5)) {
+            if (++D_800B73AC.vx >= 0x80) {
+                D_800B73AC.vx = 0;
             }
-        } else if (func_80018F14(0, 4) != 0) {
-            if (++D_800B73AE >= 0x80) {
-                D_800B73AE = 0;
+        } else if (func_80018F14(0, 4)) {
+            if (++D_800B73AC.vy >= 0x80) {
+                D_800B73AC.vy = 0;
             }
-        } else if (func_80018F14(0, 6) != 0) {
-            if (--D_800B73AE < 0) {
-               D_800B73AE = 0x7F;
+        } else if (func_80018F14(0, 6)) {
+            if (--D_800B73AC.vy < 0) {
+               D_800B73AC.vy = 0x7F;
             }
-        } else if (func_80018F14(0, 0xD) != 0) {
+        } else if (func_80018F14(0, 0xD)) {
             D_800B6D48 = 2;
-            FieldMapData->pos.x = D_800B73AC;
-            FieldMapData->pos.y = D_800B73AE;
+            FieldMapData->pos.x = D_800B73AC.vx;
+            FieldMapData->pos.y = D_800B73AC.vy;
         }
     } else if (D_800B6D48 == 2) {
         bzero(&sp10, 0x24);
-        sp10[2] = D_800B73AC;
-        sp10[3] = D_800B73AE;
-        sp10[4] = FieldMapData->pos.movement_dir;
+        sp10.init_x = D_800B73AC.vx;
+        sp10.init_y = D_800B73AC.vy;
+        sp10.unk10 = FieldMapData->pos.movement_dir;
         func_80017258(&sp10);
         D_800B6D48 = 3;
     } else if (D_800B6D48 == 3) {
         D_800B6C6C = 0;
         func_80018F6C(0, 0);
         D_800B6D48 = 0;
-        ((struct object *)FieldMapData->origin)->proc_func = func_800152D0;
+        FieldMapData->origin->proc_func = func_800152D0;
     }
 
     story_section = func_8004ED78();
     {
-        s8 str0[16];
-        s8 str1[] = "HAKAI_BEF";
-        s8 str2[] = "HAKAI_AFT";
-        s8 str3[] = "NEBI_KILL";
-        s8 str4[] = "KOZUI";
-        s8 str5[] = "NO_DATA";
-        s8* sp80[5] = {
-            str1, str2, str3, str4, str5,
+        char str0[16];
+        char * sp80[5] = {
+            "HAKAI_BEF",
+            "HAKAI_AFT",
+            "NEBI_KILL",
+            "KOZUI",
+            "NO_DATA"
         };
         s32 x;
 
@@ -1168,10 +1129,10 @@ void func_80017B4C(void) {
         }
         
         FntPrint("\n\n\n\n\n\n\n\n\n        %s", sp80[var_a0]);
-        x = func_80045658(D_800B73AC, D_800B73AE);
-        strcpy(str0, Locations[x]);
+        x = func_80045658(D_800B73AC.vx, D_800B73AC.vy);
+        strcpy(str0, FieldMapLocations[x]);
         FntPrint(&D_800B6D5C, &str0);
-        FntPrint("\n\n        x=%3d", D_800B73AC);
-        FntPrint("\n        y=%3d", D_800B73AE);
+        FntPrint("\n\n        x=%3d", D_800B73AC.vx);
+        FntPrint("\n        y=%3d", D_800B73AC.vy);
     }
 }

@@ -1012,13 +1012,13 @@ void func_80030B6C(void) {
     func_800303C0(DungeonData);
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80030CF4);
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80030CF4);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80030E90);
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80030E90);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003102C);
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003102C);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800311FC);
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800311FC);
 
 void func_80031370(u16 arg0, s16 arg1, s16 arg2) {
     s16 temp_a0;
@@ -1064,7 +1064,7 @@ void func_80031370(u16 arg0, s16 arg1, s16 arg2) {
     temp_s0 = DungeonData->control_locked;
     if ((temp_s0 == 1) && (DungeonData->unk4 != 2)) {
         DungeonData->last_action = 0x100;
-        if (func_8002F248(DungeonData) == temp_s0) {
+        if (func_8002F248() == temp_s0) {
             DungeonData->last_action = 0x80;
         }
     }
@@ -1564,39 +1564,233 @@ void func_800332A8(void) {
 }
 
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80033338);
+void func_80033338(void) {
+    s16 temp_v0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003345C);
+    func_80029398(DungeonData);
+    DungeonData->control_locked = 1;
+    temp_v0 = func_8002D5C0(DungeonData);
+    if (temp_v0 == 1) {
+        DungeonData->control_locked = 0;
+    } else {
+        func_80031370(temp_v0);
+    }
+    RemoveObject(DungeonData->unk5C00);
+    DungeonData->unk5C00 = 0;
+    RemoveObject(DungeonData->unk5BF8);
+    DungeonData->unk5BF8 = 0;
+    RemoveObject(DungeonData->unk5BF4);
+    DungeonData->unk5BF4 = 0;
+    func_80055E4C(DungeonData->unk5C08);
+    func_80055E4C(DungeonData->unk5C0C);
+    DungeonData->unk5C08 = 0;
+    DungeonData->unk5C0C = 0;
+    func_800225C8(0, 3, 0, 0, 2);
+    setObjSubRoutNoRet(DungeonData, func_80032C80);
+}
+
+void func_8003345C(void) {
+    void* sp10[2];
+    s32 var_a0;
+    struct unk_dungeon_data_substruct * temp_s1;
+    s32 temp_a0;
+    s32 temp_s0;
+
+    temp_s1 = &DungeonData->unk5BC8;
+    sp10[0] = temp_s1->unk40->data;
+    sp10[1] = temp_s1->unk44->data;
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    temp_s0 = temp_s1->falling_status;
+    switch (temp_s1->falling_status) {                              /* irregular */
+    case 0:
+        func_8006A504();
+        temp_s1->falling_status = 1;
+        return;
+    case 1:
+        if (temp_s1->unk_counter == 0) {
+            func_8006966C(0x89, D_800B7410);
+            func_8006A54C(D_800B7410, 0);
+            temp_s1->unk_counter = 1;
+        } else if (temp_s1->unk_counter == 2) {
+            temp_s1->unk_counter = 1;
+            func_8006A584(D_800B7414, 0);
+        }
+        func_8006A368();
+        if (((func_80069F3C()) != 0) && ((func_80018F14(0, 0xD) != 0) || (func_80018EE8(0, 0xE) != 0))) {
+            temp_a0 = temp_s1->unk5D76 - 1;
+            if (temp_s1->unk56[temp_a0] == -1) {
+                func_8003FFE4((func_8004C638(temp_a0) < 4) ? 0x51 : 0x52);
+            }
+            temp_s1->falling_status = 2;
+            return;
+        }
+        return;
+    case 2:
+        if (func_8004F628() == 0) {
+            func_800147CC();
+        }
+        ((u8*)sp10[1])[0xA0] |= 2;
+        func_8006A5BC();
+        temp_s1->falling_status = 3;
+        return;
+    case 3:
+        if ((func_8006A5E8() << 0x10) != 0) {
+            DungeonData->origin->proc_func = &func_80033338;
+        }
+        break;
+    }
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003365C);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003386C);
+void func_8003386C(void) {
+    void* sp1C[2];
+    struct dungeon_data* temp_s0;
+    struct unk_dungeon_data_substruct* temp_s1;
+    s32 temp_v0;
+    s16 temp_v1;
 
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010A60);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010A70);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010A84);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010A94);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010AA4);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", jtbl_80010AB4);
+    temp_s0 = DungeonData;
+    temp_s1 = &DungeonData->unk5BC8;
+    sp1C[0] = temp_s1->unk40->data;
+    sp1C[1] = temp_s1->unk44->data;
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (temp_s1->falling_counter == 0)  {
+        temp_s1->unk6C = func_8004B888(0x86);
+        temp_v0 = func_80056480(&temp_s0->unk5BC8.unk2C, &temp_s0->unk5BC8.unk30, temp_s1->unk6C, 0x1C, 0x8C, 0);
+        if (temp_v0 == 1) {
+            temp_s1->falling_counter = temp_v0;
+            return;
+        }
+        return;
+    } else if (temp_s1->falling_counter == 1) {
+        if (func_8005667C(&temp_s0->unk5BC8.unk2C) == 1) {
+            temp_s1->falling_counter = 2;
+            return;
+        }
+    } else if (temp_s1->falling_counter == 2) {
+        temp_s1->unk6C = func_8004B888(0x79);
+        if (func_80056480(&temp_s0->unk5BC8.unk2C, &temp_s0->unk5BC8.unk30, temp_s1->unk6C, 0x1C, 0x8C, 0) == 1) {
+            temp_s1->falling_counter = 3;
+            return;
+        }
+    } else if (temp_s1->falling_counter == 3) {
+        if (func_8005667C(&temp_s0->unk5BC8.unk2C) == 1) {
+            ((u8*)sp1C[1])[0xA0] |= 2;
+            DungeonData->origin->proc_func = &func_80033338;
+        }
+    }
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800339E0);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80033F6C);
+void func_80033F6C(void) {
+    void * sp1C[2];
+    struct unk_dungeon_data_substruct* temp_s0;
+    struct dungeon_data * temp_s1;
+    struct object* temp_v0_2;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800340C8);
+    temp_s1 = DungeonData;
+    temp_s0 = &temp_s1->unk5BC8;
+    sp1C[1] = temp_s0->unk44->data;
+    func_8003102C(temp_s1);
+    func_80029398(DungeonData);
+    if (func_8004C248(temp_s0->tile_data.unk20) == 1) {
+        switch (temp_s0->falling_status) {
+        case 0:
+            temp_s0->unk6C = func_8004B888(0x8A);
+            temp_s0->falling_status = 1;
+            return;
+        case 1:
+            if (func_80056480(&temp_s1->unk5BC8.unk2C, &temp_s1->unk5BC8.unk30, temp_s0->unk6C, 0x1C, 0x8C, 0) == 1) {
+                temp_s0->unk48 |= 2;
+                setObjSubRoutNoRet(DungeonData, func_80033338)
+            }
+            break;
+        }
+    } else {
+        temp_s0->unk6C = func_8004B888(0x84);
+        if (func_80056480(&temp_s1->unk5BC8.unk2C, &temp_s1->unk5BC8.unk30, temp_s0->unk6C, 0x1C, 0x8C, 0) == 1) {
+            temp_v0_2 = func_800684E8();
+            temp_s0->unk38 = temp_v0_2;
+            ((s16*)temp_v0_2->data)[21] = 0;
+            temp_s0->falling_status = 0;
+            setObjSubRoutNoRet(DungeonData, func_800339E0)
+        }
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003412C);
+void func_800340C8(void) {
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (func_8001F920() == 2) {
+        setObjSubRoutNoRet(DungeonData, func_80033F6C);
+    }
+}
+
+void func_8003412C(void) {
+    void* sp10[2];
+    struct unk_dungeon_data_substruct * temp_s0;
+    u8* var_v1;
+
+    temp_s0 = &DungeonData->unk5BC8;
+    sp10[0] = temp_s0->unk40->data;
+    sp10[1] = temp_s0->unk44->data;
+    if (DungeonData->unk5BC8.unk48 == 0) {
+        func_8003102C(DungeonData);
+        func_80029398(DungeonData);
+    }
+    if (func_8004C248(temp_s0->tile_data.unk20) != 0) {
+        var_v1 = sp10[1];
+    } else {
+        var_v1 = sp10[0];
+    }
+    var_v1[0xA0] &= ~2;
+    temp_s0->falling_status = 0;
+    temp_s0->unk1AE = 0;
+    if (DungeonData->unk5BC8.unk48 == 1) {
+        func_8001F7A0(1, 0xC);
+        DungeonData->unk5BC8.unk48 = 0;
+        setObjSubRoutNoRet(DungeonData, func_800340C8);
+    } else {
+        DungeonData->unk5BC8.unk48 = 0;
+        setObjSubRoutNoRet(DungeonData, func_80033F6C);
+    }
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80034250);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800343A4);
+void func_800343A4(void) {
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (DungeonData->control_locked == 0) {
+        DungeonData->control_locked = 1;
+        setObjSubRoutNoRet(DungeonData, func_80034250);
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003440C);
+void func_8003440C(void) {
+    s16 temp_v0;
+
+    func_800225C8(1, 1, 1, 1, 2);
+    if (DungeonData->unk5BC8.unk48 == 0) {
+        func_8003102C(DungeonData);
+        func_80029398(DungeonData);
+        DungeonData->control_locked = 1;
+        temp_v0 = func_8002D6C4();
+        if (temp_v0 == 1) {
+            DungeonData->control_locked = 0;
+        } else {
+            func_80031370(temp_v0);
+        }
+        setObjSubRoutNoRet(DungeonData, func_800343A4);
+    } else {
+        setObjSubRoutNoRet(DungeonData, func_80034250);
+    }
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800344DC);
 
@@ -1604,9 +1798,72 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800347E4);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80034AAC);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80034BE4);
+void func_80034BE4(void) {
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (DungeonData->brightness < 10) {
+        DungeonData->brightness += 1;
+        return;
+    }
+    if (DungeonData->unk_counter == 0) {
+        struct dungeon_init_data sp18;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80034DF8);
+        DungeonData->grid_x = DungeonData->unk5C60[1];
+        DungeonData->grid_z = DungeonData->unk5C60[2];
+        DungeonData->cardinal_dir = func_8002D4EC(DungeonData->cardinal_dir, 0, 0x400, 0x800, 0xC00);
+        func_8002F4F8(&sp18);
+        sp18.initial_dir = func_8002D4EC(sp18.initial_dir, 0, 2, 4, 6);
+        sp18.unk18 = 0;
+        sp18.appearance = DungeonData->unk5C60[3];
+        RemoveObject(DungeonData->unk5BFC);
+        DungeonData->unk5BFC = 0;
+        func_800441F0(1, &sp18);
+    } else if (DungeonData->unk_counter == 1) {
+        func_8001F860(1, 0xC);
+        DungeonData->unk_counter = DungeonData->light_info->unkA;
+    } else {
+        DungeonData->unk_counter -= 0x102;
+        if (DungeonData->unk_counter <= 0) {
+            DungeonData->unk_counter = 0;
+        }
+        switch (DungeonData->cardinal_dir >> 10) {
+        case 0:
+            DungeonData->coordinates.coord.t[2] += 0x46;
+            break;
+        case 1:
+            DungeonData->coordinates.coord.t[0] += 0x46;
+            break;
+        case 2:
+            DungeonData->coordinates.coord.t[2] -= 0x46;
+            break;
+        case 3:
+            DungeonData->coordinates.coord.t[0] -= 0x46;
+        }
+    }
+}
+
+void func_80034DF8(void) {
+    s32 temp_s0 = DungeonData->buffer_0_img[1] / 4;
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (DungeonData->falling_counter == 0) {
+        DungeonData->x_offset -= 2;
+        if (DungeonData->x_offset < -15) {
+            DungeonData->x_offset = -16;
+        }
+        func_8002D0A4(&DungeonData->buffer_0_img[temp_s0], DungeonData->x_offset);
+        if (DungeonData->x_offset == -16) {
+            DungeonData->falling_counter = 1;
+            DungeonData->brightness = 0;
+            DungeonData->unk_counter = 0;
+        }
+    } else if (DungeonData->falling_counter == 1) {
+        DungeonData->falling_counter = 0;
+        DungeonData->brightness = 0;
+        DungeonData->unk_counter = 1;
+        setObjSubRoutNoRet(DungeonData, func_80034BE4);
+    }
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80034EEC);
 
@@ -1626,11 +1883,53 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036290);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036404);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036574);
+void func_80036574(void) {
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (func_8002F2F4() == 1) {
+        DungeonData->origin->proc_func = DungeonData->return_function;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800365DC);
+void func_800365DC(void) {
+    u32 temp_s0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036680);
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    temp_s0 = func_8004E780() & 3;
+    switch (temp_s0) {
+    case 0:
+        break;
+    case 1:
+        func_8002F30C(1);
+        break;
+    case 3:
+        func_8002F30C(2);
+        break;
+    case 2:
+        func_8002F30C(3);
+        break;
+    }
+    if (temp_s0 != 0) {
+        func_8003FFE4(0xE);
+    }
+    DungeonData->origin->proc_func = func_80036574;
+}
+
+void func_80036680(SVECTOR* arg0, GsCOORDINATE2* arg1) {
+    MATRIX sp10;
+    SVECTOR sp30;
+
+    sp10 = GsIDMATRIX;
+    sp10.t[0] = arg1->coord.t[0];
+    sp10.t[1] = arg1->coord.t[1];
+    sp10.t[2] = arg1->coord.t[2];
+    sp30 = *arg0;
+    RotMatrixZYX_gte(&sp30, &sp10);
+    arg1->coord = sp10;
+    arg1->flg = 0;
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036778);
 
@@ -1638,55 +1937,396 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036998);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036CE4);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80036F10);
+void func_80036F10(void) {
+    struct unk_dungeon_data_substruct * temp_s0;
+    s16 temp_a0;
+    s32 temp_a0_2;
+    s32 var_v0;
+    u8 temp_v1;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800371EC);
+    temp_s0 = &DungeonData->unk5BC8;
+    func_80029398(DungeonData);
+    func_8003102C(DungeonData);
+    temp_v1 = temp_s0->falling_status;
+    switch (temp_v1) {                              /* irregular */
+    case 0:
+        if (temp_s0->flags & D_80010A84[temp_s0->unk_counter]) {
+            if (temp_s0->unk_counter >= 0 && temp_s0->unk_counter < 6) {
+                func_80069B94(func_8006B7D4(func_8004C638(temp_s0->unk_counter)));
+                func_8006966C(0x155, D_800B7420);
+            } else if (temp_s0->unk_counter == 6) {
+                temp_s0->unk5C34 = func_8004B888(0x57);
+                func_8006966C(0x57, D_800B7420);
+            } else if (temp_s0->unk_counter == 7) {
+                temp_s0->unk5C34 = func_8004B888(0x58);
+                func_8006966C(0x58, D_800B7420);
+            }
+            temp_s0->flags &= ~D_80010A84[temp_s0->unk_counter];
+            if (temp_s0->unk_counter == 6) {
+                D_800B7420[13] = 0;
+            }
+            func_8006A504();
+            func_8006A54C(D_800B7420, 0);
+            temp_s0->falling_status = 1;
+        }
+        temp_s0->unk_counter += 1;
+        break;
+    case 1:
+        func_8006A368();
+        if (func_80069F3C() && 
+            (func_80018F14(0, 0xD) || 
+            func_80018F14(0, 4) || 
+            func_80018F14(0, 5) || 
+            func_80018F14(0, 7) || 
+            func_80018F14(0, 6) || 
+            func_80018F14(0, 0xC) || 
+            func_80018F14(0, 0xF) || 
+            func_80018F14(0, 0xE))) {
+            temp_a0_2 = temp_s0->unk_counter - 1;
+            if (temp_a0_2 < 6) {
+                if (func_8004C638(temp_a0_2) < 4) {
+                    func_8003FFE4(0x51);
+                } else {
+                    func_8003FFE4(0x52);
+                }
+            }
+            func_8006A5BC();
+            temp_s0->falling_status = 2;
+        }
+        break;
+    case 2:
+        if (func_8006A5E8()) {
+            temp_s0->falling_status = 3;
+        }
+        break;
+    case 3:
+        if (temp_s0->flags == 0) {
+            if (func_8004F628() == 0) {
+                func_800147CC();
+            }
+            DungeonData->origin->proc_func = &func_80028714;
+        } else {
+            temp_s0->falling_status = 0;
+        }
+        break;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037448);
+void func_800371EC(void) {
+    func_8003102C(DungeonData);
+    func_80029398(DungeonData);
+    if (DungeonData->unk5BC8.falling_counter == 0) {
+        func_8001A778(0, 0, 0);
+        func_800225C8(3, 3, 3, 3, 2);
+        DungeonData->unk5BC8.falling_counter = 1;
+    } else if (DungeonData->unk5BC8.falling_counter == 1) {
+        if (func_8001F920() == 2) {
+            DungeonData->unk5BC8.unk_counter += 1;
+            if (DungeonData->unk5BC8.unk_counter >= 3) {
+                func_8003FFE4(0xC);
+                DungeonData->unk5BC8.falling_counter = 2;
+            }
+        } else {
+            return;
+        }
+    }
+    if (DungeonData->unk5BC8.falling_counter == 2) {
+        func_800388B4(1);
+        DungeonData->unk5BC8.unk_counter = 0;
+        DungeonData->unk5BC8.falling_counter = 3;
+    } else if (DungeonData->unk5BC8.falling_counter == 3) {
+        DungeonData->unk5BC8.unk_counter += 1;
+        if (DungeonData->unk5BC8.unk_counter >= 0x1A) {
+            func_8002C95C(0);
+            DungeonData->unk5BC8.falling_counter = 4;
+        }
+    } else if (DungeonData->unk5BC8.falling_counter == 4) {
+        func_8001F860(1, 0x12);
+        DungeonData->unk5BC8.falling_counter = 5;
+    } else if (DungeonData->unk5BC8.falling_counter == 5) {
+        if (func_8001F920() == 2) {
+            DungeonData->unk5BC8.falling_counter = 6;
+        }
+    } else if (DungeonData->unk5BC8.falling_counter == 6) {
+        struct dungeon_init_data sp18;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800374B4);
+        func_80037DE8(DungeonData);
+        func_8003A3F4(DungeonData->grid_x, DungeonData->grid_z, &sp18);
+        if (sp18.unk20 != -1) {
+            sp18.initial_dir = DungeonData->cardinal_dir >> 9;
+            if (func_8002F248() == 1) {
+                sp18.unk18 = 3;
+            } else {
+                sp18.unk18 = 0;
+            }
+            func_800292AC(0, &sp18);
+        }
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037524);
+void func_80037448(void) {
+    if (DungeonData->unk4 < 5 && DungeonData->unk4 > 2) {
+        func_80032B24();
+    }
+    if (func_800148D4() == 0) {
+        DungeonData->control_locked = 0;
+        DungeonData->origin->proc_func = DungeonData->unk5BC8.return_function;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800375A4);
+void func_800374B4(void) {
+    if (DungeonData->unk4 > 2 && DungeonData->unk4 < 5) {
+        func_80032B24();
+    }
+    DungeonData->unk5BC8.return_function = DungeonData->origin->proc_func;
+    DungeonData->origin->proc_func = &func_80037448;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003761C);
+void func_80037524(void) {
+    if (DungeonData->unk4 > 2 && DungeonData->unk4 < 5) {
+        func_80032B24();
+    }
+    DungeonData->unk5BC8.unk_counter += 1;
+    if (DungeonData->unk5BC8.unk_counter >= DungeonData->unk5BC8.brightness) {
+        DungeonData->control_locked = 0;
+        DungeonData->origin->proc_func = DungeonData->unk5BC8.return_function;
+    }
+}
+
+void func_800375A4(s16 arg0) {
+    if (DungeonData->unk4 > 2 && DungeonData->unk4 < 5) {
+        func_80032B24();
+    }
+    DungeonData->unk5BC8.unk_counter = 0;
+    DungeonData->unk5BC8.brightness = arg0;
+    DungeonData->unk5BC8.return_function = DungeonData->origin->proc_func;
+    DungeonData->origin->proc_func = func_80037524;
+}
+
+void func_8003761C(void) {
+    func_80032B24();
+    if (func_8001F920() == 2) {
+        DungeonData->control_locked = 0;
+        DungeonData->origin->proc_func = DungeonData->unk5BC8.return_function;
+    }
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003766C);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800376DC);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037A50);
+void func_80037A50(void) {
+    u8* temp_s0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037B9C);
+    temp_s0 = D_800A2744[DungeonData->unk4 - 3];
+    if (func_8002F2F4() == 1) {
+        func_800376DC(temp_s0[DungeonData->unk5BC8.unk5C70] & 0x7F);
+        DungeonData->unk5BC8.unk5C70 += 1;
+    }
+    if (DungeonData->unk4 == 3 || DungeonData->unk4 == 4) {
+        func_80032B24();
+    }
+    if (!(temp_s0[DungeonData->unk5BC8.unk5C70 - 1] & 0x80)) {
+        if (DungeonData->unk4 == 5) {
+            func_80032B24();
+        }
+        func_8003102C(DungeonData);
+        func_80029398(DungeonData);
+    }
+    FntPrint("\n\n\n\nDream_Proc");
+    FntPrint("\n(X=%3d, y=%3d)", DungeonData->grid_x, DungeonData->grid_z);
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037BE0);
+void func_80037B9C(void) {
+    object** temp_v0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037C04);
+    if (D_800B6F28 != 0) {
+        RemoveObject(D_800B7428->unk0);
+        temp_v0 = D_800B7428;
+        D_800B7428 = 0;
+        D_800B6F28 = 0;
+        temp_v0->unk0 = 0;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037CC8);
+void func_80037BE0(s8 arg0, s8 arg1, s8 arg2) {
+    D_800B7428->unk14 = arg0;
+    D_800B7428->unk15 = arg1;
+    D_800B7428->unk16 = arg2;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037DA0);
+void func_80037C04(void) {
+    GsBOXF* temp_a0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037DE8);
+    temp_a0 = &D_800B7428->unk4;
+    if (DungeonData->status & 0x40) {
+        temp_a0->x = -0x90;
+        temp_a0->y = -0xE;
+        temp_a0->w = 0x120;
+        temp_a0->h = 0x1C;
+    } else {
+        temp_a0->x = -0x90;
+        temp_a0->y = -0xE;
+        temp_a0->w = 0x120;
+        temp_a0->h = 0x21;
+    }
+    temp_a0->r = D_800B7428->unk14;
+    temp_a0->g = D_800B7428->unk15;
+    temp_a0->b = D_800B7428->unk16;
+    GsSortBoxFill(temp_a0, GsOTPtr, 0x514);
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037E1C);
+void func_80037CC8(s8 arg0, s8 arg1, s8 arg2) {
+    struct object* temp_v0;
+    struct unk_data_101* temp_v0_2;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037E2C);
+    if (D_800B6F28 == 0) {
+        D_800B6F28 = 1;
+        temp_v0 = CreateObject(0, 0, *FirstObjectPtrPtr, 0x50000, 0, 0x18);
+        if (temp_v0 == 0) return;
+        bzero(temp_v0->data, 0x18);
+        temp_v0_2 = temp_v0->data;
+        D_800B7428 = temp_v0->data;
+        temp_v0_2->unk0 = temp_v0;
+    }
+    D_800B7428->unk14 = arg0;
+    D_800B7428->unk15 = arg1;
+    D_800B7428->unk16 = arg2;
+    D_800B7428->unk0->proc_func = &func_80037C04;
+}
+
+void func_80037DA0(s16 arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s16 arg5) {
+    RECT sp10;
+
+    sp10.x = arg0;
+    sp10.y = arg1;
+    sp10.w = arg2;
+    sp10.h = arg3;
+    MoveImage(&sp10, arg4, arg5);
+}
+
+void func_80037DE8(void) {
+    RemoveObject(D_800B7424->unk0);
+    D_800B7424->unk0 = 0;
+    D_800B7424 = 0;
+}
+
+void func_80037E1C(void) {
+    D_800B7424->unk8 = 1;
+}
+
+void func_80037E2C(void) {
+    D_800B7424->unk8 = 0;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80037E38);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038760);
+void func_80038760(void) {
+    D_800B7424->unk1EC = 0;
+    D_800B7424->unk1EE = 0;
+    D_800B7424->unk1F0 = 0;
+    D_800B7424->unk1F2 = 0;
+    D_800B7424->unk1F4 = 0;
+    D_800B7424->x0 = 0x10;
+    D_800B7424->y0 = 0x10;
+    D_800B7424->w0 = 0x90;
+    D_800B7424->h0 = 0x78;
+    D_800B7424->unk164 = 0x200;
+    D_800B7424->unk166 = 0;
+    D_800B7424->unk168 = 0;
+    D_800B7424->unk16A = 0;
+    D_800B7424->u0 = 0;
+    D_800B7424->v0 = 0;
+    D_800B7424->tw0 = 0x8F;
+    D_800B7424->th0 = 0x77;
+    D_800B7424->unk174 = 0;
+    D_800B7424->unk176 = 2;
+    D_800B7424->unk178 = 1;
+    D_800B7424->unk17C = 0x22;
+    D_800B7424->x1 = 0xA0;
+    D_800B7424->y1 = 0x10;
+    D_800B7424->w1 = 0x90;
+    D_800B7424->h1 = 0x78;
+    D_800B7424->unk188 = 0x200;
+    D_800B7424->unk18A = 0;
+    D_800B7424->unk18C = 0;
+    D_800B7424->unk18E = 0;
+    D_800B7424->u1 = 0;
+    D_800B7424->v1 = 0x78;
+    D_800B7424->tw1 = 0x8F;
+    D_800B7424->th1 = 0x77;
+    D_800B7424->x2 = 0x10;
+    D_800B7424->y2 = 0x10;
+    D_800B7424->y3 = 0x10;
+    D_800B7424->unk198 = 0;
+    D_800B7424->unk19A = 2;
+    D_800B7424->unk19C = 1;
+    D_800B7424->unk1A0 = 0x22;
+    D_800B7424->w2 = 0x90;
+    D_800B7424->h2 = 0x78;
+    D_800B7424->unk1AC = 0x200;
+    D_800B7424->unk1AE = 0;
+    D_800B7424->unk1B0 = 0;
+    D_800B7424->unk1B2 = 0;
+    D_800B7424->u2 = 0;
+    D_800B7424->v2 = 0;
+    D_800B7424->tw2 = 0x8F;
+    D_800B7424->th2 = 0x77;
+    D_800B7424->unk1BC = 0;
+    D_800B7424->unk1BE = 2;
+    D_800B7424->unk1C0 = 1;
+    D_800B7424->unk1C4 = 0x22;
+    D_800B7424->x3 = 0xA0;
+    D_800B7424->w3 = 0x90;
+    D_800B7424->h3 = 0x78;
+    D_800B7424->unk1D0 = 0x200;
+    D_800B7424->unk1D2 = 0;
+    D_800B7424->unk1D4 = 0;
+    D_800B7424->unk1D6 = 0;
+    D_800B7424->u3 = 0;
+    D_800B7424->v3 = 0x78;
+    D_800B7424->tw3 = 0x8F;
+    D_800B7424->th3 = 0x77;
+    D_800B7424->unk1E0 = 0;
+    D_800B7424->unk1E2 = 2;
+    D_800B7424->unk1E4 = 1;
+    D_800B7424->unk1E8 = 0x22;
+    D_800B7424->unk0->proc_func = &func_80037E38;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800388B4);
+void func_800388B4(s16 arg0) {
+    struct object * temp_v0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038944);
+    temp_v0 = CreateObject(0, 0, *FirstObjectPtrPtr, 0x50000, 0, sizeof(struct unk_data_102));
+    if (temp_v0 == 0) return;
+    bzero(temp_v0->data, sizeof(struct unk_data_102));
+    D_800B7424 = temp_v0->data;
+    D_800B7424->unk8 = 1;
+    D_800B7424->unk0 = temp_v0;
+    D_800B7424->unk4 = arg0;
+    D_800B7424->unk0->proc_func = &func_80038760;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038950);
+void func_80038944(void) {
+    D_800B742C->unkB4.p[1].x0 = 0;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003896C);
+s32 func_80038950(void) {
+    return D_800B742C->unkB4.p[1].x0 == 1;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038990);
+void func_8003896C(s32* arg0) {
+    D_800B742C->unk60 = arg0[6];
+    D_800B742C->unk64 = arg0[7];
+    D_800B742C->unkB4.p[1].x0 = 1;
+}
+
+
+void func_80038990(void) {
+    RemoveObject(D_800B742C->unk0);
+    D_800B742C->unk0 = 0;
+    D_800B742C = 0;
+}
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800389C4);
 
@@ -1781,109 +2421,3 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AE00);
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AFB4);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AFE8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B044);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B0F8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B10C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B2D0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B304);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B6DC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003B78C);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010BB4);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010BFC);
-
-INCLUDE_RODATA("asm/smt1/main/nonmatchings/dgraph", D_80010C10);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003BA3C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003BCA0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C0A8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C0E4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C328);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C368);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C5B0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C810);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003C990);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CA8C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CAC0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CC24);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CD8C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CDC8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CF24);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CF60);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003CFAC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D084);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D1C8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D36C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D434);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D4F0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D604);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D658);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003D844);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003DB00);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003DC34);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003DC6C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003DE14);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003DEE4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003E05C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003E168);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003E3A0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003E5B4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EB00);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EBB0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003ED10);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EDE0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EED8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003F000);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003F08C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003F244);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003F27C);

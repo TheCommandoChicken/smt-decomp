@@ -2,7 +2,7 @@
 #include "lib/memory.h"
 
 void InitPads(void) {
-	bzero(&RawInput[0][0], 0x44);
+	bzero(&RawInput[0][0], sizeof(RawInput));
 	bzero(&TransDataBuff, 2);
 	PadInitDirect(&RawInput[0][0], &RawInput[1][0]);
 	PadSetAct(0, &TransDataBuff, 2);

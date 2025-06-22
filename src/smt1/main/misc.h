@@ -311,9 +311,9 @@ typedef struct encounter_bar_geometry_3d {
 	u8 field8_0x8;
 	u8 field9_0x9;
 	u8 field10_0xa;
-	u8 field11_0xb;
-	u8 field12_0xc;
-	u8 field13_0xd;
+	u8 unkB;
+	u8 unkC;
+	u8 unkD;
 	u8 field14_0xe;
 	u8 field15_0xf;
 	u8 field16_0x10;

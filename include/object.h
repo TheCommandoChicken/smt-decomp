@@ -1,8 +1,21 @@
 #include "common.h"
+#include "memory.h"
 
 #ifndef _OBJECT_H_
 #define _OBJECT_H_
 #define NO_OBJ (struct object *)-1
+
+#define OBJ_TYPE_DEFAULT 0
+#define OBJ_TYPE_SPRITE 1
+#define OBJ_TYPE_POLY_F3 2
+#define OBJ_TYPE_POLY_FT3 3
+#define OBJ_TYPE_POLY_G3 4
+#define OBJ_TYPE_POLY_GT3 5
+#define OBJ_TYPE_POLY_F4 6
+#define OBJ_TYPE_POLY_FT4 7
+#define OBJ_TYPE_POLY_G4 8
+#define OBJ_TYPE_POLY_GT4 9
+#define OBJ_TYPE_LINE_F2 10
 
 /*
 	Very common struct which is used as a container for data relating to most game elements,
@@ -56,8 +69,10 @@ struct unk_data_6 {
 
 void func_80017FF0(void (*)(struct object *), s32);
 void func_800180D4(void);
-struct object * CreateObject(void (*proc_func)(struct object *), void (*kill_func)(struct object *), void * origin, u32 priority, u32 type, s32 data_size);
-void RemoveObject(struct object * arg0);
+struct object * CreateObject(void (*proc_func)(struct object *), 
+	void (*kill_func)(struct object *), 
+	void * origin, u32 priority, u32 type, size_t data_size);
+void RemoveObject(struct object * obj);
 void func_80018BD0(struct object * arg0);
 void func_80018808(void);
 void func_80018954(void);

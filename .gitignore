@@ -50,3 +50,14 @@ game/smt1.cue
 game/smt1.bin
 libcdio-2.2.0.tar.gzZone.Identifier
 *.Identifier
+/.cache
+/build/.cmake
+build/cmake_install.cmake
+build/CMakeCache.txt
+/build/CMakeFiles
+cmake_install.cmake
+CMakeCache.txt
+build/compile_commands.json
+build/Makefile
+/CMakeFiles
+compile_commands.json

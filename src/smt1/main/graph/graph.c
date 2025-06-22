@@ -1052,7 +1052,7 @@ void AddDrawMode(s32 dfe, s32 dtd, s32 tpage, RECT * tw, s32 ot_index, DR_MODE *
 	AddPrim(&OrderingTable[ot_index], p);
 }
 
-void AddSprt(s16 x, s16 y, s16 w, s16 h, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT * p) {
+void AddSprt(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT * p) {
 	setSprt(p);
 	setXY0(p, x - 0xA0, y - 0x46);
 	setUV0(p, u, v);
@@ -1062,7 +1062,7 @@ void AddSprt(s16 x, s16 y, s16 w, s16 h, s8 u, s8 v, u32 color, u16 clut, s32 ot
 	AddPrim(&OrderingTable[ot_index], p);
 }
 
-void AddSprt8(s16 x, s16 y, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT_8 * p) {
+void AddSprt8(s16 x, s16 y, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT_8 * p) {
 	setSprt8(p);
 	setXY0(p, x - 0xA0, y - 0x46);
 	setUV0(p, u, v);
@@ -1071,7 +1071,7 @@ void AddSprt8(s16 x, s16 y, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT_
 	AddPrim(&OrderingTable[ot_index], p);
 }
 
-void AddSprt16(s16 x, s16 y, s8 u, s8 v, u32 color, u16 clut, s32 ot_index, SPRT_16 * p) {
+void AddSprt16(s16 x, s16 y, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT_16 * p) {
 	setSprt16(p);
 	setXY0(p, x - 0xA0, y - 0x46);
 	setUV0(p, u, v);

@@ -50,7 +50,7 @@ struct field_map_graphics_container {
 
 
 struct field_map_data {
-	void *origin;
+	struct object *origin;
 	void *next;
 	u32 unk8;
 	u32 unkC;
@@ -68,7 +68,7 @@ struct field_map_data {
 	struct field_map_graphics_container g;
 	struct field_pos pos;
 	u8 unk84EE, unk84EF;
-	void * unk84F0;
+	void (* unk84F0)();
 	s32 unk84F4;
 	u32 random_encounter; /* If bit 0 of the highest byte is on then a random encounter happens */
 	s32 unk84FC;

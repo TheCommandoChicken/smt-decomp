@@ -45,4 +45,5 @@ typedef unsigned char u8;
     __asm__ volatile ("addiu $29,$29,0x18":::"$29","memory"); \
     __asm__ volatile ("lw $29,0($29)" :::"$29","memory"); \
 }
+
 #endif
