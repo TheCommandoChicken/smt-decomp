@@ -226,7 +226,7 @@ s32 func_8002F198(void) {
     return var_s0;
 }
 
-s32 func_8002F228(void) {
+s16 func_8002F228(void) {
     return DungeonData->cardinal_dir >> 10;
 }
 
@@ -242,9 +242,58 @@ s32 func_8002F248(void) {
 
 // INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002F27C);
 
-// INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002F2F4);
+s32 func_8002F2F4(void) {
+    return DungeonData->control_locked == 0;
+}
 
-// INCLUDE_ASM("asm/smt1/main/nonmatchings/dungeon", func_8002F30C);
+void func_8002F30C(s16 arg0) {
+    s32 var_a0;
+
+    DungeonData->control_locked = 1;
+    DungeonData->field198_0x5ba6 = 0;
+    switch (arg0) {
+    case 0:
+        var_a0 = 1;
+        func_80031548(var_a0);
+        DungeonData->last_x = DungeonData->grid_x;
+        DungeonData->last_y = DungeonData->grid_y;
+        DungeonData->last_z = DungeonData->grid_z;
+        break;
+    case 1:
+        var_a0 = 2;
+        func_80031370(var_a0);
+        DungeonData->last_dir = DungeonData->cardinal_dir;
+        break;
+    case 2:
+        var_a0 = 4;
+        func_80031370(var_a0);
+        DungeonData->last_dir = DungeonData->cardinal_dir;
+        break;
+    case 3:
+        var_a0 = 3;
+        func_80031370(var_a0);
+        DungeonData->last_dir = DungeonData->cardinal_dir;
+        break;
+    case 4:
+        var_a0 = 3;
+        func_80031548(var_a0);
+        DungeonData->last_x = DungeonData->grid_x;
+        DungeonData->last_y = DungeonData->grid_y;
+        DungeonData->last_z = DungeonData->grid_z;
+        break;
+    case 5:
+        DungeonData->field198_0x5ba6 = 6;
+        break;
+    }
+    if (func_8002F248() != 1) {
+        ((object*)DungeonData->origin)->proc_func = &func_8003302C;
+    }
+    DungeonData->last_grid_x = DungeonData->grid_x;
+    DungeonData->last_grid_y = DungeonData->grid_y;
+    DungeonData->last_grid_z = DungeonData->grid_z;
+    DungeonData->last_card_dir = DungeonData->cardinal_dir;
+}
+
 
 void func_8002F440(s32 arg0, s32 arg1) {
     func_8003A6DC(DungeonData->grid_x, DungeonData->grid_z, arg0, arg1);

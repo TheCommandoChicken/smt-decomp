@@ -47,7 +47,7 @@ src/smt1/main/lib
 src/smt1/main/dat.c
 src/smt1/main/field.c
 src/smt1/main/graph.c
-src/smt1/main/intro.c
+src/smt1/data/intro.c
 src/smt1/main/main.c
 src/smt1/main/misc.h
 src/smt1/main/object.c

@@ -1,13 +1,14 @@
 #include "lib/asm.h"
+#include <stdint.h>
 
 #ifndef _S32_
 #define _S32_
-typedef signed long s32;
+typedef int32_t s32;
 #endif
 
 #ifndef _U32_
 #define _U32_
-typedef unsigned long u32;
+typedef uint32_t u32;
 #endif
 
 #ifndef _S16_

@@ -1,8 +1,11 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/ovr1", func_80117CA4);
+//INCLUDE_ASM("asm/smt1/data/nonmatchings/ovr1", func_80117CA4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/ovr1", func_80117D30);
+void func_80117D30(void) {
+    D_801208B0.unk1C = 1;
+}
+
 
 INCLUDE_ASM("asm/smt1/data/nonmatchings/ovr1", func_80117D40);
 

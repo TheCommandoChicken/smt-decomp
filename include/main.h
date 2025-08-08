@@ -43,46 +43,42 @@ struct unk_data_1 {
 	Purpose unclear. Seems related to displaying dialogue and cutscenes?
 */
 struct unknown_object_struct {
-	u8 unk0;
-	u8 unk1;
+	s16 unk0;
 	s16 unk2;
-	void * unk4;
-	void * unk8;
-	void * unkC;
-	s32 unk10[2];
-	s32 unk18;
-	s32 unk1C;
-	u8 unk20[0x40];
-	s32 unk60;
-	s32 unk64;
-	u8 unk68[0x18];
+	struct unknown_object_struct * unk4;
+	u16 * unk8;
+	u16 * unkC;
+	u16 * unk10;
+    u16 * unk14;
+	u16 * unk18;
+	u16 * unk1C;
+	s32 unk20[16];
+	s32 unk60[8]; // Contains event flags?
 	s32 unk80;
 	u32 flags;
 	u16 unk88;
 	u16 unk8A;
-	s16 unk8C;
-	u8 unk8E[0x102];
+	u16 unk8C;
+	u16 unk8E;
+    s32 unk90;
+    u8 unk94[0xFC];
 	s32 unk190;
-	s32 unk194;
+	u32 unk194;
 	s16 unk198;
-	u8 unk19A[0x16];
+	u8 unk19A;
+    u8 unk19B;
+    s32 unk19C;
+    s32 unk1A0;
+    s32 unk1A4;
+    s32 unk1A8;
+    s32 unk1AC;
 	s32 unk1B0;
 	/* These contain pointers to objects for the sprites displayed on screen during the cutscene. */
 	struct object * sprite0;
-	struct object * sprite1;
-	struct object * sprite2;
-	struct object * sprite3;
-	struct object * sprite4;
-	struct object * sprite5;
-	struct object * sprite6;
-	struct object * sprite7;
-	struct object * sprite8; /* Assumed. */
+	struct object * sprite1[8];
 	struct object * sprite9;
-	struct object * sprite10;
-	struct object * sprite11;
-	struct object * sprite12;
-	struct object * sprite13;
-	struct object * sprite14;
+	struct object * sprite10[4];
+	s32 sprite14;
 };
 
 
@@ -202,7 +198,6 @@ extern struct unknown_object_struct * func_800527E8(void);
 extern void * func_80019C58(s32, void *, s32, s32, s32, s32);
 extern struct object * func_80117E70(s8);
 extern struct object * func_8005B67C(s32, s32, s32);
-extern u32 * func_8004C5A8(void);
 extern struct object * func_800494D0(s32);
 extern u16 * func_8004B888(s32);
 extern struct object * func_80065F38(s32, s32, s32, s32, s32, s32, void *, s32, s32, s32, s32, s32, s32);

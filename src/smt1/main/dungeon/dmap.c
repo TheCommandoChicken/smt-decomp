@@ -2,9 +2,8 @@
 
 
 void func_8003B044(struct object * arg0) {
-    struct unk_data_113 * temp_s0;
+    struct unk_data_113 * temp_s0 = arg0->data;
 
-    temp_s0 = arg0->data;
     RemoveObject(temp_s0->unk18);
     temp_s0->unk18 = 0;
     RemoveObject(temp_s0->unk10);
@@ -61,10 +60,10 @@ void func_8003B10C(s16 arg0) {
     DungeonMap->unk2C = 0;
     RemoveObject(DungeonMap->unk24);
     DungeonMap->unk24 = 0;
-    DungeonMap->unkC18 = subroutine_arg4.vx;
-    DungeonMap->unkC1A = subroutine_arg4.vy;
+    DungeonMap->x3 = subroutine_arg4.vx;
+    DungeonMap->y3 = subroutine_arg4.vy;
     DungeonMap->unkC0D = var_s0;
-    DungeonMap->unk161A = func_8002DADC(func_800149F0(1), DungeonMap->unkC18, DungeonMap->unkC1A);
+    DungeonMap->unk161A = func_8002DADC(func_800149F0(1), DungeonMap->x3, DungeonMap->y3);
     DungeonMap->unkC14 = D_800A0CDC[DungeonMap->unk161A][0];
     DungeonMap->unkC16 = D_800A0CDC[DungeonMap->unk161A][1];
     func_8003EED8();
@@ -272,15 +271,11 @@ void* func_8003BA3C(s16 arg0, s16 arg1, s32 arg2, s16 arg3) {
 void func_8003BCA0(struct object * arg0) {
     s16 var_s1;
     RECT* temp_a3_2;
-    struct unk_data_122 * temp_s0;
-    struct unk_data_121 * temp_s2;
-    struct unk_data_120 * temp_s3;
-    struct unk_data_123 * temp_v1;
-
-    temp_s0 = arg0->data;
-    temp_v1 = &temp_s0->unk64;
-    temp_s2 = &DungeonMap->unk74[temp_s0->unk0];
-    temp_s3 = &DungeonMap->unk34[temp_s0->unk0];
+    struct unk_data_122 * temp_s0 = arg0->data;
+    struct unk_data_123 * temp_v1 = &temp_s0->unk64;
+    struct unk_data_121 * temp_s2 = &DungeonMap->unk74[temp_s0->unk0];
+    struct unk_data_120 * temp_s3 = &DungeonMap->unk34[temp_s0->unk0];
+    
     func_80027978(&temp_s0->unk10, 
         (temp_s0->unkC + temp_v1->unk0), 
         (temp_s0->unkE + temp_v1->unk2), 
@@ -660,11 +655,11 @@ void func_8003D36C(struct unk_data_113 * arg0) {
 void func_8003D434(void) {
     s16 temp_a1;
 
-    temp_a1 = D_800B743C->unk1620;
-    D_800B743C->unk1627[D_800B743C->unk1620][2] = ((s16 *)((struct unk_data_124 *)D_800B743C->unk24->data)->unk4->data)[19] + 1;
-    D_800B743C->unk1627[D_800B743C->unk1620][0] = D_800B743C->unk13A4;
-    D_800B743C->unk1627[D_800B743C->unk1620][1] = D_800B743C->unk13A6;
-    func_8004F2E8(D_800B743C->unk1620, func_8003CF24(D_800B743C->unk1620, temp_a1));
+    temp_a1 = DungeonMap->unk1620;
+    DungeonMap->unk1627[DungeonMap->unk1620][2] = ((s16 *)((struct unk_data_124 *)DungeonMap->unk24->data)->unk4->data)[19] + 1;
+    DungeonMap->unk1627[DungeonMap->unk1620][0] = DungeonMap->unk13A4;
+    DungeonMap->unk1627[DungeonMap->unk1620][1] = DungeonMap->unk13A6;
+    func_8004F2E8(DungeonMap->unk1620, func_8003CF24(DungeonMap->unk1620, temp_a1));
 }
 
 void func_8003D4F0(struct unk_data_113 * arg0) {
@@ -742,8 +737,8 @@ void func_8003DB00(struct unk_data_113 * arg0) {
 void func_8003DC34(s32 arg0) {
     struct unk_data_122* temp_a1;
 
-    temp_a1 = D_800B743C->unk14->data;
-    D_800B743C->unk139C += arg0;
+    temp_a1 = DungeonMap->unk14->data;
+    DungeonMap->unk139C += arg0;
     temp_a1->unkE += arg0;
     temp_a1->unk92 += arg0;
 }
@@ -833,16 +828,16 @@ void func_8003DEE4(void) {
     s16 var_s2;
 
     for (var_s2 = 0; var_s2 < 8; var_s2++) {
-        if (D_800B743C->unk161A == func_8002DADC(func_800149F0(1), D_800B743C->unk1627[var_s2][0], D_800B743C->unk1627[var_s2][1])) {
-            if (D_800B743C->unk1627[var_s2][2] != 0) {
-                D_800B743C->unk71C[D_800B743C->unk75E].w = D_80010BFC[D_800B743C->unk1627[var_s2][2] - 1][0];
-                D_800B743C->unk71C[D_800B743C->unk75E].h = D_80010BFC[D_800B743C->unk1627[var_s2][2] - 1][1];
-                sp10.vx = D_800B743C->unk1627[var_s2][0];
-                sp10.vy = D_800B743C->unk1627[var_s2][1];
+        if (DungeonMap->unk161A == func_8002DADC(func_800149F0(1), DungeonMap->unk1627[var_s2][0], DungeonMap->unk1627[var_s2][1])) {
+            if (DungeonMap->unk1627[var_s2][2] != 0) {
+                DungeonMap->unk71C[DungeonMap->unk75E].w = D_80010BFC[DungeonMap->unk1627[var_s2][2] - 1][0];
+                DungeonMap->unk71C[DungeonMap->unk75E].h = D_80010BFC[DungeonMap->unk1627[var_s2][2] - 1][1];
+                sp10.vx = DungeonMap->unk1627[var_s2][0];
+                sp10.vy = DungeonMap->unk1627[var_s2][1];
                 func_8003CDC8(&sp10);
-                D_800B743C->unk71C[D_800B743C->unk75E].x = ((sp10.vx * 0xA) + 0xA1);
-                D_800B743C->unk71C[D_800B743C->unk75E].y = ((sp10.vy * 0xA) + 0x94);
-                D_800B743C->unk75E += 1;
+                DungeonMap->unk71C[DungeonMap->unk75E].x = ((sp10.vx * 0xA) + 0xA1);
+                DungeonMap->unk71C[DungeonMap->unk75E].y = ((sp10.vy * 0xA) + 0x94);
+                DungeonMap->unk75E += 1;
             }
         }
     }
@@ -858,11 +853,11 @@ void func_8003E168(void) {
 
     for (sp10.vy = 0; sp10.vy < 25; sp10.vy++) {
         for (sp10.vx = 0; sp10.vx < 25; sp10.vx++) {
-            if (D_800B743C->unk99C[sp10.vx + (sp10.vy * 25)] == 0) {
-                switch (D_800B743C->unk13A8[sp10.vx + (sp10.vy * 25)]) {
+            if (DungeonMap->unk99C[sp10.vx + (sp10.vy * 25)] == 0) {
+                switch (DungeonMap->unk13A8[sp10.vx + (sp10.vy * 25)]) {
                 case 13:
                 case 14:
-                    temp_v1 = func_8003E05C(&sp10, &D_800B743C->unkC14);
+                    temp_v1 = func_8003E05C(&sp10, &DungeonMap->unkC14);
                     if (temp_v1 == -1) {
                         temp_v1 = 0x64;
                     }
@@ -884,54 +879,54 @@ void func_8003E168(void) {
                     break;
                 }
                 if (temp_v1 != 0x64) {
-                    D_800B743C->unk604[var_s2].w = D_80010C10[temp_v1][0];
-                    D_800B743C->unk604[var_s2].h = D_80010C10[temp_v1][1];
-                    sp18.vx = (sp10.vx + D_800B743C->unkC14) - 0xC;
-                    sp18.vy = (sp10.vy + D_800B743C->unkC16) - 0xC;
-                    if (D_800B743C->unk161A == func_8002DADC(func_800149F0(1), sp18.vx, sp18.vy)) {
+                    DungeonMap->unk604[var_s2].w = D_80010C10[temp_v1][0];
+                    DungeonMap->unk604[var_s2].h = D_80010C10[temp_v1][1];
+                    sp18.vx = (sp10.vx + DungeonMap->unkC14) - 0xC;
+                    sp18.vy = (sp10.vy + DungeonMap->unkC16) - 0xC;
+                    if (DungeonMap->unk161A == func_8002DADC(func_800149F0(1), sp18.vx, sp18.vy)) {
                         func_8003CDC8(&sp18);
-                        D_800B743C->unk604[var_s2].x = ((sp18.vx * 0xA) + 0xA1);
-                        D_800B743C->unk604[var_s2].y = ((sp18.vy * 0xA) + 0x94);
+                        DungeonMap->unk604[var_s2].x = ((sp18.vx * 0xA) + 0xA1);
+                        DungeonMap->unk604[var_s2].y = ((sp18.vy * 0xA) + 0x94);
                         var_s2 += 1;
                     }
                 }
             }
         }
     }
-    D_800B743C->unk75C = var_s2;
+    DungeonMap->unk75C = var_s2;
 }
 
 void func_8003E3A0(void) {
     s16 var_s0 = 0;
 
-    ((s32 *)D_800B743C->unk10->data)[0x1D9] = 0x21;
-    func_8003CDC8(&D_800B743C->unkC18);
-    if (D_800B743C->unk4 & 8) {
-        if (!(D_800B743C->unk4 & 0x10)) {
+    ((s32 *)DungeonMap->unk10->data)[0x1D9] = 0x21;
+    func_8003CDC8(&DungeonMap->x3);
+    if (DungeonMap->unk4 & 8) {
+        if (!(DungeonMap->unk4 & 0x10)) {
             var_s0 = DungeonData->cardinal_dir >> 10;
         }
-        D_800B743C->unk6C.w = 0x20;
-        D_800B743C->unk6C.h = (var_s0 * 8) + 0xE0;
-        D_800B743C->unk6C.x = ((D_800B743C->unkC18 * 0xA) + 0xA1);
-        D_800B743C->unk6C.y = ((D_800B743C->unkC1A * 0xA) + 0x94);
+        DungeonMap->unk6C.w = 0x20;
+        DungeonMap->unk6C.h = (var_s0 * 8) + 0xE0;
+        DungeonMap->unk6C.x = ((DungeonMap->x3 * 0xA) + 0xA1);
+        DungeonMap->unk6C.y = ((DungeonMap->y3 * 0xA) + 0x94);
     }
-    D_800B743C->unk4 &= 0xFD;
+    DungeonMap->unk4 &= 0xFD;
     func_8003E168();
     func_8003DEE4();
-    D_800B743C->unk14 = func_8003C0E4(((D_800B743C->unkC1C * 0xA) + 0x28), ((D_800B743C->unkC1E * 0xA) + 0x1A), D_800B743C->unkC0D, 0xB00000, 0x1E);
-    D_800B743C->unk20 = func_8003C990(0xA5, 0x51, 0xB00000, 0x1D);
-    D_800B743C->unk2C = func_8003BA3C(0x104, 0x1E, 0xB00000, 0x19);
-    if (D_800B743C->unkC1A + 7 > 0) {
-        for (var_s0 = D_800B743C->unkC1A + 7; var_s0 > 0; var_s0--) {
-            if (D_800B743C->unk139C >= -0x9F) {
+    DungeonMap->unk14 = func_8003C0E4(((DungeonMap->unkC1C * 0xA) + 0x28), ((DungeonMap->unkC1E * 0xA) + 0x1A), DungeonMap->unkC0D, 0xB00000, 0x1E);
+    DungeonMap->unk20 = func_8003C990(0xA5, 0x51, 0xB00000, 0x1D);
+    DungeonMap->unk2C = func_8003BA3C(0x104, 0x1E, 0xB00000, 0x19);
+    if (DungeonMap->y3 + 7 > 0) {
+        for (var_s0 = DungeonMap->y3 + 7; var_s0 > 0; var_s0--) {
+            if (DungeonMap->unk139C >= -0x9F) {
                 func_8003DC34(-0xA);
             } else {
-                D_800B743C->unk139C = -0xA0;
+                DungeonMap->unk139C = -0xA0;
             }
         }
     }
-    D_800B743C->unk4 |= 2;
-    D_800B743C->unk0->proc_func = &func_8003DE14;
+    DungeonMap->unk4 |= 2;
+    DungeonMap->unk0->proc_func = &func_8003DE14;
 }
 
 
@@ -942,44 +937,99 @@ void func_8003EB00(void) {
 
     for (sp10.vy = 0; sp10.vy < 25; sp10.vy++) {
         for (sp10.vx = 0; sp10.vx < 25; sp10.vx++) {
-            if (D_800B743C->unk99C[sp10.vx + (sp10.vy * 25)] == 1) {
+            if (DungeonMap->unk99C[sp10.vx + (sp10.vy * 25)] == 1) {
                 func_8003E5B4(&sp10);
             }
         }
     }
 }
 
-// INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EBB0);
+
+void func_8003EBB0(void) {
+    s16 var_t3;
+    s16 i;
+    s16 sub_x;
+    s32 temp_v1_2;
+    s16 x;
+    s16 y;
+    s32 var_t2;
+
+    for (i = 0; i < 625; i++) {
+        DungeonMap->unk99C[i] = 1;
+    }
+    temp_v1_2 = (DungeonMap->unkC14 - 12);
+    var_t3 = sub_x = temp_v1_2 - (((DungeonMap->unkC14 - 12) / 8) * 8);
+    var_t2 = x = ((DungeonMap->unkC14 - 12) / 8);
+    y = DungeonMap->unkC16 - 12;
+    for (i = 0; i < 625; i++) {
+        if ((y >= 0) && ((D_800B72AC->map_flags[x + (y * 16)] & (1 << sub_x)) > 0)) {
+            DungeonMap->unk99C[i] = 0;
+        }
+        sub_x += 1;
+        if (sub_x >= 8) {
+            sub_x = 0;
+            x += 1;
+        }
+        if (i != 0) {
+            if ((i + 1) == (((i + 1) / 25) * 25)) {
+                y += 1;
+                x = var_t2;
+                sub_x = var_t3;
+            }
+        }
+    }
+}
+
 
 void func_8003ED10(void) {
-    u32* temp_v0;
-
-    if (func_80019ECC(D_800B743C->unk8) != 0) {
+    if (func_80019ECC(DungeonMap->unk8) != 0) {
         SetSpadStack(0x1F8003FC);
         func_8003EBB0();
         ResetSpadStack();
         SetSpadStack(0x1F8003FC);
         func_8003EB00();
         ResetSpadStack();
-        temp_v0 = D_800B743C->unkC;
-        func_80018FF0(&temp_v0[temp_v0[1] / 4]);
-        func_80019478(D_800B743C->unkC);
-        D_800B743C->unkC = 0;
-        D_800B743C->unk0->proc_func = &func_8003E3A0;
+        func_80018FF0(&DungeonMap->unkC[DungeonMap->unkC[1] / 4]);
+        func_80019478(DungeonMap->unkC);
+        DungeonMap->unkC = NULL;
+        DungeonMap->unk0->proc_func = &func_8003E3A0;
     }
 }
 
-// INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EDE0);
+
+void func_8003EDE0(void) {
+    s32 var_s0;
+    struct unk_data_113 * var_v1 = DungeonMap; // This is stupid even for this game.
+
+    DungeonMap->unk4 |= 0x20;
+    var_v1->unkC24.vx = 0;
+    var_v1->unkC24.vz = 0;
+    DungeonMap->unk161E = 0;
+    DungeonMap->unk139C = 0;
+    DungeonMap->unk75C.vx = 0;
+    DungeonMap->unk75C.vy = 0;
+    for (var_s0 = 0; var_s0 < 8; var_s0++) {
+        DungeonMap->unk1627[var_s0][0] = 0;
+        DungeonMap->unk1627[var_s0][1] = 0;
+        DungeonMap->unk1627[var_s0][2] = 0;
+    }
+    for (var_s0 = 0; var_s0 < 8; var_s0++) {
+        func_8003CF60(func_8004F2FC(var_s0), var_s0);
+    }
+    DungeonMap->unk8 = func_80019C58(0, 0, DungeonMap->unk161A + 0x167, &DungeonMap->unkC, 0, 3);
+    DungeonMap->unk0->proc_func = &func_8003ED10;
+}
 
 // INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003EED8);
 
 void func_8003F000(void) {
-    D_800B743C->unk161A = func_8002DADC(func_800149F0(1), D_800B743C->unkC0E, D_800B743C->unkC10);
-    D_800B743C->unkC14 = D_800A0CDC[D_800B743C->unk161A][0];
-    D_800B743C->unkC16 = D_800A0CDC[D_800B743C->unk161A][1];
+    DungeonMap->unk161A = func_8002DADC(func_800149F0(1), DungeonMap->unkC0E, DungeonMap->unkC10);
+    DungeonMap->unkC14 = D_800A0CDC[DungeonMap->unk161A][0];
+    DungeonMap->unkC16 = D_800A0CDC[DungeonMap->unk161A][1];
     func_8003EED8();
-    D_800B743C->unk0->proc_func = &func_8003EDE0;
+    DungeonMap->unk0->proc_func = &func_8003EDE0;
 }
+
 
 struct object * func_8003F08C(void) {
     struct object * temp_v0;
@@ -989,38 +1039,40 @@ struct object * func_8003F08C(void) {
     u16 temp_v0_3;
     s16 temp_v1;
 
-    temp_v0 = CreateObject(0, &func_8003B044, *FirstObjectPtrPtr, 0xB00000, 0, 0x1640);
+    temp_v0 = CreateObject(0, &func_8003B044, *FirstObjectPtrPtr, 0xB00000, 0, sizeof(struct unk_data_113));
     if (temp_v0 == 0) return 0;
     bzero(temp_v0->data, 0x1640);
-    D_800B743C = temp_v0->data;
-    D_800B743C->unk0 = temp_v0;
+    DungeonMap = temp_v0->data;
+    DungeonMap->unk0 = temp_v0;
     func_8003FFE4(0x13);
     if (func_8004F74C() == 0) {
-        D_800B743C->unk4 &= 0xEF;
+        DungeonMap->unk4 &= 0xEF;
     } else {
-        D_800B743C->unk4 |= 0x10;
+        DungeonMap->unk4 |= 0x10;
     }
-    D_800B743C->unk4 |= 8;
-    D_800B743C->unkC0E = D_800B743C->unkC18 = DungeonData->grid_x;
-    D_800B743C->unkC10 = D_800B743C->unkC1A = DungeonData->grid_z;
-    if (D_800B743C->unk4 & 0x10) {
+    DungeonMap->unk4 |= 8;
+    DungeonMap->unkC0E = DungeonMap->x3 = DungeonData->grid_x;
+    DungeonMap->unkC10 = DungeonMap->y3 = DungeonData->grid_z;
+    if (DungeonMap->unk4 & 0x10) {
         temp_v0_4 = DungeonData->cardinal_dir >> 10;
-        D_800B743C->unkC12 = D_800B743C->unkC0D = temp_v0_4;
+        DungeonMap->unkC12 = DungeonMap->unkC0D = temp_v0_4;
     } else {
-        D_800B743C->unkC12 = 0;
+        DungeonMap->unkC12 = 0;
     }
-    D_800B743C->unk10 = func_8002864C(0x10, 0x10, 0x120, 0x78, 0xB00000, 0x1A);
-    D_800B743C->unk18 = func_8003CC24(0x18, 0x88, 0x110, 0x11, 0, 0, 0xB00000, 4);
-    D_800B743C->unk30 = func_8003B6DC(0x34, 0x2F, 0xB00000, 4);
-    D_800B743C->unk0->proc_func = &func_8003F000;
+    DungeonMap->unk10 = func_8002864C(0x10, 0x10, 0x120, 0x78, 0xB00000, 0x1A);
+    DungeonMap->unk18 = func_8003CC24(0x18, 0x88, 0x110, 0x11, 0, 0, 0xB00000, 4);
+    DungeonMap->unk30 = func_8003B6DC(0x34, 0x2F, 0xB00000, 4);
+    DungeonMap->unk0->proc_func = &func_8003F000;
     return temp_v0;
 }
 
+
 struct object * func_8003F244(void) {
     struct object * temp_v0 = func_8003F08C();
-    D_800B743C->unk4 |= 4;
+    DungeonMap->unk4 |= 4;
     return temp_v0;
 }
+
 
 void func_8003F27C(void) {
     func_800225C8(1, 1, 1, 1, 2);

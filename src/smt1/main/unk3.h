@@ -49,5 +49,6 @@ struct c_is_dumb_and_can_kiss_my_ass D_800B71D4 = {
     {0x2D5, 0x2D6, 0x2D7, 0x2D9}
 };
 
+extern void func_800441F0(s32 arg0, struct unk_data_403 * arg1);
 void func_80040F44(struct object *);
 void func_80041078(struct object *);

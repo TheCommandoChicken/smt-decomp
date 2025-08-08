@@ -604,7 +604,7 @@ void func_80040894(s32 arg0, s16 arg1) {
 }
 
 
-s16 func_800408BC(s32 arg0) {
+s32 func_800408BC(s32 arg0) {
     s16 * temp_a1 = &D_800FAC80[arg0];
     if ((arg0 >= 5) || (temp_a1[4] == -1)) {
         return -1;

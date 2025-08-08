@@ -1,3 +1,6 @@
+#include "lib/libgte.h"
+#include "sys/types.h"
+
 /* $PSLibId: Run-time Library Release 4.7$ */
 #ifndef _LIBGPU_H_
 #define _LIBGPU_H_

@@ -8,7 +8,7 @@
 #ifndef _LIBDS_H_
 #define _LIBDS_H_
 
-#include <kernel.h>
+#include "kernel.h"
 
 /*
  * CD-ROM Mode (used int CdlSetmode)

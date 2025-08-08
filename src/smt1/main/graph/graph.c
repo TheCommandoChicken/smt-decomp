@@ -208,6 +208,7 @@ void func_8001A450(void) {
 	return;
 }
 
+
 void func_8001A454(void) {
 	RECT sp18;
 
@@ -239,9 +240,7 @@ void func_8001A454(void) {
 
 
 void func_8001A54C(void) {
-	s32 buff;
-
-	buff = GsGetActiveBuff();
+	s32 buff = GsGetActiveBuff();
 
 	OrderingTable = &OrderingTable50[buff][0];
 	OTPtr = &OTData[buff];
@@ -265,11 +264,13 @@ void func_8001A610(void) {
 	DRAWENV * var_v1_2;
 
 	GsSwapDispBuff();
+
 	spD0.x = 0;
 	spD0.y = ActiveBuffer == 0 ? 0xF0 : 0;
 	spD0.w = 0x140;
 	spD0.h = 0xF0;
 	ClearImage(&spD0, BackgroundR, BackgroundG, BackgroundB);
+
 	GetDrawEnv(&sp10);
 	sp70 = sp10;
 	sp10.clip.x += 0x10;
@@ -278,6 +279,7 @@ void func_8001A610(void) {
 	sp10.clip.h = 0x78;
 	SetDrawEnv(&D_800F0F08, &sp10);
 	SetDrawEnv(&D_800F0F48, &sp70);
+
 	AddPrim(&D_800B73DC, &D_800F0F08);
 	DrawOTag((u32 *)&D_800B73DC);
 	setaddr(&MainOTPtr[70], 0xFFFFFF);
@@ -290,7 +292,7 @@ void func_8001A610(void) {
 /*
 	Set background color.
 */
-void func_8001A778(s8 r, s8 g, s8 b) {
+void func_8001A778(u8 r, u8 g, u8 b) {
 	BackgroundR = r;
 	BackgroundG = g;
 	BackgroundB = b;
@@ -1037,14 +1039,14 @@ void func_8001D364(struct line_f2_data * arg0, struct line_init_data * arg1) {
 	arg0->color.b = arg1->b;
 }
 
-void func_8001D440(s32 arg0, s16 * arg1) {
-	arg1[0] = (arg0 & 0xF) * 0x40;
-	arg1[1] = (arg0 & 0x10) * 0x10;
+void func_8001D440(s32 arg0, RECT * arg1) {
+	arg1->x = (arg0 & 0xF) * 0x40;
+	arg1->y = (arg0 & 0x10) * 0x10;
 }
 
-void func_8001D45C(u32 arg0, s16 * arg1) {
-	arg1[0] = ((arg0 & 0x3F) * 0x10);
-	arg1[1] = ((arg0 & 0x7FC0) / 0x40);
+void func_8001D45C(s32 arg0, RECT * arg1) {
+	arg1->x = ((arg0 & 0x3F) * 0x10);
+	arg1->y = ((arg0 & 0x7FC0) / 0x40);
 }
 
 void AddDrawMode(s32 dfe, s32 dtd, s32 tpage, RECT * tw, s32 ot_index, DR_MODE * p) {
@@ -1132,7 +1134,7 @@ void AddPolyG4(s16 x, s16 y, s16 w, s16 h, u32 * color, s32 ot_index, POLY_G4 * 
 	AddPrim(&OrderingTable[ot_index], p);
 }
 
-void AddPolyFT4(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, s8 tw, s8 th, u32 color, s16 tpage, s16 clut, s32 ot_index, POLY_FT4 * p) {
+void AddPolyFT4(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, u8 tw, u8 th, u32 color, s16 tpage, s16 clut, s32 ot_index, POLY_FT4 * p) {
 	setPolyFT4(p);
 	setXYWH(p, x - 0xA0, y - 0x46, w, h);
 	setRGB0FromU32(p, color);

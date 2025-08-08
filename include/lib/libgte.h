@@ -1,3 +1,5 @@
+#include "sys/types.h"
+
 /*
  * $PSLibId: Run-time Library Release 4.7$ 
  */

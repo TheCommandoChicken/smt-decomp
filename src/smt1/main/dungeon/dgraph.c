@@ -1,5 +1,7 @@
 #include "common.h"
 #include "dungeon.h"
+#include "object.h"
+#include "unk6.h"
 
 //INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80029398);
 
@@ -652,7 +654,7 @@ void func_8002F044(void) {
 void func_8002F0AC(void) {
     struct unk_data_29 sp10;
 
-    if (func_8004C06C(0x2F) == 0) {
+    if (!func_8004C06C(FLAG_APOCALYPSE)) {
         DungeonData->coordinates = DungeonData->unk90;
     } else {
         sp10.unk8 = DungeonData->grid_x;
@@ -1105,7 +1107,7 @@ void func_80031E7C(s16* arg0) {
     }
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80031EE0);
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80031EE0);
 
 void func_80032280(s16 arg0) {
     s32 temp_s1;
@@ -1113,8 +1115,8 @@ void func_80032280(s16 arg0) {
     temp_s1 = func_8004ED78();
     switch (arg0) {
     case 0:
-        func_8004C08C(3);
-        func_8004C0B4(4);
+        func_8004C08C(FLAG_HALLWAY);
+        func_8004C0B4(FLAG_SLEEP);
     default:
         return;
     case 1:
@@ -1127,15 +1129,15 @@ void func_80032280(s16 arg0) {
     case 8:
         switch (temp_s1) {
         case 1:
-            if (func_8004C06C(0x47) == 0) {
+            if (!func_8004C06C(FLAG_TAKEMINEKATA)) {
                 if ((arg0 != 1) && (arg0 != 3) && (arg0 != 5)) {
                     if (arg0 == 8) {
-                        func_8004C08C(0xFF);
+                        func_8004C08C(FLAG_NO_ENCOUNTERS);
                     } else {
-                        func_8004C0B4(0xFF);
+                        func_8004C0B4(FLAG_NO_ENCOUNTERS);
                     }
                 } else {
-                    func_8004C08C(0xFF);
+                    func_8004C08C(FLAG_NO_ENCOUNTERS);
                 }
             }
         case 0:
@@ -1144,22 +1146,22 @@ void func_80032280(s16 arg0) {
         break;
     case 9:
     case 13:
-        if (func_8004C06C(0x56) == 0) {
-            func_8004C08C(0xFF);
+        if (!func_8004C06C(FLAG_BELIAL)) {
+            func_8004C08C(FLAG_NO_ENCOUNTERS);
         }
         return;
     case 10:
     case 14:
-        if (func_8004C06C(0x56) == 0) {
-            func_8004C0B4(0xFF);
+        if (!func_8004C06C(FLAG_BELIAL)) {
+            func_8004C0B4(FLAG_NO_ENCOUNTERS);
             return;
         }
         return;
     case 15:
-        func_8004C0B4(0x38);
+        func_8004C0B4(FLAG_VAJRADHATU);
         return;
     case 16:
-        func_8004C08C(0x38);
+        func_8004C08C(FLAG_VAJRADHATU);
         return;
     case 17:
         func_8004C0B4(0x9C);
@@ -2328,25 +2330,247 @@ void func_80038990(void) {
     D_800B742C = 0;
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_800389C4);
+void func_800389C4(void) {
+    if (D_800B742C->unkE4 != 0) {
+        D_800B742C->unkE6 = 0x8C;
+        D_800B742C->unkE8 = 0x82;
+        D_800B742C->unkE4 = 1;
+        D_800B742C->unk0->proc_func = &func_80038A08;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038A08);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038BCC);
+void func_80038A08(void) {
+    struct unk_data_105 * temp_s0;
+    struct unk_data_104 * temp_s1;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038DA0);
+    temp_s1 = &D_800B742C->unk4[D_800B742C->unk44];
+    if (D_800B742C->unkE4 == 1) {
+        D_800B742C->unkE8 -= 10;
+        if (D_800B742C->unkE8 < 0x74) {
+            D_800B742C->unkE8 = 0x73U;
+            D_800B742C->unkC0.unkDC = 1;
+            D_800B742C->unk0->proc_func = func_80038BCC;
+        }
+    } else if (D_800B742C->unkE4 == 0) {
+        D_800B742C->unkE8 += 10;
+        if (D_800B742C->unkE8 >= 0x82) {
+            D_800B742C->unkE8 = 0x82U;
+            D_800B742C->unk60 = 0;
+            D_800B742C->unk64 = 0;
+            D_800B742C->unk0->proc_func = func_800389C4;
+        }
+    }
+    D_800B742C->unkC0.unkC0 = (u16) D_800B742C->unkE6;
+    D_800B742C->unkC0.unkDC = 1;
+    D_800B742C->unkC0.unkC2 = (u16) D_800B742C->unkE8;
+    temp_s0 = &D_800B742C->unkC0;
+    AddSprt(temp_s0->unkC0, temp_s0->unkC2, temp_s0->unkC6, temp_s0->unkC4, temp_s0->unkD0, temp_s0->unkD2, 0x808080, ((temp_s0->unkCE << 6) | ((temp_s0->unkCC >> 4) & 0x3F)), temp_s0->unkE0, &temp_s1->unk0);
+    temp_s1->unk0.code |= 2;
+    AddDrawMode(0, 1, ((temp_s0->unkCA & 0x100) >> 4) | ((temp_s0->unkC8 & 0x3FF) >> 6) | ((temp_s0->unkCA & 0x200) * 4), 0, temp_s0->unkE0, &temp_s1->unk14);
+    D_800B742C->unk44 ^= 1;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038F00);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038F34);
+void func_80038BCC(void) {
+    struct unk_data_105* temp_s0;
+    struct unk_data_104* temp_s1;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038F40);
+    temp_s1 = &D_800B742C->unk4[D_800B742C->unk44];
+    if (D_800B742C->unkE4 != 1) {
+        D_800B742C->unkE4 = 0;
+        D_800B742C->unk0->proc_func = &func_80038A08;
+    }
+    
+    D_800B742C->unkC0.unk0 = D_800B742C->unkE6;
+    D_800B742C->unkC0.unk2 = D_800B742C->unkE8;
+    D_800B742C->unkF4 += 1;
+    if (D_800B742C->unkF4 >= 0 && D_800B742C->unkF4 < 10) {
+        D_800B742C->unkC0.unk1C = 1;
+        temp_s0 = &D_800B742C->unkC0;
+        AddSprt(temp_s0->unk0, temp_s0->unk2, temp_s0->unk6, temp_s0->unk4, temp_s0->unk10, temp_s0->unk12, 0x808080, ((temp_s0->unkE << 6) | ((temp_s0->unkC >> 4) & 0x3F)), temp_s0->unk20, temp_s1);
+        temp_s1->unk0.code |= 2;
+        AddDrawMode(0, 1, ((temp_s0->unkA & 0x100) >> 4) | ((temp_s0->unk8 & 0x3FF) >> 6) | ((temp_s0->unkA & 0x200) * 4), 0, temp_s0->unk20, &temp_s1->unk14);
+    } else if (D_800B742C->unkF4 <= 9 || D_800B742C->unkF4 >= 20) {
+        D_800B742C->unkF4 = 0;
+    }
+    D_800B742C->unk44 ^= 1;
+    if (func_80018EE8(0, 0xD) != 0) {
+        if (func_8002DBAC() == 1) {
+            func_80032874(&D_800B742C->unk48);
+            func_80038944();
+        }
+    } else if (func_80018EE8(0, 0xE) != 0) {
+        func_80038944();
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038F64);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80038FA0);
+void func_80038DA0(void) {
+    struct texture_data sp18;
+    s16 sp28[2];
+    struct object* temp_v0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80039110);
+    temp_v0 = CreateObject(0, 0, *FirstObjectPtrPtr, 0x50000, 0, 0xF8);
+    if (temp_v0 == 0) return;
+    bzero(temp_v0->data, 0xF8);
+    D_800B742C = temp_v0->data;
+    D_800B742C->unk0 = temp_v0;
+    D_800B742C->unkE4 = 0;
+    D_800B742C->unkE6 = 0x8B;
+    D_800B742C->unkE8 = 0x82;
+    D_800B742C->unkEA = 0x28;
+    D_800B742C->unkEC = 0x10;
+    D_800B742C->unkF0 = 0x22;
+    D_800B742C->unkF4 = 0;
+    sp18 = GetTextureInitData(0xB3);
+    sp28[0] = (sp18.unk8 & 0xF) * 0x10;
+    sp28[1] = ((sp18.unk8 >> 4) + 0x1E0) & 0x1FF;
+    D_800B742C->unkC0.unk0 = 0;
+    D_800B742C->unkC0.unk2 = 0;
+    D_800B742C->unkC0.unk6 = sp18.w;
+    D_800B742C->unkC0.unk4 = sp18.h;
+    D_800B742C->unkC0.unk8 = 0x2C0;
+    D_800B742C->unkC0.unkA = 0x100;
+    D_800B742C->unkC0.unkC = sp28[0];
+    D_800B742C->unkC0.unkE = sp28[1];
+    D_800B742C->unkC0.unk10 = sp18.u;
+    D_800B742C->unkC0.unk12 = sp18.v;
+    D_800B742C->unkC0.unk14 = 0x28;
+    D_800B742C->unkC0.unk16 = 0x10;
+    D_800B742C->unkC0.unk18 = 0;
+    D_800B742C->unkC0.unk1A = 0;
+    D_800B742C->unkC0.unk1C = 1;
+    D_800B742C->unkC0.unk20 = (D_800B742C->unkF0 - 1);
+    D_800B742C->unk0->proc_func = &func_800389C4;
+}
+
+
+void func_80038F00(void) {
+    RemoveObject(D_800B7430->unk0);
+    D_800B7430->unk0 = 0;
+    D_800B7430 = NULL;
+}
+
+
+void func_80038F34(void) {
+    D_800B7430->unk14C = 0;
+}
+
+
+void func_80038F40(void) {
+    D_800B7430->unk14C = 1;
+    D_800B7430->unk0->proc_func = func_80038F64;
+}
+
+
+void func_80038F64(void) {
+    if (D_800B7430->unk14C != 1) {
+        D_800B7430->unk15A = 0;
+        D_800B7430->unk15C = 0;
+        D_800B7430->unk0->proc_func = func_80038FA0;
+    }
+}
+
+
+void func_80038FA0(void) {
+    struct dungeon_init_data sp10;
+    s32 stack_pad[2]; // IDK if this is accurate but it pads the stack enough for it to match so..?
+
+    if ((func_8002CA84(&DungeonData->grid_x, DungeonData) & 0xF) == 10) {
+        s16 var_a1;
+        for (var_a1 = 0; var_a1 < 9; var_a1++) {
+            D_800B7430->unk14D[var_a1] = 0;
+        }
+        func_8003A6A4(DungeonData->grid_x, DungeonData->grid_z, (func_8002ED70() >> 4), &sp10);
+        if (sp10.unk20 != -1) {
+            struct unk_data_106* temp_a0 = D_800B7430;
+            temp_a0->unk159 = func_8009C9BC(func_8003A8B0(sp10.unk18));
+            D_800B7430->unk15C = ((8 - D_800B7430->unk159) * 4);
+            strncat(&D_800B7430->unk14D, func_8003A8B0(sp10.unk18), D_800B7430->unk159);
+            D_800B7430->unk15A = 0;
+            D_800B7430->unk14C = 2;
+            D_800B7430->unk146 = (((0x40 - (D_800B7430->unk159 * 8)) >> 1) + 0x78);
+            D_800B7430->unk14A = (D_800B7430->unk159 * 8);
+            D_800B7430->unk0->proc_func = &func_80039110;
+            return;
+        }
+    }
+    D_800B7430->unk14C = 1;
+    D_800B7430->unk0->proc_func = &func_80038F64;
+}
+
+
+void func_80039110(void) {
+    D_800A2750.unkC = D_800A2750.unk12 = D_800B7430->unk14A + 8;
+    
+    if (D_800B7430->unk14C < 2 || D_800B7430->unk14C >= 4) {
+        D_800B7430->unk15A = 0;
+        D_800B7430->unk15C = 0;
+        D_800B7430->unk0->proc_func = &func_80038FA0;
+    }
+    if (DungeonData->origin->proc_func == &func_80028714) {
+        s16 var_v0;
+        struct unk_data_108 * temp_s3 = &D_800B7430->unk8[D_800B7430->unk145];
+        for (var_v0 = 0; var_v0 < 6; var_v0++) {
+            s16 * temp_s0 = &D_800A2750.unk0[var_v0];
+            struct texture_data sp38 = GetTextureInitData(temp_s0[2]);
+            s16 temp_t4 = (((sp38.unk8 >> 4) + 0x1E0) << 6) | (sp38.unk8 & 0xF);
+            if (var_v0 >= 4 && var_v0 < 6) {
+                POLY_FT4 * temp_s0_2 = &temp_s3->p[var_v0 - 4];
+                AddPolyFT4((temp_s0[0] + D_800B7430->unk146), 
+                    (temp_s0[1] + D_800B7430->unk148), 
+                    D_800B7430->unk14A, 8, 
+                    sp38.u, sp38.v, 
+                    8, 8, 0x808080, 0x1B, 
+                    temp_t4, 
+                    D_800B7430->unk140, 
+                    temp_s0_2);
+                SetSemiTrans(temp_s0_2, 1);
+            } else {
+                SPRT_8 * temp_s0_3 = &temp_s3->s[var_v0];
+                AddSprt8((temp_s0[0] + D_800B7430->unk146), 
+                    (temp_s0[1] + D_800B7430->unk148), 
+                    sp38.u, sp38.v, 
+                    0x808080, 
+                    temp_t4, 
+                    D_800B7430->unk140, 
+                    temp_s0_3);
+                SetSemiTrans(temp_s0_3, 1);
+                if (var_v0 == 3) {
+                    AddDrawMode(0, 1, 0x1B, 0, D_800B7430->unk140, &temp_s3->d);
+                }
+            }
+        }
+        D_800B7430->unk145 ^= 1;
+        if (D_800B7430->unk14C == 3) {
+            D_800B7430->unk142 += 1;
+            if (D_800B7430->unk142 >= 0x15) {
+                D_800B7430->unk142 = 0;
+            }
+            if (D_800B7430->unk142 > 0 && D_800B7430->unk142 <= 9) {
+                func_80022394(&D_800B6F30, (D_800B7430->unk15C + (D_800B7430->unk15A * 8) + 0x7C), (D_800B7430->unk148 + 5), 1, D_800B7430->unk140 - 1);
+            }
+            func_80022394(&D_800B7430->unk14D, (D_800B7430->unk15C + 0x7C), (D_800B7430->unk148 + 5), 1, D_800B7430->unk140 - 1);
+        } else if (D_800B7430->unk14C == 2) {
+            u8 var_a1;
+            for (var_a1 = 0; var_a1 < D_800B7430->unk15A; var_a1++) {
+                D_800FA1C0[var_a1] = D_800B7430->unk14D[var_a1];
+            }
+            D_800FA1C0[var_a1] = 0x5F;
+            var_a1++;
+            D_800FA1C0[var_a1] = 0x5F;
+            var_a1++;
+            D_800FA1C0[var_a1] = 0;
+            D_800B7430->unk15A += 1;
+            if (D_800B7430->unk15A >= D_800B7430->unk159) {
+                D_800B7430->unk14C = 3;
+            }
+            func_80022394(&D_800FA1C0, (D_800B7430->unk15C + 0x7C), (D_800B7430->unk148 + 5), 1, D_800B7430->unk140 - 1);
+        }
+    }
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_80039574);
 
@@ -2420,4 +2644,16 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AE00);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AFB4);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dgraph", func_8003AFE8);
+
+s32 func_8003AFE8(void) {
+    s32 var_s0;
+
+    for (var_s0 = 0; var_s0 < 4; var_s0++) {
+        if (func_8004CA5C(var_s0)) {
+            if (!(func_8004C85C(var_s0) & 0xE000)) {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}

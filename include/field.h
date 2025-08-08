@@ -3,18 +3,10 @@
 #include "lib/libgpu.h"
 #include "object.h"
 #include "common.h"
+#include "unk6.h"
 
 #ifndef _FIELD_H_
 #define _FIELD_H_
-
-enum story_section {
-	HAKAI_BEF = 0,
-	HAKAI_AFT = 1,
-	NEBI_KILL = 2,
-	KOZUI = 3,
-	NO_DATA = 4
-};
-
 
 struct field_pos {
     s16 x, y;
@@ -125,6 +117,20 @@ struct return_thing {
 	s32 unk1C;
 	s32 unk20;
 };
+
+u16 D_800A2D2C[10][4] = {
+	{0x8E, 0x147, 0x179, 0x00}, 
+	{0x57, 0x179, 0x18A, 0x32}, 
+	{0x8F, 0x18A, 0x1A9, 0x43}, 
+	{0x90, 0x1A9, 0x1D9, 0x62}, 
+	{0x65, 0x1D9, 0x1DB, 0x92}, 
+	{0x66, 0x1DB, 0x1E2, 0x94}, 
+	{0xEC, 0x1E3, 0x1E4, 0x9C}, 
+	{0xA8, 0x1E4, 0x1E5, 0x9D}, 
+	{0x80, 0x1E2, 0x1E3, 0x9B}, 
+	{0xFFFF, 0, 0, 0}
+};
+
 
 void CreateFieldMap(struct return_thing * arg0);
 void func_800152D0(struct object *);

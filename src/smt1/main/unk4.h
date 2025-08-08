@@ -17,12 +17,12 @@ struct unk_data_408 {
     s32 unk18;
     s32 unk1C[8];
     s32 unk3C;
-    s32 unk40;
+    s32 dir;
     s32 unk44;
     s32 unk48;
     s32 unk4C;
-    s32 unk50;
-    s32 unk54;
+    s32 x;
+    s32 y;
     s32 unk58;
     s32 unk5C;
 };
@@ -30,7 +30,27 @@ struct unk_data_408 {
 struct unk_data_408 * OverworldMapDataPtr;
 
 struct unk_data_407 D_800A2D0C[4];
-struct unk_data_407 D_800A2D2C[4];
+s8 D_800A2F7C[8] = {
+    1, 3, 8, 10, -1
+};
+s8 D_800A2F84[8] = {
+    2, 3, 8, 10, 9, -1
+};
+s8 D_800A2F8C[4] = {
+    4, 3, 10, -1
+};
+s8 D_800A2F90[4] = {
+    5, 3, 10, -1
+};
+s8 D_800A2F94[8] = {
+    3, 6, 7, 10, -1
+};
+s8 D_800A2F9C[8] = {
+    1, 2, 3, 6, 8, 10, -1
+};
+s8 D_800A2FA4[8] = {
+    1, 4, 2, 5, 1, 4, 2, 5
+};
 u8 D_800A9A70[8];
 u8 D_800A9A78[8];
 u8 D_800A9B18[52][5];
@@ -68,4 +88,13 @@ u8 FieldLocationLookup[352] = {
      0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
 };
 
+
+extern void func_80044FA0(void * arg0, void * arg1, void * arg2, void * arg3, void * arg4);
 extern void func_80045288(u32 *, u32 *);
+void func_80045AD4(struct unk_data_408 *);
+void func_80045AE4(struct unk_data_408 *);
+void func_80045BA0(struct unk_data_408 *);
+void func_80045D04(struct unk_data_408 *);
+void func_80045DB0(struct unk_data_408 *);
+void func_80045DF4(struct unk_data_408 *);
+extern s32 func_80045FF8(s32 x, s32 y, s32 dir);

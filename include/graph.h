@@ -361,7 +361,18 @@ extern MATRIX D_801112F8;
 extern struct object_ptrs * FirstObjectPtrPtr;
 
 
-extern void func_8001A778(s8 r, s8 g, s8 b);
+extern void func_8001A778(u8 r, u8 g, u8 b);
 extern struct object * func_800180DC(void (*)(struct object *), void (*)(struct object *), struct object *, s32, s32, size_t);
+extern struct texture_data GetTextureInitData(s32);
+extern void AddDrawMode(s32 dfe, s32 dtd, s32 tpage, RECT * tw, s32 ot_index, DR_MODE * p);
+extern void AddSprt(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT * p);
+extern void AddSprt8(s16 x, s16 y, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT_8 * p);
+extern void AddSprt16(s16 x, s16 y, u8 u, u8 v, u32 color, u16 clut, s32 ot_index, SPRT_16 * p);
+extern void AddLineF2(s16 * x, s16 * y, u32 color, s32 ot_index, LINE_F2 * p);
+extern void AddPolyF4(s16 x, s16 y, s16 w, s16 h, u32 col, s32 ot_index, POLY_F4 * p);
+extern void AddPolyG4(s16 x, s16 y, s16 w, s16 h, u32 * color, s32 ot_index, POLY_G4 * p);
+extern void AddPolyFT4(s16 x, s16 y, s16 w, s16 h, u8 u, u8 v, u8 tw, u8 th, u32 color, s16 tpage, s16 clut, s32 ot_index, POLY_FT4 * p);
+extern void FlipPolyFT4H(POLY_FT4 * arg0);
+extern void FlipPolyFT4V(POLY_FT4 * arg0);
 
 #endif

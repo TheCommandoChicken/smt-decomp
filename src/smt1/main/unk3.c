@@ -499,7 +499,7 @@ void func_8004407C(void) {
 }
 
 
-u8 func_80044114(void) {
+s32 func_80044114(void) {
     return D_800FAE18.unk29;
 }
 

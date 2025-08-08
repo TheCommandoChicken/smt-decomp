@@ -35,7 +35,7 @@ struct object {
 	u32 active;							/* 2 = Removed. */
 	s16 unk2C;							/* Unknown, set to 0 when removing object. */
 	s16 unk2E;							/* Unknown, checked before removing object. */
-	s8 unk30, unk31, unk32, unk33;
+	void * unk30;
 	void * data;						/* Pointer to the data struct associated with this object. */
 	u32 type;							/* Indicates which type of common object this is. */
 	s16 initialized;					/* Set after the object is initialized. */
@@ -67,7 +67,7 @@ struct unk_data_6 {
 	s32 unk3C;
 };
 
-void func_80017FF0(void (*)(struct object *), s32);
+void func_80017FF0(void (*func)(struct object *), s32 arg1);
 void func_800180D4(void);
 struct object * CreateObject(void (*proc_func)(struct object *), 
 	void (*kill_func)(struct object *), 

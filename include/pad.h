@@ -27,6 +27,14 @@ u8 TransDataBuff;
 u8 RawInput[2][0x22];
 struct input_info ControllerInfo[2];
 
-void InitPads(void);
-void InitPadInfo(int pad);
-void InitPadInfos(void);
+extern void SetControlMonitoring(s32 pad, s8 mon);
+extern void InitPads(void);
+extern void InitPadInfo(s32 pad);
+extern void InitPadInfos(void);
+extern s32 GetButton(s32 pad, s32 button);
+extern s32 GetJustPressedButton(s32 pad, s32 button);
+extern s32 GetHeldButton(s32 pad, s32 button);
+extern u16 GetJustPressedButtons(s32 pad);
+extern u16 GetHeldButtons(s32 pad);
+extern u8 * GetRawInput(s32 pad);
+extern void func_80018D44(void);

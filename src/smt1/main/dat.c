@@ -1,9 +1,14 @@
 #include "dat.h"
 #include "memory.h"
+#include "lib/libds.h"
 
 TIM_IMAGE Tim;
 struct unk_data_9 * D_800B6D60;
 s32 D_800B9830[2][2];
+extern s32 D_800B9850;
+struct data_container DataContainer;
+s32 SectorNumber;
+
 
 void func_80018FF0(u32 * addr) {
 	TIM_IMAGE sp10;
@@ -24,16 +29,16 @@ TIM_IMAGE * func_800190B0(void) {
 	return &Tim;
 }
 
-void func_800190BC(u32 * addr, SVECTOR * arg1, RECT * arg2) {
+void func_800190BC(u32 * addr, RECT * prect, RECT * crect, s32 arg3) {
 	TIM_IMAGE sp10;
 
 	OpenTIM(addr);
 	ReadTIM(&sp10);
-	sp10.prect->x = arg1->vx;
-	sp10.prect->y = arg1->vy;
+	sp10.prect->x = prect->x;
+	sp10.prect->y = prect->y;
 	LoadImage(sp10.prect, sp10.paddr);
 	if ((sp10.mode >> 3) & 1) {
-		LoadImage(arg2, sp10.caddr);
+		LoadImage(crect, sp10.caddr);
 	}
 	DrawSync(0);
 }
@@ -142,15 +147,15 @@ u32 func_80019300(u8 * arg0, struct unk_data_8 * arg1) {
 
 /* Matched by AngheloAlf */
 void func_80019384(struct unk_data_9 * arg0, s32 arg1) {
-	struct unk_data_9 * v0 = D_800B6D60->unk0;
+	struct unk_data_9 * v0 = D_800B6D60->next;
 
-	v0->unk0 = arg0;
-	v0->unk4 = arg0;
+	v0->next = arg0;
+	v0->prev = arg0;
 	v0->unk8 = -0x3E7;
-	v0->unk4->unk0 = v0;
-	v0->unk4->unk4 = v0;
-	v0->unk4->unk8 = 0;
-	v0->unk4->unkC = arg1;
+	v0->prev->next = v0;
+	v0->prev->prev = v0;
+	v0->prev->unk8 = 0;
+	v0->prev->unkC = arg1;
 }
 
 void * func_800193C0(s32 arg0) {
@@ -159,7 +164,7 @@ void * func_800193C0(s32 arg0) {
 	struct unk_data_9 * var_s0;
 
 	if (arg0 >= 0) {
-		var_s0 = D_800B6D60->unk4;
+		var_s0 = D_800B6D60->prev;
 		arg0 = (arg0 + 7) & ~7;
 		while (var_s0 != D_800B6D60) {
 			if ((var_s0->unk8 != 1) && (var_s0->unkC >= arg0)) {
@@ -168,7 +173,7 @@ void * func_800193C0(s32 arg0) {
 				}
 				break;
 			}
-			var_s0 = var_s0->unk4;
+			var_s0 = var_s0->prev;
 		}
 		if (var_s0 != D_800B6D60) {
 			var_s0->unk8 = 1;
@@ -186,7 +191,7 @@ void func_80019478(struct unk_data_9 * arg0) {
 		if (temp_a0->unk8 == 1) {
 			temp_a0->unk8 = 0;
 			func_80019520(temp_a0);
-			func_80019520(temp_a0->unk0);
+			func_80019520(temp_a0->next);
 		}
 	}
 }
@@ -196,16 +201,16 @@ void func_800194C4(struct unk_data_9 * arg0, s32 arg1) {
 	struct unk_data_9 * temp_v0;
 
 	temp_v0 = (s8 *)arg0 + arg1;
-	temp_v0[1].unk0 = arg0;
+	temp_v0[1].next = arg0;
 	temp_a2 = &temp_v0[1];
-	temp_a2->unk4 = arg0->unk4;
+	temp_a2->prev = arg0->prev;
 	temp_a2->unk8 = 0;
 	temp_a2->unkC = ((arg0->unkC - arg1) - 0x10);
-	arg0->unk4->unk0 = temp_a2;
-	arg0->unk4 = temp_a2;
+	arg0->prev->next = temp_a2;
+	arg0->prev = temp_a2;
 	arg0->unkC = arg1;
-	if (arg0 == D_800B6D60->unk0) {
-		D_800B6D60->unk0 = temp_a2;
+	if (arg0 == D_800B6D60->next) {
+		D_800B6D60->next = temp_a2;
 	}
 }
 
@@ -213,11 +218,11 @@ void func_80019520(struct unk_data_9 * arg0) {
 	struct unk_data_9 * temp_v1;
 
 	if (arg0->unk8 == 0) {
-		temp_v1 = arg0->unk4;
+		temp_v1 = arg0->prev;
 		if (temp_v1->unk8 == 0) {
 			arg0->unkC += (0x10 + temp_v1->unkC);
-			arg0->unk4->unk4->unk0 = arg0;
-			arg0->unk4 = arg0->unk4->unk4;
+			arg0->prev->prev->next = arg0;
+			arg0->prev = arg0->prev->prev;
 		}
 	}
 }
@@ -246,138 +251,182 @@ s32 func_8001958C(s32 arg0, s32 arg1, s32 arg2) {
 	return var_a1;
 }
 
-void func_800195FC(s32 arg0, s32 arg1, DVECTOR * arg2) {
-	DVECTOR sp0;
-	u16 temp_a0;
-	u16 temp_a1;
-	s32 var_a3;
-	s32 var_t1;
-	s32 var_v0;
-	DVECTOR * var_t0;
 
-	temp_a1 = arg1;
-	temp_a0 = arg0;
-	for (var_t1 = temp_a0 + 1; var_t1 < temp_a1; var_t1++) {
-		var_a3 = var_t1 - 1;
-		sp0 = arg2[var_t1];
-		var_v0 = arg2[var_t1].vy;
-		while (var_a3 >= temp_a0) {
-			if (var_v0 < arg2[var_a3].vy) {
-				arg2[var_a3 + 1] = arg2[var_a3];
-				var_a3--;
-			} else {
-				break;
-			}
-		}
-		arg2[var_a3 + 1] = sp0;
-	}
+void func_800195FC(u16 start, u16 end, s16 (* arg2)[][2]) {
+    s32 i;
+
+    for (i = start + 1; i < end; i++) {
+        s32 var_a3 = i - 1;
+        s32 var_v0;
+        s16 sp0[2];
+        
+        memcpy(sp0, (*arg2)[i], 4);
+        var_v0 = (*arg2)[i][1];
+        while (var_a3 >= start) {
+            if (var_v0 < (*arg2)[var_a3][1]) {
+                memcpy((*arg2)[var_a3 + 1], (*arg2)[var_a3], 4);
+                var_a3--;
+            } else {
+                break;
+            }
+        }
+        memcpy((*arg2)[var_a3 + 1], sp0, 4);
+    }
 }
 
 
-/* 48.23% */
-void func_800196B4(s32 arg0, s32 arg1, thingy * arg2[], void * arg3) {
-	s16 temp_t1;
-	s16 temp_v0;
-	s16 var_t3;
-	s16 var_t4;
-	s32 temp_a0_2;
-	s32 temp_a1;
-	s32 temp_v1_2;
-	s16 var_a0;
-	s32 var_a1;
-	s32 var_t2;
-	u32 temp_a0;
-	u32 temp_v1;
-	u32 var_a1_2;
-	u32 var_t0;
-	s16 * temp_v0_2;
-	s16 * temp_v1_3;
-	s16 * temp_v1_4;
-	thingy * var_a0_2;
-	thingy * var_a3;
-	thingy * var_v1;
-	thingy * var_v1_2;
-	u16 sp50[32];
-	u16 sp90[32];
-	thingy subroutine_arg24;
+//INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_800196B4);
 
-	var_t4 = arg0;
-	temp_v0 = (arg0 + arg1) - 1;
-	var_t3 = temp_v0;
-	var_t2 = 0;
-	if ((temp_v0 - arg0) < 0xB) {
-		var_a0 = arg0;
-	} else {
-	loop_3:
-		var_a1 = var_t4 << 0x10;
-		do {
-			temp_a1 = var_a1 >> 0x10;
-			temp_t1 = arg2[(temp_a1 + var_t3) / 2]->unk2;
-			var_a1_2 = temp_a1 - 1;
-			var_t0 = var_t3 + 1;
-			var_a3 = arg2[var_t0];
-			var_a0_2 = arg2[var_a1_2 + 1];
-		loop_5:
-			var_a1_2 += 1;
-			if (temp_t1 < var_a0_2->unk2) {
-				var_v1 = arg2[var_a1_2];
-				do {
-					var_v1 += 1;
-					var_a0_2 += 1;
-					var_a1_2 += 1;
-				} while (temp_t1 < var_v1->unk2);
-			}
-			var_v1_2 = arg2[var_t0];
-			do {
-				var_v1_2 -= 1;
-				var_a3 -= 1;
-				var_t0 -= 1;
-			} while (var_v1_2->unk2 < temp_t1);
-			if (var_a1_2 < var_t0) {
-				subroutine_arg24 = *var_a0_2;
-				*var_a0_2 = *var_a3;
-				*var_a3 = subroutine_arg24;
-				var_a0_2 += 1;
-				goto loop_5;
-			}
-			temp_a0 = var_a1_2 - var_t4;
-			temp_v1 = var_t3 - var_t0;
-			if (temp_v1 < temp_a0) {
-				temp_v1_2 = var_t2;
-				if (temp_a0 >= 0xB) {
-					var_t2 += 1;
-					sp50[temp_v1_2] = var_t4;
-					sp90[temp_v1_2] = (s16)(var_a1_2 - 1);
-				}
-				var_t4 = var_t0 + 1;
-			} else {
-				temp_a0_2 = var_t2 * 2;
-				if (temp_v1 >= 0xB) {
-					var_t2 += 1;
-					sp50[temp_a0_2] = (s16)(var_t0 + 1);
-					sp90[temp_a0_2] = var_t3;
-				}
-				var_t3 = var_a1_2 - 1;
-			}
-			var_a1 = var_t4 << 0x10;
-		} while ((var_t3 - var_t4) >= 0xB);
-		var_t2 -= 1;
-		if (var_t2 != 0) {
-			var_t4 = sp50[var_t2];
-			var_t3 = sp90[var_t2];
-			goto loop_3;
-		}
-		var_a0 = arg0;
-	}
-	func_800195FC(var_a0, arg1, var_a3);
+
+void func_800198BC(void) {
+    DslFILE sp10;
+    struct data_struct* var_s0;
+    u32 var_s1;
+
+    DsInit();
+    DsSearchFile(&sp10, "\\DATA.BIN;1");
+    SectorNumber = func_800743BC(&sp10);
+    DataContainer.write_index = 0;
+    DataContainer.index = 0;
+    var_s0 = &DataContainer.data[0];
+    for (var_s1 = 0; var_s1 < 0x20; var_s1++) {
+        bzero(var_s0, 0x40);
+        var_s0->status = 0;
+        var_s0 += 1;
+    }
+    bzero(&D_800B9850, 0x80);
+    func_80019268();
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_800198BC);
 
 void func_80019950(void) {
 }
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/dat", func_80019958);
+
+void func_80019958(void) {
+    u8 sp10[8];
+    void (*temp_v0_5)(struct data_struct*);
+    u32 temp_v1;
+    s32 temp_a0;
+    s32 temp_a0_2;
+    s32 temp_v0;
+    s32 temp_v0_3;
+    s32 temp_v0_4;
+    s32 temp_v1_3;
+    s32* temp_v1_2;
+    u32 temp_v0_2;
+    u32 var_s2;
+    struct data_struct* temp_s0;
+
+    var_s2 = 0;
+    do {
+        temp_s0 = &DataContainer.data[DataContainer.index];
+        temp_v0 = temp_s0->status;
+        switch (temp_v0) {
+        case 1:
+            func_800742AC(SectorNumber + ((u32)Data[temp_s0->sector_offset] / 0x800), &temp_s0->data_loc);
+            temp_v1 = temp_s0->sector_offset;
+            temp_a0 = temp_s0->field7_0x14;
+            temp_v0_2 = (Data[temp_v1 + 1] - Data[temp_v1]) >> 0xB;
+            temp_s0->data = temp_a0;
+            temp_s0->sectors_size = temp_v0_2;
+            temp_v0_3 = temp_v0_2 * 0x800;
+            temp_s0->size0 = temp_v0_3;
+            temp_s0->size1 = temp_v0_3;
+            if (temp_a0 == 0) {
+                temp_v0_4 = func_800193C0(temp_v0_3);
+                temp_s0->data = temp_v0_4;
+                if (temp_v0_4 == 0) {
+                    temp_s0->status = 1;
+                    return;
+                }
+            }
+            temp_s0->data_mirror = temp_s0->data;
+            if (temp_s0->field2_0x6 != 0) {
+                temp_s0->data = func_800193C0(temp_s0->size1 + 0x20);
+            }
+            temp_s0->status = 2;
+        case 2:
+            if (DsRead(&temp_s0->data_loc, temp_s0->sectors_size, temp_s0->data, 0x80) == 0) {
+                temp_s0->status = 8;
+                return;
+            }
+            temp_s0->status = 3;
+            temp_s0->wait_count = 0;
+        case 3:
+            temp_s0->wait_count += 1;
+            temp_a0_2 = DsReadSync(&sp10);
+            if ((temp_s0->wait_count >= 0xF0) || (temp_a0_2 == -1)) {
+                if (temp_s0->field7_0x14 == 0) {
+                    func_80019478(temp_s0->data_mirror);
+                    temp_s0->data_mirror = 0;
+                }
+                if (temp_s0->field2_0x6 != 0) {
+                    func_80019478(temp_s0->data);
+                    temp_s0->data = 0;
+                }
+                temp_s0->status = 9;
+                temp_s0->fail_count += 1;
+                DsReadBreak();
+                return;
+            }
+            if (temp_a0_2 == 0) {
+                if (temp_s0->field2_0x6 != 0) {
+                    temp_s0->status = 6;
+                    return;
+                }
+                temp_s0->status = 5;
+            case 5:
+    block_23:
+                temp_v1_2 = temp_s0->field9_0x1c;
+                if (temp_v1_2 != 0) {
+                    *temp_v1_2 = temp_s0->data;
+                }
+                temp_v0_5 = temp_s0->function;
+                if (temp_v0_5 != 0) {
+                    temp_v0_5(temp_s0);
+                }
+                if (temp_s0->field18_0x34 == 0) {
+                    temp_s0->status = 4;
+                }
+                goto block_default;
+            } else {
+                return;
+            }
+            break;
+        case 6:
+            func_80019478(temp_s0->data);
+            temp_s0->data = 0;
+            temp_s0->status = 5;
+            temp_s0->data = temp_s0->data_mirror;
+            goto block_23;
+        case 8:
+            DsSystemStatus();
+            return;
+        case 9:
+            if (DsReadSync(&sp10) == -1) {
+                temp_s0->status = 1;
+                DsReset();
+                return;
+            }
+            break;
+        default:
+block_default:
+            temp_v1_3 = DataContainer.index + 1;
+            DataContainer.index += 1;
+            if (temp_v1_3 == 0x20) {
+                DataContainer.index = 0;
+            }
+            var_s2 += 1;
+            if (var_s2 >= 0x20U) {
+                return;
+            } else {
+                continue;
+            }
+        }
+    } while (1);
+}
+
 
 s32 func_80019C58(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 	void * var_v0;
@@ -385,7 +434,7 @@ s32 func_80019C58(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 	s32 temp_a0;
 	s32 temp_v1;
 	u32 temp_a0_2;
-	data_struct * temp_s0;
+	struct data_struct * temp_s0;
 
 	temp_s0 = &DataContainer.data[DataContainer.write_index];
 	bzero(temp_s0, 0x40);
@@ -401,10 +450,10 @@ s32 func_80019C58(s32 arg0, s32 arg1, u32 arg2, s32 arg3, s32 arg4, s32 arg5) {
 		temp_s0->function = func_80019F70;
 		temp_s0->field18_0x34 = 1;
 		if (arg2 == 0x278) {
-			temp_s0->field12_0x28 = 1;
+			temp_s0->unk28 = 1;
 		} else {
 			func_80040680(arg2 - 0x26D);
-			temp_s0->field12_0x28 = 0;
+			temp_s0->unk28 = 0;
 		}
 	} else if (arg2 == 13) {
 		temp_s0->function = func_8001A1F4;

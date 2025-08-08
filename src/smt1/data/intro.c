@@ -1,174 +1,176 @@
 #include "common.h"
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801806E0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80117E70);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801807E8);
+INCLUDE_RODATA("asm/smt1/data/nonmatchings/intro", D_80117790);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180C78);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80117F78);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180D0C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118408);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180D44);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011849C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180E0C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801184D4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180E44);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011859C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180E68);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801185D4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180EA8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801185F8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180EE4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118638);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180F4C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118674);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80180F9C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801186DC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801810A8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011872C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801810E8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118838);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181288);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118878);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181788);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118A18);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018180C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118F18);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018183C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118F9C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181884);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80118FCC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181A28);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119014);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181AB4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801191B8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181B1C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119244);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181BE0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801192AC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181CA4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119370);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181E60);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119434);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80181F10);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801195F0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801820E8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801196A0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182190);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119878);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018227C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119920);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801822D4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119A0C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182348);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119A64);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182430);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119AD8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182484);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119BC0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801824E4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119C14);
 
-void func_8018261C(void) {
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119C74);
+
+void func_80119DAC(void) {
 }
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182624);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119DB4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018267C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119E0C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801826E0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119E70);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801827AC);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80119F3C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182990);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A120);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801829A8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A138);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801829C8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A158);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801829E4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A174);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182B48);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A2D8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182B88);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A318);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182D58);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A4E8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182F54);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A6E4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80182F9C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A72C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801830E8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011A878);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801832BC);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AA4C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801832C8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AA58);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183318);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AAA8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018338C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AB1C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801833A0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AB30);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183434);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011ABC4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183468);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011ABF8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183570);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AD00);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183624);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011ADB4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183748);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AED8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183828);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011AFB8);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018389C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B02C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183908);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B098);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018393C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B0CC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801839A4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B134);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801839F0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B180);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183AAC);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B23C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183B00);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B290);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183B78);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B308);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183BF4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B384);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183C3C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B3CC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183C6C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B3FC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183D60);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B4F0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80183EB4);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B644);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184150);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011B8E0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184370);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BB00);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801843CC);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BB5C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801845F0);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BD80);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184644);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BDD4);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184680);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BE10);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018473C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BECC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801847EC);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011BF7C);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184E60);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011C5F0);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184E74);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011C604);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_80184F6C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011C6FC);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_801850B8);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011C848);
 
-INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8018522C);
+INCLUDE_ASM("asm/smt1/data/nonmatchings/intro", func_8011C9BC);

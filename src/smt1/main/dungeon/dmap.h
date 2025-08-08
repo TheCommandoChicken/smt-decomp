@@ -92,8 +92,8 @@ struct unk_data_113 {
 	s16 unkC12;
 	s16 unkC14;
 	s16 unkC16;
-	s16 unkC18;
-	s16 unkC1A;
+	s16 x3;
+	s16 y3;
 	s32 unkC1C[472];
 	u16 (*unk137C[8])[];
 	u32 unk139C;

@@ -179,7 +179,7 @@ u8 func_8001F134(struct object * arg0) {
 	return ((struct battle_animation *)arg0->data)->unk341;
 }
 
-void func_8001F148(struct object * arg0, s8 arg1, s8 arg2) {
+void func_8001F148(struct object * arg0, s32 arg1, s32 arg2) {
 	struct battle_animation * temp_v0;
 
 	temp_v0 = arg0->data;
@@ -200,7 +200,7 @@ void func_8001F170(struct object * arg0, s8 arg1) {
 	((struct battle_animation *)arg0->data)->unk344 = arg1;
 }
 
-struct object * func_8001F17C(s32 arg0, s16 arg1, s16 arg2, u8 arg3, s32 arg4) {
+struct object * func_8001F17C(s32 arg0, s16 arg1, s16 arg2, s16 arg3, s32 arg4) {
 	u8 temp_v0_2;
 	struct battle_animation * temp_s0;
 	struct object * temp_v0;

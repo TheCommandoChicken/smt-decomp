@@ -148,7 +148,6 @@ SECTIONS
         ovr4_TEXT_SIZE = ABSOLUTE(ovr4_TEXT_END - ovr4_TEXT_START);
         ovr4_DATA_START = .;
         build/src/smt1/data/ovr4.o(.data);
-        build/src/smt1/data/ovr2.o(.data);
         . = ALIGN(., 16);
         ovr4_DATA_END = .;
         ovr4_DATA_SIZE = ABSOLUTE(ovr4_DATA_END - ovr4_DATA_START);

@@ -101,7 +101,7 @@ segments:
     subsegments:
       - [0x22000, .rodata, ovr4]
       - [0x22374, c, ovr4]
-      - [0x2e890, .data, ovr2]
+      - [0x2e890, .data, ovr4]
   - [0x2f800, bin]
   - [0x33800, bin]
   - name: intro
@@ -109,6 +109,7 @@ segments:
     start: 0x36000
     vram: 0x80117790
     exclusive_ram_id: overlay
+    section_order: [".rodata", ".text", ".data", ".bss"]
     subalign: 1
     subsegments:
       - [0x36000, .rodata, intro]

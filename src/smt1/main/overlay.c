@@ -144,9 +144,91 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_800230FC);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_80023148);
 
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D1_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D2_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D3_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", HalfMoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D5_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D6_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D7_8MoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", FullMoonText);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", EndOfMoonText);
+
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_800231C8);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_800232C8);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800104CC);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800104D8);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800104E4);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800104F4);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010500);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_8001050C);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010518);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010524);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010530);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_8001053C);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010548);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010554);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010560);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010570);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_8001057C);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010588);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010594);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105A0);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105AC);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105B8);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105C4);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105D0);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105DC);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105E8);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_800105F4);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010600);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010610);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_8001061C);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010628);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010634);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010644);
+
+INCLUDE_RODATA("asm/smt1/main/nonmatchings/overlay", D_80010650);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_80023488);
 
@@ -337,3 +419,8 @@ INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_800280BC);
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_800281BC);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_80028350);
+
+void func_80028644(void) {
+}
+
+INCLUDE_ASM("asm/smt1/main/nonmatchings/overlay", func_8002864C);
