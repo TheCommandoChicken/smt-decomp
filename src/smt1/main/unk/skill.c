@@ -4844,183 +4844,1584 @@ void func_8005B8E0(struct object* arg0) {
 }
 
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BAE0);
+s32 func_8005BAE0(void) {
+    u8 temp_v0 = func_8005BD30();
+    if (func_8005BB80(temp_v0)) {
+        func_8004018C(temp_v0, 0x3C, 0, 5);
+        return 1;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BB30);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BB80);
+s32 func_8005BB30(void) {
+    u8 temp_v0 = func_8005BCB0();
+    if (func_8005BB80(temp_v0)) {
+        func_8004018C(temp_v0, 0x3C, 0, 5);
+        return 1;
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BBDC);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BC1C);
+s32 func_8005BB80(s16 arg0) {
+    if (func_800408BC(0) != arg0) {
+        if (func_80040A68(0) == 0)  {
+            func_80040204(arg0);
+        } else { 
+            return 0;
+        }
+    }
+    return 1;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BC5C);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BCB0);
+void func_8005BBDC(struct unk_data_1009* arg0) {
+    func_80040204(arg0->unkDFC);
+    func_8004018C(arg0->unkDFC, 0x3C, 0, 5);
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BD04);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BD30);
+void func_8005BC1C(s16 arg0) {
+    func_80040204(arg0);
+    func_8004018C(arg0, 0x3C, 0, 5);
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BDA0);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BDC8);
+s32 func_8005BC5C(struct unk_data_1009* arg0, s16 arg1) {
+    if (func_800408BC(0) != arg1) {
+        if (func_80040A68(0) == 0) {
+            func_80040204(arg1);
+            return 1;
+        }
+    }
+    return 0;
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BE18);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005BFCC);
+s32 func_8005BCB0(void) {
+    switch (func_80044114()) {
+    case 0xFF:
+        return -1;
+    case 0x0:
+        return func_800460C0();
+    default:
+        return func_8003AFB4();
+    }
+}
+
+
+void func_8005BD04(void) {
+    func_8005BC1C(func_8005BCB0());
+}
+
+
+u8 func_8005BD30(void) {
+    switch (func_8004E9C0(0)) {
+    case 14:
+        return 3;
+    case 15:
+        return 6;
+    case 16:
+        return 6;
+    case 17:
+        return 6;
+    default:
+        return 9;
+    }
+}
+
+
+void func_8005BDA0(void) {
+    func_8005BC1C(func_8005BD30());
+}
+
+
+s32 func_8005BDC8(struct unk_data_1009* arg0) {
+    if (func_8005BC5C(arg0, arg0->unkDFC)) {
+        func_8004018C(arg0->unkDFC, 0x3C, 0, 5);
+        return 1;
+    }
+    return 0;
+}
+
+
+void func_8005BE18(struct object* arg0) {
+    struct unk_data_1009* temp_s1 = arg0->data;
+    
+    if ((func_8005D8BC(temp_s1) != 0) && (temp_s1->unk8C6 > 2 && temp_s1->unk8C6 < 5)) {
+        s16 var_s0 = 0;
+        func_8004990C();
+        for (; var_s0 < 16; var_s0++) {
+            struct character_data * temp_a0 = &D_800B72AC->characters[var_s0];
+            u8 var_a1 = (var_s0 < 4) ? 4 : 10;
+            temp_a0->action = temp_a0->default_action = var_a1;
+        }
+    }
+    
+    if (temp_s1->unk8B8 != NULL && temp_s1->unk8B8->unk2C == 1) {
+        struct unk_data_1011 * temp_v1_2 = temp_s1->unk8B8->data;
+        if (temp_v1_2->unk19C == 1) {
+            D_800B74A0 = temp_v1_2->unk6;
+        }
+    }
+    
+    RemoveObject(temp_s1->unk8B8);
+    temp_s1->unk8B8 = NULL;
+    func_80019478(temp_s1->unk8D8);
+    temp_s1->unk8D8 = NULL;
+    
+    if (temp_s1->unk8C6 == 1) {
+        if (temp_s1->unkE1C != 0) {
+            RemoveObject((struct object* ) temp_s1->unkE18);
+            temp_s1->unkE18 = 0;
+        } else if (temp_s1->unkE10 != 0) {
+            struct object * temp_v1_3 = *temp_s1->unkE14;
+            if ((temp_v1_3 != NULL) && (temp_v1_3->unk2C == 1)) {
+                struct unk_data_1010 * temp_s0 = temp_v1_3->data;
+                RemoveObject(temp_s0->unk4);
+                temp_s0->unk4 = NULL;
+                temp_s0->unk19C = &temp_s0->unk4;
+                temp_s0->unk198 = 0;
+                temp_s0->unk188 = 0;
+            }
+        }
+    }
+    
+    RemoveObject(temp_s1->unk17C);
+    temp_s1->unk17C = NULL;
+    RemoveObject(temp_s1->unk2FC);
+    temp_s1->unk2FC = NULL;
+}
+
+
+s32 func_8005BFCC(s16 arg0) {
+    switch (arg0) {
+        case 1: return 0;
+        case 2: return 2;
+        case 3: return 1;
+        case 4: return 3;
+        default: return 0;
+    }
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005C034);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005C92C);
+void func_8005C92C(struct unk_data_1009* arg0) {
+    s16 var_s0;
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CA34);
+    arg0->unk2FC = NULL;
+    func_8005DD14(arg0, 0x10, 0x10, 0x120, 0x10, 0x12);
+    func_8005DEF4(&arg0->unk8E8[2], 0x13);
+    if (arg0->unk8C6 == 0) {
+        func_8005DD14(arg0->unk180, 0x18, 0x59, 0x110, 0x3D, 0x12);
+    } else {
+        func_8005DD14(arg0->unk180, 0x18, 0xA1, 0x110, 0x3D, 0x12);
+    }
+    for (var_s0 = 0; var_s0 < 3; var_s0++) {
+        func_8005D97C(&arg0->unk300[var_s0], var_s0, ((arg0->unk8C6 == 2) || (arg0->unk8C6 == 4)) ? 1 : 0);
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CA84);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CB08);
+s16 func_8005CA34(struct unk_data_1009* arg0) {
+    switch (arg0->unk8C6) {
+    case 0:
+        return 0;
+    case 1:
+    case 3:
+        return 3;
+    case 2:
+    case 4:
+        return 1;
+    default:
+        return 3;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CC58);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CD54);
+s32 func_8005CA84(struct unk_data_1009* arg0) {
+    if ((arg0->unk8B8 != NULL) && (arg0->unk8B8->unk2C == 1)) {
+        return ((struct unk_data_1011 *)arg0->unk8B8->data)->unk19E;
+    }
+
+    switch (arg0->unk8C6) {
+    case 0:
+        return 4;
+    case 1:
+    case 3:
+        return 3;
+    case 2:
+    case 4:
+        return 1;
+    default:
+        return 3;
+    }
+}
+
+
+s32 func_8005CB08(struct unk_data_1009 * arg0, s16 arg1, u32 arg2, u32 arg3, u32 arg4, u32 arg5) {
+    struct poly_init_data sp10;
+
+    sp10.x0 = arg0->unk11A;
+    sp10.y0 = arg0->unk11C;
+    sp10.x1 = arg0->unk11A + arg0->unk11E;
+    sp10.y1 = arg0->unk11C;
+    sp10.x2 = arg0->unk11A;
+    sp10.y2 = arg0->unk11C + arg0->unk120;
+    sp10.x3 = arg0->unk11A + arg0->unk11E;
+    sp10.y3 = arg0->unk11C + arg0->unk120;
+    setRGB0FromU32(&sp10, arg2);
+    setRGB1FromU32(&sp10, arg3);
+    setRGB2FromU32(&sp10, arg4);
+    setRGB3FromU32(&sp10, arg5);
+    
+    if (arg1 != -1) {
+        sp10.abe = 1;
+        sp10.unk30 = arg1;
+        arg0->unk142 = arg1;
+    } else {
+        sp10.abe = 0;
+        sp10.unk30 = 0;
+        arg0->unk142 = 0;
+    }
+    
+    sp10.tge = 1;
+    sp10.ot_index = arg0->unk122;
+    func_8001BAEC(&arg0->unkA0, &sp10);
+    return 1;
+}
+
+
+void func_8005CC58(struct poly_g4_data* arg0, s16 x, s16 y, s16 w, s16 h, u32 arg5, u32 arg6, u32 arg7, u32 arg8, s32 abe, s32 ot_index) {
+    struct poly_init_data sp10;
+
+    sp10.x0 = x;
+    sp10.y0 = y;
+    sp10.x1 = x + w;
+    sp10.y1 = y;
+    sp10.x2 = x;
+    sp10.y2 = y + h;
+    sp10.x3 = x + w;
+    sp10.y3 = y + h;
+    setRGB0FromU32(&sp10, arg5);
+    setRGB1FromU32(&sp10, arg6);
+    setRGB2FromU32(&sp10, arg7);
+    setRGB3FromU32(&sp10, arg8);
+    sp10.unk30 = 0;
+    sp10.tge = 1;
+    sp10.abe = abe;
+    sp10.ot_index = ot_index;
+    func_8001B8EC(arg0);
+    func_8001BAEC(arg0, &sp10);
+    arg0->flags |= 0x3F;
+}
+
+
+void func_8005CD54(struct unk_data_1009* arg0) {
+    s32 var_s0 = 0;
+
+    arg0->unk8C2 = -1;
+    
+    for (var_s0 = 0; var_s0 < 4; var_s0++) {
+        s32 temp_s1 = var_s0 + 12;
+        if (func_80018F14(0, temp_s1)) {
+            arg0->unk8C2 = temp_s1;
+        }
+    }
+    
+    arg0->unk8BC = -1;
+    
+    for (var_s0 = 0; var_s0 < 4; var_s0++) {
+        s32 temp_s1 = var_s0 + 4;
+        if (func_80018F14(0, temp_s1)) {
+            arg0->unk8BC = temp_s1;
+        }
+    }
+    
+    arg0->unk8C0 = arg0->unk8BE;
+    arg0->unk8BE = -1;
+    
+    for (var_s0 = 0; var_s0 < 4; var_s0++) {
+        s32 temp_s1 = var_s0 + 4;
+        if (func_80018EE8(0, temp_s1)) {
+            arg0->unk8BE = temp_s1;
+        }
+    }
+
+    if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+        func_80048BB4(arg0->unk2FC->data);
+    }
+}
+
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005CE58);
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D00C);
+s32 func_8005D00C(struct poly_f4_data* arg0, s16 x, s16 y, s16 w, s16 h, u16 r, u16 g, u16 b, s32 abe, s32 arg9, s32 tge, s32 ot_index) {
+    struct poly_init_data sp10;
+
+    sp10.x0 = x;
+    sp10.y0 = y;
+    sp10.x1 = x + w;
+    sp10.y1 = y;
+    sp10.x2 = x;
+    sp10.y2 = y + h;
+    sp10.x3 = x + w;
+    sp10.y3 = y + h;
+    sp10.r0 = r;
+    sp10.g0 = g;
+    sp10.b0 = b;
+    sp10.abe = abe;
+    sp10.unk30 = arg9;
+    sp10.tge = tge;
+    sp10.ot_index = ot_index;
+    func_8001ADD0(arg0, &sp10);
+    return 1;
+}
+
+
+s32 func_8005D090(struct unk_data_1009* arg0 /* Maybe? who knows */, s16 x, s16 y, s16 w, s16 h, s32 abe, s32 ot_index) {
+    struct poly_init_data sp10;
+
+    sp10.x0 = x;
+    sp10.y0 = y;
+    sp10.x1 = x + w;
+    sp10.y1 = y;
+    sp10.x2 = x;
+    sp10.y2 = y + h;
+    sp10.x3 = x + w;
+    sp10.y3 = y + h;
+    sp10.r0 = arg0->unk0.r0;
+    sp10.g0 = arg0->unk0.g0;
+    sp10.b0 = arg0->unk0.b0;
+    sp10.r1 = arg0->unk0.r1;
+    sp10.g1 = arg0->unk0.g1;
+    sp10.b1 = arg0->unk0.b1;
+    sp10.r2 = arg0->unk0.r2;
+    sp10.g2 = arg0->unk0.g2;
+    sp10.b2 = arg0->unk0.b2;
+    sp10.r3 = arg0->unk0.r3;
+    sp10.g3 = arg0->unk0.g3;
+    sp10.b3 = arg0->unk0.b3;
+    sp10.abe = abe;
+    sp10.unk30 = 0;
+    sp10.tge = 1;
+    sp10.ot_index = ot_index;
+    func_8001BAEC(&arg0->unk0, &sp10);
+    return 1;
+}
+
+
+s32 func_8005D184(struct unk_data_1009 * arg0) {
+    arg0->unk2F0 = 0;
+    arg0->unk2FC->initialized = 0;
+    RemoveObject(arg0->unk2FC);
+    arg0->unk2FC = NULL;
+    return 1;
+}
+
+
+void func_8005D1C4(struct unk_data_1009 * arg0, s16 arg1) {
+    arg0->unk2F0 = func_8005D684(arg0, arg1);
+}
+
+
+s32 func_8005D1F4(struct unk_data_1009* arg0, s16 arg1, s16 arg2, s32 arg3, s32 arg4) {
+    func_8005D684(arg0, arg1);
+    func_8005DA4C(arg0, arg3);
+    if (arg4 != 0) {
+        struct unk_data_1014* temp_v1;
+        struct object * temp_v0 = func_800684E8();
+        arg0->unk17C = temp_v0;
+        temp_v1 = temp_v0->data;
+        temp_v1->unk30 = 1;
+        temp_v1->unk44 = 0;
+    } else {
+        RemoveObject(arg0->unk17C);
+        arg0->unk17C = NULL;
+    }
+    arg0->unk8D2 = arg2;
+    return 1;
+}
+
+
+void func_8005D290(struct unk_data_1009* arg0) {
+    if ((arg0->unk17C != NULL) && (arg0->unk17C->unk2C == 1)) {
+        struct unk_data_1014 * temp_v1_2 = arg0->unk17C->data;
+        
+        if ((temp_v1_2->unk2C != 0) && (temp_v1_2->unk28 == 1)) {
+            if (temp_v1_2->unk26 == 0) {
+                arg0->unk8D4 = 3;
+            } else if (temp_v1_2->unk26 == 1) {
+                arg0->unk8D4 = 1;
+            }
+        }
+    }
+}
+
+
+void func_8005D308(struct unk_data_1009* arg0) {
+    func_8005CE58(arg0);
+    
+    if (arg0->unk8C2 == 13) {
+        arg0->unk8D4 = 3;
+    } else if (arg0->unk8C2 == 14) {
+        arg0->unk8D4 = 1;
+        func_8003FFE4(3);
+    } else if (arg0->unk8C2 == 15) {
+        arg0->unk8D4 = 2;
+        func_8003FFE4(4);
+    }
+}
+
+
+void func_8005D378(struct unk_data_1009* arg0) {
+    if ((arg0->unk8C2 > 11) && (arg0->unk8C2 < 16)) {
+        arg0->unk8D4 = 3;
+    }
+}
+
+
+s16 func_8005D39C(struct unk_data_1009* arg0) {
+    s16 var_s0;
+    s16 var_s1 = 0;
+
+    for (var_s0 = 0; var_s0 < func_8005CA34(arg0); var_s0++) {
+        var_s1 |= func_8005DEE0(&arg0->unk300[var_s0]);
+    }
+    return var_s1;
+}
+
+
+s32 func_8005D424(struct unk_data_1009* arg0) {
+    struct object* temp_v0;
+
+    temp_v0 = arg0->unk17C;
+    if ((temp_v0 != NULL) && (temp_v0->unk2C == 1)) {
+        if (func_80064774(&arg0->unk8DC)) {
+            RemoveObject(arg0->unk17C);
+            arg0->unk17C = NULL;
+        }
+    } else if (func_8005D39C(arg0) != 0) {
+        if (func_80064774(&arg0->unk8DC)) {
+            func_8005DA4C(arg0, 0);
+            return 0;
+        }
+    } else {
+        if (!func_80064774(&arg0->unk8DC)) {
+            RemoveObject(arg0->unk2FC);
+            arg0->unk2FC = NULL;
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+s32 func_8005D4E8(struct unk_data_1009 * arg0) {
+    if (arg0->unk8C6 == 0) {
+        return 0;
+    } else if (arg0->unk8C6 == 1) {
+        return 1;
+    } else if (arg0->unk8C6 == 2) {
+        return 2;
+    } else if (arg0->unk8C6 != 3) { // weird
+        return (arg0->unk8C6 == 4) * 2;
+    } else {
+        return 1;
+    }
+}
+
+
+s32 func_8005D538(struct unk_data_1009 * arg0) {
+    if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+        return 0;
+    }
+    if ((arg0->unk8B8 != NULL) && (arg0->unk8B8->unk2C == 1)) {
+        if (arg0->unk8E4 != -1) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+void func_8005D594(struct unk_data_1009 * arg0, s16 arg1) {
+    RemoveObject(arg0->unk17C);
+    arg0->unk17C = NULL;
+    arg0->unk8D2 = -1;
+    func_800647DC(&arg0->unk8C6, arg1);
+}
+
+
+void func_8005D5E4(struct unk_data_1009* arg0) {
+    if ((arg0->unk8D0 != -1) && (arg0->unkE10 == 0)) {
+        s32 temp_s1 = func_8004B7D8(7, arg0->unk8D0);
+        if ((arg0->unk8D0 == 18) || (arg0->unk8D0 == 20)) {
+            func_8005DA4C(arg0, 0);
+        }
+        if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+            return;
+        }
+        func_8005D740(arg0, temp_s1);
+    }
+}
+
+
+s32 func_8005D684(struct unk_data_1009* arg0, s16 arg1) {
+    if (arg0->unk8D0 == arg1) {
+        return 0;
+    }
+    
+    if (arg1 == -1) {
+        return 0;
+    }
+    
+    if (arg1 >= 0x1E) {
+        return 0;
+    }
+    
+    if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+        RemoveObject(arg0->unk2FC);
+        arg0->unk2FC = NULL;
+        arg0->unk8D0 = arg1;
+    }
+    
+    arg0->unk8D0 = arg1;
+    func_8005D740(arg0, func_8004B7D8(7, arg1));
+    return 1;
+}
+
+
+void func_8005D740(struct unk_data_1009* arg0, s32 arg1) {
+    s32 var_s1 = (arg0->unk8C6 == 0) ? 0x5D : 0xA5;
+
+    if (arg0->unk8D0 == 0xC) {
+        func_8004E914(((struct unk_data_1011 *)arg0->unk8B8->data)->unk0[0].unk6 + 1);
+    }
+    
+    arg0->unk2FC = func_800470E4(
+        0x1C, 
+        (arg0->unkE10 != 0) ? 0x8C : var_s1, 
+        (arg0->unkE10 != 0) ? func_80049284() : 0, 
+        arg1, 0, 0x70000, 
+        (arg0->unkE10 != 0) ? 0x15 : 0x11
+    );
+    
+    if (arg0->unk8C6 == 0) {
+        func_80064D98(arg0->unk2FC->data, 0x18, 0x85, 0x110);
+    }
+}
+
+
+void func_8005D83C(struct unk_data_1009 * arg0, s32 arg1) {
+    if ((arg0->unk8B8 != NULL) && (arg0->unk8B8->unk2C == 1)) {
+        ((struct unk_data_1011 *)arg0->unk8B8->data)->unk1A4 = arg1;
+    }
+}
+
+
+s32 func_8005D870(struct unk_data_1009* arg0) {
+    if (arg0 == NULL) {
+        return 1;
+    } else {
+        if (
+            (arg0->unk2FC != NULL) && 
+            (arg0->unk2FC->unk2C == 1) && 
+            (((struct unk_data_600 *)arg0->unk2FC->data)->unk7900 == 0)
+        ) {
+            return 0;
+        } else {
+            return arg0->unk8C4;
+        }
+    }
+}
+
+
+s32 func_8005D8BC(struct unk_data_1009* arg0) {
+    return arg0->unkDF8;
+}
+
+
+void func_8005D8C8(struct unk_data_1009* arg0, s32 arg1) {
+    arg0->unk8C4 = 1;
+    arg0->unkDF8 = arg1;
+}
+
+
+void func_8005D8D8(struct poly_f4_data* arg0, s16 x, s16 y, s16 w, s16 h, u16 r, u16 g, u16 b, s32 abe, s32 arg9, s32 ot_index) {
+    struct poly_init_data sp10;
+
+    sp10.x0 = x;
+    sp10.y0 = y;
+    sp10.x1 = x + w;
+    sp10.y1 = y;
+    sp10.x2 = x;
+    sp10.y2 = y + h;
+    sp10.x3 = x + w;
+    sp10.y3 = y + h;
+    sp10.r0 = r;
+    sp10.g0 = g;
+    sp10.b0 = b;
+    sp10.tge = 1;
+    sp10.abe = abe;
+    sp10.unk30 = arg9;
+    sp10.ot_index = ot_index;
+    func_8001ABAC(arg0);
+    func_8001ADD0(arg0, &sp10);
+    arg0->flags |= 0x3F;
+}
+
+
+s32 func_8005D97C(struct unk_data_1012 * arg0, s16 arg1, s32 arg2) {
+    s16 temp_s0 = (arg1 + (arg2 != 0));
+
+    temp_s0 *= 0x2A;
+    temp_s0 += 0x20;
+    func_8005DD14(arg0, 0x10, temp_s0, 0x120, 0x2A, 0xF);
+    arg0->unk170 = 0;
+    func_8005D8D8(&arg0->unk17C, 0x10, temp_s0, 0x120, 0x2A, 0x23U, 0x23U, 0x23U, 1, 2, 0xD);
+    return 1;
+}
+
+
+s32 func_8005DA4C(struct unk_data_1009* arg0, s32 arg1) {
+    s16 var_s0;
+
+    for (var_s0 = 0; var_s0 < func_8005CA34(arg0); var_s0++) {
+        func_8005DEEC(&arg0->unk300[var_s0], arg1);
+    }
+    return 1;
+}
+
+
+s32 func_8005DAD0(struct unk_data_1009* arg0) {
+    if (func_8005DBA0() != 0) {
+        if (arg0->unk8B8 != NULL && (arg0->unk8B8->unk2C == 1)) {
+            if (func_80063AE4(arg0->unk8B8->data) == 0) {
+                if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+                    struct unk_data_600 * temp_a0_2 = arg0->unk2FC->data;
+                    if (temp_a0_2->unk7900 == 0) {
+                        func_8004949C(temp_a0_2);
+                    } else {
+                        return 0;
+                    }
+                }
+                func_8005D594(arg0, arg0->unkE0C);
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+
+void func_8005DB90(struct unk_data_1009 * arg0, s16 arg1) {
+    arg0->unkE08 = 1;
+    arg0->unkE0C = arg1;
+}
+
+
+s32 func_8005DBA0(struct unk_data_1009 * arg0) {
+    return arg0->unkE08;
+}
+
+
+void func_8005DBAC(struct unk_data_1009 * arg0, s16 arg1) {
+    arg0->unk8CA = arg1;
+    arg0->unk8D2 = -1;
+}
+
+
+s32 func_8005DBBC(struct unk_data_1009* arg0) {
+    if ((arg0->unk2FC != NULL) && (arg0->unk2FC->unk2C == 1)) {
+        return ((struct unk_data_600 *)arg0->unk2FC->data)->unk7900 == 0;
+    }
+    return 0;
+}
+
+
+struct object * func_8005DBF8(s32 arg0, struct object** arg1) {
+    struct object * temp = func_8005B67C(1, 0, 0x900000);
+    temp->data->unkE14 = arg1;
+    return temp;
+}
+
+
+void func_8005DC34(struct unk_data_1009* arg0) {
+    struct object * temp_a0 = *((struct unk_data_1010 *)(*arg0->unkE14)->data)->unk19C;
+    
+    if ((temp_a0 != NULL) && (temp_a0->unk2C == 1)) {
+        func_80049214(temp_a0->data);
+    }
+}
+
+
+void func_8005DC98(struct unk_data_1009* arg0) {
+    if ((arg0->unk8B8 != NULL) && (arg0->unk8B8->unk2C == 1)) {
+        struct unk_data_1011 * temp_s0 = arg0->unk8B8->data;
+        func_80062410(temp_s0, 1);
+        temp_s0->unk0[0].unk2 = -1;
+    }
+    arg0->unk8D0 = -1;
+}
+
+
+s32 func_8005DCFC(struct unk_data_1009 * arg0) {
+    return arg0->unkE10;
+}
+
+
+void func_8005DD08(struct unk_data_1009 * arg0) {
+    arg0->unkE10 = 1;
+}
+
+
+void func_8005DD14(struct not_dialog_box* arg0, s16 x, s16 y, s16 w, s16 h, s32 arg5) {
+    arg0->x = x;
+    arg0->y = y;
+    arg0->w = w;
+    arg0->h = h;
+    arg0->unk178 = 0;
+    arg0->unk170 = 1;
+    arg0->unk174 = arg5;
+}
+
+
+void func_8005DD40(struct not_dialog_box* arg0) {
+    if (arg0->unk170 != 0) {
+        func_800209F0(arg0->x, arg0->y, arg0->w, arg0->h, arg0->unk174, &arg0->p[arg0->unk178], 1);
+        arg0->unk178 ^= 1;
+    }
+}
+
+
+void func_8005DDC4(struct not_dialog_box* arg0) {
+    if (arg0->unk170 != 0) {
+        func_800209F0(arg0->x, arg0->y, arg0->w, arg0->h, arg0->unk174, &arg0->p[arg0->unk178], 2);
+        arg0->unk178 ^= 1;
+    }
+}
+
+
+void func_8005DE48(struct not_dialog_box* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4) {
+    if (arg0->unk170 != 0) {
+        func_800209F0(arg1, arg2, arg3, arg4, arg0->unk174, &arg0->p[arg0->unk178], 1);
+        arg0->unk178 ^= 1;
+    }
+}
+
+
+s32 func_8005DEE0(struct not_dialog_box * arg0) {
+    return arg0->unk170;
+}
+
+
+void func_8005DEEC(struct not_dialog_box * arg0, s32 arg1) {
+    arg0->unk170 = arg1;
+}
+
+
+void func_8005DEF4(struct unk_data_1015 * arg0, s32 arg1) {
+    arg0->unk508 = arg1;
+    arg0->unk50C = 0;
+}
+
+
+void func_8005DF00(struct unk_data_1015* arg0) {
+    func_80021AD0(0, 0, arg0->unk508, &arg0->unk0[arg0->unk50C]);
+    arg0->unk50C ^= 1;
+}
+
+
+s32 func_8005DF5C(struct unk_data_1016* arg0) {
+    if (arg0->unk0 != 0) {
+        func_8001B978(&arg0->unk4);
+    }
+    return arg0->unk0;
+}
+
+
+s32 func_8005DF98(struct unk_data_1012* arg0, s16 arg1, s16 arg2, s16 arg3, s16 arg4, s32 arg5, s32 arg6, s32 arg7) {
+    func_8005DD14(&arg0->unk0, arg1, arg2, arg3, arg4, arg6);
+    func_8005D8D8(&arg0->unk17C, arg1, arg2, arg3, arg4, 0x23, 0x23, 0x23, 1, 2, arg7);
+    arg0->unk1E4 = arg5;
+    return 1;
+}
+
+
+void func_8005E06C(struct unk_data_1012 * arg0) {
+    func_8005DDC4(&arg0->unk0);
+    if (arg0->unk1E4 != 0) {
+        func_8001AC38(&arg0->unk17C);
+    }
+}
+
+
+void func_8005E0A8(struct not_dialog_box* arg0) {
+    if (arg0->unk170 != 0) {
+        func_800209F0(arg0->x, arg0->y, arg0->w, arg0->h, arg0->ot_index, &arg0->p[arg0->buffer], 3);
+        arg0->buffer ^= 1;
+    }
+}
+
+
+void func_8005E12C(struct unk_data_1009* arg0) {
+    struct unk_data_1011 * temp_s1;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D684(arg0, 4);
+        arg0->unk2F0 = 1;
+        arg0->unk8D2 = -1;
+        if ((arg0->unk8B8 == NULL) || (arg0->unk8B8->unk2C != 1)) {
+            arg0->unk8B8 = func_80060EA4(0, func_8005D4E8(arg0), arg0->unk8CC);
+        }
+        arg0->unk8E4 = -1;
+        return;
+    case 1:
+        temp_s1 = arg0->unk8B8->data;
+        if (temp_s1->unk0[0].unk4 >= 2U) {
+            func_8005D1C4(arg0, temp_s1->unk0[0].unk2);
+        }
+        if (func_80062388(temp_s1, 5) != 0) {
+            if ((func_80063D88(temp_s1) != 0) && (func_8006194C(temp_s1) == 0)) {
+                switch (temp_s1->unk1A0) {
+                case 0:
+                    func_8005D1C4(arg0, 0x13);
+                    func_8005D594(arg0, 1);
+                    return;
+                case 1:
+                    func_8005D1C4(arg0, 8);
+                    func_8005D594(arg0, 1);
+                    return;
+                default:
+                    break;
+                }
+            }
+            func_8005D184(arg0);
+            if (func_800629A0(temp_s1) != 0) {
+                arg0->unk8E4 = 2;
+                func_8005DC98(arg0);
+                return;
+            } else if (func_800629AC(temp_s1) != 0) {
+                arg0->unk8E4 = 1;
+                func_8005DC98(arg0);
+                return;
+            } else {
+                arg0->unk8E4 = 0;
+            }
+            func_8005DC98(arg0);
+            return;
+        }
+        if (func_80062388(temp_s1, 6) != 0) {
+            if (arg0->unk8D0 == 0xE) {
+                func_8005D184(arg0);
+                arg0->unk8E4 = 0;
+                func_8005DC98(arg0);
+            } else if (temp_s1->unk0[0].unk2 == 0x1E) {
+                func_8005D184(arg0);
+                arg0->unk8E4 = -1;
+                func_8006174C(temp_s1);
+            } else if (func_80063D88(temp_s1) != 0) {
+                func_8005D594(arg0, 1);
+                func_8005D1C4(arg0, temp_s1->unk0[0].unk2);
+            } else {
+                func_8005D184(arg0);
+                if (arg0->unk8D0 != 0x12) {
+                    if (arg0->unk8D0 != 0x14) {
+                        if (arg0->unk8D0 != -1) {
+                            arg0->unk8E4 = -1;
+                            func_8005DC98(arg0);
+                            return;
+                        }
+                    }
+                }
+                func_80062410(temp_s1, 1);
+            }
+        }
+        break;
+    }
+}
+
+
+void func_8005E398(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        arg0->unk2F0 = 1;
+        func_8005D5E4(arg0);
+        return;
+    case 1:
+        func_8005DC98(arg0);
+        func_8005D184(arg0);
+        if (arg0->unk8E4 == -1) {
+            arg0->unk8E4 = 0;
+        }
+        func_8005D83C(arg0, 0);
+        func_8005D594(arg0, 0);
+        arg0->unk8CA = 1;
+        return;
+    }
+}
+
+
+void func_8005E43C(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 4, -1, 0, 0);
+        if ((arg0->unk8B8 == NULL) || (arg0->unk8B8->unk2C != 1)) {
+            arg0->unk8B8 = func_80060EA4(0, func_8005D4E8(arg0), arg0->unk8CC);
+        }
+    case 1:
+        temp_s0 = arg0->unk8B8->data;
+        func_8005D684(arg0, temp_s0->unk0[0].unk2);
+        if (func_80062388(temp_s0, 5) != 0) {
+            if ((func_8006194C(temp_s0) == 0) && (func_80063E1C(temp_s0) == 0)) {
+                func_8005D684(arg0, 0x13);
+                func_8005D594(arg0, 0xF);
+                func_8005DB90(arg0, 0xC);
+            } else {
+                func_80062410(temp_s0, 0);
+                func_8005D594(arg0, 1);
+            }
+        } else if ((func_80062370(temp_s0, 6) != 0) && (arg0->unk8D0 == 0xE)) {
+            func_80062410(temp_s0, 0);
+            func_8005D594(arg0, 2);
+        } else if (func_80062388(temp_s0, 6) != 0) {
+            if (temp_s0->unk0[0].unk2 == 0x1F) {
+                func_8005D684(arg0, 0x17);
+            } else {
+                func_8005D594(arg0, 8);
+            }
+        }
+    }
+}
+
+
+void func_8005E5F8(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+    struct unk_data_1011* temp_s0_2;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        temp_s0 = ((struct unk_data_1011 *)arg0->unk8B8->data);
+        func_8005D1F4(arg0, 4, -1, 0, 0);
+        temp_s0->unk0[0].unk6 = 0;
+    case 1:
+        temp_s0_2 = ((struct unk_data_1011 *)arg0->unk8B8->data);
+        if (func_80062230(temp_s0_2) != 0) {
+            if (temp_s0_2->unk0[0].unk2 == 0x14) {
+                func_8005D594(arg0, 12);
+                return;
+            } else {
+                temp_s0_2->unk0[0].unk6 += 1;
+            }
+        }
+        if (temp_s0_2->unk0[0].unk6 >= temp_s0_2->unk19E) {
+            temp_s0_2->unk0[0].unk6 = D_800B74A0;
+            func_8005D594(arg0, 3);
+        }
+    }
+}
+
+
+void func_8005E6E0(struct unk_data_1009* arg0) {
+    s32 temp_v0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, arg0->unk8D0, 1, 0, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 12);
+            return;
+        }
+        if (arg0->unk8D4 == 3) {
+            func_8005D684(arg0, 7);
+            func_8005DBAC(arg0, 3);
+        } else if (arg0->unk8D4 == 1) {
+            func_8005D594(arg0, 15);
+        } else if (arg0->unk8D4 == 2) {
+            func_8005D594(arg0, 13);
+        }
+        break;
+    case 3:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005DBAC(arg0, 4);
+        }
+        break;
+    case 4:
+        func_8005DBAC(arg0, 5);
+        return;
+    case 5:
+        temp_v0 = func_80061F34(arg0->unk8B8->data);
+        if (temp_v0 == 0) {
+            func_8005D594(arg0, 3);
+        } else if (temp_v0 == 1) {
+            func_8005D684(arg0, 0x14);
+            func_8005D594(arg0, 12);
+        } else {
+            func_8005D684(arg0, 0x1B);
+            func_8005D594(arg0, 8);
+        }
+    }
+}
+
+
+void func_8005E870(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0, 0, 1, 0);
+    case 1:
+        func_8005D684(arg0, 0);
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 12);
+            return;
+        }
+        
+        if (arg0->unk8D4 == 3) {
+            struct unk_data_1011 * temp_s0 = arg0->unk8B8->data;
+            if (func_80062454(temp_s0) != 0) {
+                func_8005D594(arg0, 4);
+            } else {
+                if (func_80063E54(temp_s0) == 0) {
+                    func_8003FFE4(5);
+                    func_8005D684(arg0, 0x19);
+                    func_8005DB90(arg0, 0xC);
+                    return;
+                }
+                if ((func_80063E60(temp_s0) == 0) && (temp_s0->unk1A0 == 1)) {
+                    func_8005DBAC(arg0, 4);
+                } else {
+                    func_8005DBAC(arg0, 3);
+                }
+            }
+            func_8003FFE4(2);
+        } else if (arg0->unk8D4 == 1) {
+            func_8005D594(arg0, 15);
+        } else if (arg0->unk8D4 == 2) {
+            func_8005D594(arg0, 13);
+        }
+        break;
+    case 3:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005D594(arg0, 6);
+        }
+        break;
+    case 4:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005D594(arg0, 5);
+        }
+        break;
+    }
+}
+
+
+void func_8005EA58(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 9, 1, 1, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 12);
+        } else if (arg0->unk8D4 == 3) {
+            func_8005DBAC(arg0, 2);
+        } else if (arg0->unk8D4 == 1) {
+            func_8005D594(arg0, 3);
+        } else if (arg0->unk8D4 == 2) {
+            func_8005D594(arg0, 13);
+        }
+        break;
+    case 2:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005D594(arg0, 7);
+        }
+        break;
+    }
+}
+
+
+void func_8005EB64(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0x10, 1, 1, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) != 0) {
+            if (arg0->unk8D4 == 3) {
+                func_8005DBAC(arg0, 2);
+            } else if (arg0->unk8D4 == 1) {
+                func_8005D594(arg0, 3);
+            } else if (arg0->unk8D4 == 2) {
+                func_8005D594(arg0, 13);
+            }
+        } else {
+            func_8005D594(arg0, 12);
+        }
+        break;
+    case 2:
+        temp_s0 = arg0->unk8B8->data;
+        if (func_80062370(temp_s0, 0) != 0) {
+            func_8005D594(arg0, 6);
+        } else if (func_80062388(temp_s0, 5) != 0) {
+            func_8005D594(arg0, 6);
+        } else if (func_80062388(temp_s0, 6) != 0) {
+            func_8005D594(arg0, 12);
+        }
+        break;
+    }
+}
+
+
+void func_8005ECB4(struct unk_data_1009* arg0) {
+    s32 temp_v0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+    case 1:
+        temp_v0 = func_80061D58(arg0->unk8B8->data);
+        if (temp_v0 == 0) {
+            func_8005D594(arg0, 7);
+        } else if (temp_v0 == 1) {
+            func_8005D594(arg0, 12);
+        } else {
+            func_8005D594(arg0, 8);
+        }
+        return;
+    }
+}
+
+
+void func_8005ED44(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+    struct unk_data_1010* temp_s0_2;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 5, -1, 1, 0);
+        func_80061D08(arg0->unk8B8->data);
+    case 1:
+        temp_s0 = arg0->unk8B8->data;
+        func_8005D684(arg0, temp_s0->unk2);
+        if (func_80062388(temp_s0, 5) != 0) {
+            memcpy(&temp_s0->unk8[temp_s0->unk6], &temp_s0->unk148, 0x50);
+            func_80063C44(temp_s0, temp_s0->unk6, 1);
+            if (arg0->unkE00 != 0) {
+                func_8005D594(arg0, 14);
+                return;
+            }
+            func_8005DD08(arg0);
+            if (arg0->unkE14 == NULL) {
+                arg0->unkE1C = 1;
+                arg0->unkE14 = &arg0->unkE18;
+            }
+            *arg0->unkE14 = func_80063EA8(func_8004B7D8(7, 2), 0x15, 0x15, 0x70000);
+            RemoveObject(arg0->unk2FC);
+            arg0->unk2FC = NULL;
+            func_8005DBAC(arg0, 4);
+            arg0->unk8D0 = 2;
+            return;
+        }
+        if (func_80062370(temp_s0, 6) != 0) {
+            if (arg0->unk8D0 == 0xE) {
+                func_80062410(temp_s0, 0);
+                func_8005D594(arg0, 2);
+                return;
+            }
+        }
+        if (func_80062388(temp_s0, 6) != 0) {
+            if (arg0->unk8D0 == 23) {
+                func_8005DA4C(arg0, 0);
+                func_8005D594(arg0, 8);
+            } else if (arg0->unk8D0 == 20) {
+                func_8005DA4C(arg0, 0);
+                func_8005D594(arg0, 12);
+            } else if (arg0->unk8D0 == 30) {
+                func_8005D594(arg0, 8);
+            } else {
+                func_8005D594(arg0, 8);
+            }
+        }
+    default:
+        return;
+    case 4:
+        if (func_8005BAE0() != 0) {
+            func_8005BDA0();
+            func_8005DBAC(arg0, 3);
+        } else return;
+    case 3:
+        func_8005DC34(arg0);
+        func_8005DBAC(arg0, 5);
+    case 5:
+        temp_s0_2 = (*arg0->unkE14)->data;
+        if (func_8006425C(temp_s0_2) != 0) {
+            RemoveObject(temp_s0_2->unk4);
+            temp_s0_2->unk4 = NULL;
+            temp_s0_2->unk19C = &arg0->unk2FC;
+            func_8005D594(arg0, 9);
+        }
+        break;
+    }
+}
+
+
+void func_8005F024(struct unk_data_1009* arg0) {
+    s32 sp10;
+    struct unk_data_1009* temp_s0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        temp_s0 = arg0->unk8B8->data;
+        func_8005DA4C(arg0, 0);
+        func_80062410(temp_s0, 1);
+    case 1:
+        sp10 = 0;
+        if (func_80063B74(arg0->unk8B8->data, &sp10) != 0) {
+            if (sp10 == 0) {
+                func_8005D594(arg0, 0);
+            } else {
+                func_8005D594(arg0, 15);
+            }
+        }
+    }
+}
+
+
+void func_8005F0D8(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 2, 2, 1, 0);
+        break;
+    case 1:
+        func_8005DC34(arg0);
+        func_8005DBAC(arg0, 2);
+        break;
+    case 2:
+        if (func_8006425C((*arg0->unkE14)->data) != 0) {
+            func_8005D594(arg0, 0xA);
+        }
+    }
+}
+
+
+void func_8005F19C(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 15, 1, 1, 1);
+    case 1:
+        if (arg0->unk8D4 == 3) {
+            func_8005DC34(arg0);
+            func_8005DBAC(arg0, 3);
+        } else if (arg0->unk8D4 == 1) {
+            func_8005DC34(arg0);
+            func_8005DBAC(arg0, 4);
+        } else if (arg0->unk8D4 == 2) {
+            func_8005D594(arg0, 13);
+        }
+        break;
+    case 3:
+        if (func_8006425C((*arg0->unkE14)->data) != 0) {
+            func_8005D594(arg0, 14);
+        }
+        break;
+    case 4:
+        if (func_8006425C((*arg0->unkE14)->data) != 0) {
+            func_8005D594(arg0, 11);
+        }
+    }
+}
+
+
+void func_8005F2D4(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 3, 2, 1, 0);
+        break;
+    case 1:
+        func_800145CC(0);
+        func_8005DBAC(arg0, 2);
+    case 2:
+        break;
+    }
+}
+
+
+void func_8005F344(struct unk_data_1009* arg0) {
+    if (arg0->unk8CA == 0) {
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0x14, 2, 0, 0);
+    } else {
+        func_8005D594(arg0, 8);
+    }
+}
+
+
+void func_8005F394(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0x11, 1, 0, 1);
+        return;
+    case 1:
+        if (arg0->unk8D4 == 3) {
+            func_8005D594(arg0, 1);
+        } else if (arg0->unk8D4 == 1) {
+            func_8005D594(arg0, 13);
+        } else if (arg0->unk8D4 == 2) {
+            func_8005D594(arg0, 11);
+        }
+    }
+}
+
+
+void func_8005F42C(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 4, -1, 0, 0);
+        if ((arg0->unk8B8 == NULL) || (arg0->unk8B8->unk2C != 1)) {
+            arg0->unk8B8 = func_80060EA4(0, func_8005D4E8(arg0), arg0->unk8CC);
+        }
+    case 1:
+        temp_s0 = arg0->unk8B8->data;
+        func_8005D684(arg0, temp_s0->unk2);
+        if (func_80062388(temp_s0, 5) != 0) {
+            func_80062410(temp_s0, 0);
+            if ((func_8006194C(temp_s0) == 0) && (func_80063E1C(temp_s0) == 0)) {
+                func_8005D684(arg0, 0x13);
+                func_8005D594(arg0, 0xD);
+                func_8005DB90(arg0, 0xA);
+            } else {
+                func_8005D594(arg0, 2);
+            }
+        } else {
+            if (func_80062370(temp_s0, 6) != 0) {
+                if (arg0->unk8D0 == 0xE) {
+                    func_80062410(temp_s0, 0);
+                    func_8005D594(arg0, 3);
+                    return;
+                }
+            }
+            if (func_80062388(temp_s0, 6) != 0) {
+                if (temp_s0->unk2 == 0x1F) {
+                    func_8005D684(arg0, 0x17);
+                } else {
+                    func_8005D594(arg0, 8);
+                }
+            }
+        }
+    }
+}
+
+
+void func_8005F5E0(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+    struct unk_data_1011* temp_s0_2;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        temp_s0 = arg0->unk8B8->data;
+        func_8005D1F4(arg0, 4, -1, 0, 0);
+        temp_s0->unk6 = 0;
+    case 1:
+        temp_s0_2 = arg0->unk8B8->data;
+        if (func_80062230(temp_s0_2) != 0) {
+            if (temp_s0_2->unk2 == 0x14) {
+                func_8005D594(arg0, 10);
+                return;
+            }
+            temp_s0_2->unk6 += 1;
+        }
+        if (temp_s0_2->unk6 >= temp_s0_2->unk19E) {
+            temp_s0_2->unk6 = 0;
+            if (func_8006194C(temp_s0_2) != 0) {
+                func_8005D594(arg0, 4);
+            } else if (func_80063D88(temp_s0_2) != 0) {
+                func_8005D594(arg0, 6);
+            } else {
+                func_8005D594(arg0, 5);
+            }
+        }
+    }
+}
+
+
+void func_8005F6F4(struct unk_data_1009* arg0) {
+    s32 temp_v0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, arg0->unk8D0, 1, 0, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 10);
+        } else {
+            if (arg0->unk8D4 == 3) {
+                func_8005D684(arg0, 7);
+                func_8005DBAC(arg0, 3);
+            } else if (arg0->unk8D4 == 1) {
+                func_8005D594(arg0, 13);
+            } else if (arg0->unk8D4 == 2) {
+                func_8005D594(arg0, 11);
+            }
+        }
+        break;
+    case 3:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005DBAC(arg0, 4);
+        }
+        break;
+    case 4:
+        func_8005DBAC(arg0, 5);
+        break;
+    case 5:
+        temp_v0 = func_80061F34(arg0->unk8B8->data);
+        if (temp_v0 == 0) {
+            func_8005D594(arg0, 6);
+        } else if (temp_v0 == 1) {
+            func_8005D684(arg0, 0x14);
+            func_8005D594(arg0, 10);
+        } else {
+            func_8005D684(arg0, 0x1B);
+            func_8005D594(arg0, 8);
+        }
+    }
+}
+
+
+void func_8005F884(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0xB, 1, 1, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 10);
+        } else {
+            if (arg0->unk8D4 == 3) {
+                func_8005DBAC(arg0, 2);
+            } else if (arg0->unk8D4 == 1) {
+                func_8005D594(arg0, 13);
+            } else if (arg0->unk8D4 == 2) {
+                func_8005D594(arg0, 11);
+            }
+        }
+        break;
+    case 2:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005D594(arg0, 7);
+        }
+    }
+}
+
+
+void func_8005F990(struct unk_data_1009* arg0) {
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        func_8005D1F4(arg0, 0x11, 1, 0, 1);
+    case 1:
+        if (func_80063AE4(arg0->unk8B8->data) == 0) {
+            func_8005D594(arg0, 10);
+        } else {
+            if (arg0->unk8D4 == 3) {
+                func_8005DBAC(arg0, 2);
+            } else if (arg0->unk8D4 == 1) {
+                func_8005D594(arg0, 13);
+            } else if (arg0->unk8D4 == 2) {
+                func_8005D594(arg0, 11);
+            }
+        }
+        break;
+    case 2:
+        if (func_80063C70(arg0->unk8B8->data) != 0) {
+            func_8005D594(arg0, 6);
+        }
+    }
+}
+
+
+void func_8005FA9C(struct unk_data_1009* arg0) {
+    s32 temp_v0;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+    case 1:
+        temp_v0 = func_80061D58(arg0->unk8B8->data);
+        if (temp_v0 == 0) {
+            func_8005D594(arg0, 7);
+        } else if (temp_v0 == 1) {
+            func_8005D594(arg0, 10);
+        } else {
+            func_8005D594(arg0, 8);
+        }
+    }
+}
+
+
+void func_8005FB2C(struct unk_data_1009* arg0) {
+    struct unk_data_1011* temp_s0;
+    struct unk_data_1011* temp_s0_2;
+
+    switch (arg0->unk8CA) {
+    case 0:
+        arg0->unk8CA = 1;
+        temp_s0 = arg0->unk8B8->data;
+        func_8005D1F4(arg0, 5, -1, func_80062454(temp_s0), 0);
+        func_80061D08(temp_s0);
+    case 1:
+        temp_s0_2 = arg0->unk8B8->data;
+        func_8005D684(arg0, temp_s0_2->unk2);
+        if (func_80062388(temp_s0_2, 5) != 0) {
+            memcpy(&temp_s0_2->unk8[temp_s0_2->unk6], &temp_s0_2->unk148, 0x50);
+            func_80063C44(temp_s0_2, temp_s0_2->unk6, 1);
+            func_8005D594(arg0, 9);
+            return;
+        } else if (func_80062370(temp_s0_2, 6) != 0) {
+            if (arg0->unk8D0 == 0xE) {
+                func_80062410(temp_s0_2, 0);
+                func_8005D594(arg0, 3);
+                return;
+            }
+        }
+        if (func_80062388(temp_s0_2, 6) != 0) {
+            if (arg0->unk8D0 == 0x17) {
+                func_8005DA4C(arg0, 0);
+                func_8005D594(arg0, 8);
+            } else if (arg0->unk8D0 == 0x14) {
+                func_8005DA4C(arg0, 0);
+                func_8005D594(arg0, 10);
+            } else {
+                func_8005D594(arg0, 8);
+            }
+        }
+        return;
+    }
+}
 
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D090);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D184);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D1C4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D1F4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D290);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D308);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D378);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D39C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D424);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D4E8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D538);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D594);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D5E4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D684);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D740);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D83C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D870);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D8BC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D8C8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D8D8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005D97C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DA4C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DAD0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DB90);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DBA0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DBAC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DBBC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DBF8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DC34);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DC98);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DCFC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DD08);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DD14);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DD40);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DDC4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DE48);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DEE0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DEEC);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DEF4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DF00);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DF5C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005DF98);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E06C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E0A8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E12C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E398);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E43C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E5F8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E6E0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005E870);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005EA58);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005EB64);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005ECB4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005ED44);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F024);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F0D8);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F19C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F2D4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F344);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F394);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F42C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F5E0);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F6F4);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F884);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005F990);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005FA9C);
-
-INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005FB2C);
 
 INCLUDE_ASM("asm/smt1/main/nonmatchings/unk6", func_8005FCE8);
 

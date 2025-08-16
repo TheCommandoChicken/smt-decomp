@@ -38,13 +38,13 @@ void InitPadInfos(void) {
 
 
 // func_80018EE8
-s32 GetButton(s32 pad, s32 button) {
+s32 GetButton(s32 pad, u8 button) {
 	return (ControllerInfo[pad].button_state >> button) & 1;
 }
 
 
 // func_80018F14
-s32 GetJustPressedButton(s32 pad, s32 button) {
+s32 GetJustPressedButton(s32 pad, u8 button) {
 	return (ControllerInfo[pad].just_pressed_buttons >> button) & 1;
 }
 
