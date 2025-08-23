@@ -1,3 +1,6 @@
+# THIS PROJECT HAS MOVED
+This repository is no longer the home for this project, as I have moved to Codeberg. You can find the up-to-date repository [here](https://codeberg.org/Chickenzes/smt-decomp).
+
 # SMT1-Decomp
 A very WIP decompilation of Shin Megami Tensei 1 for the Playstation.
 
